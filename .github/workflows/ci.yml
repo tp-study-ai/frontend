@@ -24,7 +24,7 @@ jobs:
       - name: Copy
         run: |
           mkdir ./public/build
-          cp -r ./public/index.html ./public/build
+          cp -r ./dict ./public/build
 
       - name: Upload build result
         uses: actions/upload-artifact@v1

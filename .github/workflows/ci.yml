@@ -10,7 +10,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v1
         with:
-          node-version: 17
+          node-version: 18.14.0
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
         run: |
           mkdir ./public/build
           cp -r ./public ./public/build
-          cp -r ./public/index.html ./public/build
+#          cp -r ./public/index.html ./public/build
 
       - name: Upload build result
         uses: actions/upload-artifact@v1

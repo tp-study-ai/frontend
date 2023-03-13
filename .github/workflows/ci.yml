@@ -19,7 +19,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build-prod
+        run: npm run build
 
       - name: Copy
         run: |

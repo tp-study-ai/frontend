@@ -49,3 +49,14 @@ jobs:
           source: "build/*"
           target: "/home/ubuntu/frontend"
           strip_components: 1
+
+  send_message:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: send message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ github.workflow }} frontend успешно выполнен!

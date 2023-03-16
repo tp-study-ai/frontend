@@ -3,9 +3,18 @@ name: ci
 on: [push]
 
 jobs:
+  send_message_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 1/3 ${{ github.repository }} start!
+
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Install Node
         uses: actions/setup-node@v1
@@ -32,6 +41,17 @@ jobs:
           name: build
           path: ./public/build
 
+  send_message_2:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: send message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: 2/3 ${{ github.repository }} build done!
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -50,7 +70,7 @@ jobs:
           target: "/home/ubuntu/infrastructure/frontend"
           strip_components: 1
 
-  send_message:
+  send_message_3:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
@@ -59,4 +79,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: ${{ github.workflow }} frontend успешно выполнен!
+          message: 3/3 ${{ github.repository }} successes!

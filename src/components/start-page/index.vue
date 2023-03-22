@@ -1,26 +1,32 @@
 <template>
 <div>
-  <v-card v-if="loading">
-    <v-card-title>Подбираем задачу для вас...</v-card-title>
-    <v-progress-linear indeterminate />
-  </v-card>
+  <div v-if="loading">
+    <v-progress-circular indeterminate color="primary" />
+  </div>
 
   <v-card v-else>
     <v-card-title>{{ task.title }}</v-card-title>
-    <v-card-text class="pb-0" v-html="task.description" />
+    <v-card-text class="pb-0">
+      <vue-mathjax :formula="task.description" :safe="false" />
+    </v-card-text>
 
     <v-card-actions>
       <v-spacer />
       <v-btn :to="taskPath" color="primary">Перейти к задаче</v-btn>
-      <v-btn @click="sendFakeRequst">Пропустить</v-btn>
+      <v-btn @click="getTask">Пропустить</v-btn>
     </v-card-actions>
   </v-card>
 </div>
 </template>
 
 <script>
+import { VueMathjax } from 'vue-mathjax';
+
 export default {
   name: 'ColdStartPage',
+  components: {
+    'vue-mathjax': VueMathjax
+  },
   data() {
     return {
       loading: true,
@@ -33,25 +39,28 @@ export default {
     }
   },
   created() {
-    this.sendFakeRequst();
+    this.getTask();
   },
   methods: {
-    sendFakeRequst() {
+    getTask() {
       this.loading = true;
 
-      setTimeout(() => {
-        this.loading = false;
+      this.$http
+        .get('/get_task')
+        .then(({ data }) => {
+          let description = data.task_ru === '' ? data.description : data.task_ru;
+          description = description.replaceAll('$$$', '$');
+          description = description.replaceAll(String.fromCharCode(92,92), String.fromCharCode(92));
 
-        this.task = {
-          id: 1,
-          title: '1. Two Sum',
-          description: `
-            <p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.</p>
-            <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.</p>
-            <p>You can return the answer in any order.</p>
-          `
-        };
-      }, 300);
+          this.task = {
+            id: data.id,
+            title: data.name,
+            description
+          };
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     }
   }
 }

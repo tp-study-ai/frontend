@@ -4,16 +4,18 @@
     <v-app-bar v-if="$vuetify.breakpoint.smAndDown" app>
       <v-app-bar-nav-icon @click="showDrawer = true" />
 
-      <div class="d-flex align-center mx-auto">
+      <router-link class="d-flex align-center mx-auto" to="/" tag="div" style="cursor: pointer">
         <img class="mr-2" src="/logo.png" width="50" height="50" />
         <v-toolbar-title>Study AI</v-toolbar-title>
-      </div>
+      </router-link>
     </v-app-bar>
 
     <v-app-bar v-else app>
       <v-spacer />
-      <img class="mr-2" src="/logo.png" width="50" height="50" />
-      <v-toolbar-title>Study AI</v-toolbar-title>
+      <router-link class="d-flex align-center" to="/" tag="div" style="cursor: pointer">
+        <img class="mr-2" src="/logo.png" width="50" height="50" />
+        <v-toolbar-title>Study AI</v-toolbar-title>
+      </router-link>
 
       <v-btn class="pa-0 mx-5" text to="/recommendation">Рекомендации</v-btn>
       <v-btn class="pa-0" text to="/tasks">Все задачи</v-btn>

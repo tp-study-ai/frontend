@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const options = {
-  baseURL: 'https://study-ai.tu/api',
+  baseURL: 'https://study-ai.ru/api',
   timeout: 1000
 };
 

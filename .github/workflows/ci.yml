@@ -67,7 +67,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           source: "build/*"
-          target: "/home/ubuntu/infrastructure/"
+          target: "/home/ubuntu/infrastructure"
           strip_components: 1
 
   send_message_3:

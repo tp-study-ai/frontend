@@ -63,7 +63,7 @@ export default {
     this.loading = true;
 
     this.$http
-      .get(`/get_task/details/${this.id}`)
+      .get(`/get_task_by_id?id=${this.id}`)
       .then(({ data }) => {
         let description = data.task_ru === '' ? data.description : data.task_ru;
         description = description.replaceAll('$$$', '$');

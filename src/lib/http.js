@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const options = {
-  baseURL: 'http://146.185.208.233:8001/api/',
+  baseURL: 'http://127.0.0.1:8000/api',
   timeout: 1000
 };
 

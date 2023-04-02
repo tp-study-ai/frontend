@@ -30,7 +30,9 @@
 
           <v-card-actions>
             <v-spacer />
-            <v-btn color="primary" @click="sendFakeRequst">Проверить</v-btn>
+            <v-btn :loading="checkSolutionLoading" color="primary" @click="checkSolution">
+              Проверить
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -56,7 +58,8 @@ export default {
     return {
       loading: false,
       task: {},
-      code: '// #include <what_you_use>\r\n\r\nint main() {\r\n    // your code here\r\n    return 0;\r\n}'
+      code: '// #include <what_you_use>\r\n\r\nint main() {\r\n    // your code here\r\n    return 0;\r\n}',
+      checkSolutionLoading: false
     };
   },
   created() {
@@ -83,8 +86,18 @@ export default {
       });
   },
   methods: {
-    sendFakeRequst() {
+    checkSolution() {
+      this.checkSolutionLoading = true;
+      const params = {
+        id: this.id,
+        solution: this.code
+      };
 
+      this.$http
+        .post('/check_solution', params)
+        .finally(() => {
+          this.checkSolutionLoading = false;
+        });
     }
   }
 }

@@ -7,7 +7,7 @@
   <div v-else>
     <v-row>
       <v-col cols="12" md="6">
-        <v-card class="overflow-y-auto card">
+        <v-card :class="{ 'overflow-y-auto card': !this.$vuetify.breakpoint.smAndDown }">
           <v-card-title>{{ task.title }}</v-card-title>
           <v-card-text>
             <vue-mathjax :formula="task.description" :safe="false" />

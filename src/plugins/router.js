@@ -14,6 +14,10 @@ const routes = [
     path: '/task/:id',
     component: components.TaskPage,
     props: true
+  },
+  {
+    path: '/tasks',
+    component: components.TasksPage
   }
 ];
 

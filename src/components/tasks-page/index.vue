@@ -40,7 +40,13 @@ export default {
   },
   computed: {
     totalLength() {
-      return this.$vuetify.breakpoint.smAndDown ? 7 : 20;
+      if (this.$vuetify.breakpoint.xsAndDown) {
+        return 7;
+      }
+      if (this.$vuetify.breakpoint.smAndDown) {
+        return 15;
+      }
+      return 20;
     }
   },
   watch: {

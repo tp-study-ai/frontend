@@ -4,8 +4,8 @@
     <v-progress-circular indeterminate color="primary" />
   </div>
 
-  <v-card v-else width="350">
-    <div v-if="$vuetify.breakpoint.smAndDown">
+  <div v-else>
+    <v-container class="ma-0 pa-0" fluid v-if="$vuetify.breakpoint.smAndDown">
       <v-select
         v-model="selected"
         :items="mobileTopics"
@@ -30,7 +30,7 @@
           </tr>
         </tbody>
       </v-simple-table>
-    </div>
+    </v-container>
 
     <v-card v-else width="1000">
       <v-tabs v-model="selected" vertical>
@@ -59,7 +59,7 @@
         </v-tab-item>
       </v-tabs>
     </v-card>
-  </v-card>
+  </div>
 </div>
 </template>
 

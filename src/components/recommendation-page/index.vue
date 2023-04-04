@@ -36,9 +36,7 @@
 
     <v-card v-else width="1000">
       <v-tabs v-model="selected" vertical>
-        <v-tab v-for="(topic, id) in topics" :key="id">
-          <v-icon left>{{ topic }}</v-icon>
-        </v-tab>
+        <v-tab v-for="(topic, id) in topics" :key="id">{{ topic }}</v-tab>
 
         <v-tab-item v-for="(topic, id) in topics" :key="id">
           <v-simple-table>

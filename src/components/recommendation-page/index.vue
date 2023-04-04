@@ -20,6 +20,7 @@
           <tr>
             <th>Название</th>
             <th>Сложность</th>
+            <th>Рейтинг</th>
           </tr>
         </thead>
 
@@ -28,7 +29,8 @@
             <td>
               <router-link :to="getTaskPath(task)">{{ task.name }}</router-link>
             </td>
-            <td>{{ task.difficulty }}</td>
+            <td>{{ task.difficulty - 6 }}</td>
+            <td>{{ task.cf_rating }}</td>
           </tr>
         </tbody>
       </v-simple-table>
@@ -44,6 +46,7 @@
               <tr>
                 <th>Название</th>
                 <th>Сложность</th>
+                <th>Рейтинг</th>
               </tr>
             </thead>
 
@@ -52,7 +55,8 @@
                 <td>
                   <router-link :to="getTaskPath(task)">{{ task.name }}</router-link>
                 </td>
-                <td>{{ task.difficulty }}</td>
+                <td>{{ task.difficulty - 6 }}</td>
+                <td>{{ task.cf_rating }}</td>
               </tr>
             </tbody>
           </v-simple-table>
@@ -76,16 +80,16 @@ export default {
   computed: {
     topics() {
       return [
-        'Пример 1',
-        'Пример 2',
-        'Пример 3',
-        'Пример 4',
-        'Пример 5',
-        'Пример 6',
-        'Пример 7',
-        'Пример 8',
-        'Пример 9',
-        'Пример 10'
+        'Топик 1',
+        'Топик 2',
+        'Топик 3',
+        'Топик 4',
+        'Топик 5',
+        'Топик 6',
+        'Топик 7',
+        'Топик 8',
+        'Топик 9',
+        'Топик 10'
       ]
     },
     mobileTopics() {

@@ -10,6 +10,7 @@
         <tr>
           <th>Название</th>
           <th>Сложность</th>
+          <th>Рейтинг</th>
         </tr>
       </thead>
 
@@ -19,6 +20,7 @@
             <router-link :to="getTaskPath(task)">{{ task.name }}</router-link>
           </td>
           <td>{{ task.difficulty }}</td>
+          <td>{{ task.cf_rating - 6 }}</td>
         </tr>
       </tbody>
     </v-simple-table>

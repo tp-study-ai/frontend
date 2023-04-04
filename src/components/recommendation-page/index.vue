@@ -5,12 +5,14 @@
   </div>
 
   <div v-else>
-    <v-container class="ma-0 pa-0" fluid v-if="$vuetify.breakpoint.smAndDown">
+    <v-container class="px-0" fluid v-if="$vuetify.breakpoint.smAndDown">
       <v-select
         v-model="selected"
         :items="mobileTopics"
         label="Выберите топик"
-        solo
+        outlined
+        dense
+        hide-details
       />
 
       <v-simple-table>

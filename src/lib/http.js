@@ -14,7 +14,7 @@ axiosInstance.interceptors.response.use(
   function (error) {
     const event = new CustomEvent(
       'show:snackbar',
-      { detail: { text: 'При выполнении запроса произошла ошибка', color: 'error' }}
+      { detail: { text: 'При выполнении запроса произошла неизвестная ошибка', color: 'error' }}
     );
     document.dispatchEvent(event);
 

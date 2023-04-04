@@ -113,6 +113,9 @@ export default {
   created() {
     document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
   },
+  destroyed() {
+    document.removeEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
+  },
   methods: {
     handleAction(action) {
       if (typeof action !== 'function') {

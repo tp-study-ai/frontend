@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const options = {
   baseURL: 'https://study-ai.ru/api',
-  timeout: 10_000
+  timeout: 5_000
 };
 
 const axiosInstance = axios.create(options)

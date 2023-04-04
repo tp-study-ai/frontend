@@ -33,7 +33,7 @@ export default {
   name: 'TasksPage',
   data() {
     return {
-      loading: false,
+      loading: true,
       page: 1,
       tasks: []
     };
@@ -59,10 +59,6 @@ export default {
   },
   methods: {
     getTasks() {
-      if (this.loading) {
-        return;
-      }
-
       this.loading = true;
       const params = { page: this.page - 1 };
 

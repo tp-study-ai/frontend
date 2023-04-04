@@ -95,6 +95,9 @@ export default {
 
       this.$http
         .post('/check_solution', params)
+        .then(() => {
+          this.$emit('show:snackbar', { text: 'Тесты прошли', color: 'success' });
+        })
         .finally(() => {
           this.checkSolutionLoading = false;
         });

@@ -58,9 +58,23 @@
 
     <v-main>
       <v-container class="justify-center align-center" fluid fill-height>
-        <router-view />
+        <router-view @show:snackbar="showSnackbar" />
       </v-container>
     </v-main>
+
+    <v-snackbar v-model="snackbarShown" :color="snackbarOptions.color" timeout="3000">
+      {{ snackbarOptions.text }}
+
+      <template #action="{ attrs }">
+        <v-btn
+          icon
+          v-bind="attrs"
+          @click="snackbarShown = false"
+        >
+          <v-icon dark>mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </div>
 </template>
@@ -70,7 +84,9 @@ export default {
   name: 'App',
   data() {
     return {
-      showDrawer: false
+      showDrawer: false,
+      snackbarShown: false,
+      snackbarOptions: {}
     };
   },
   computed: {
@@ -94,6 +110,9 @@ export default {
       ];
     }
   },
+  created() {
+    document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
+  },
   methods: {
     handleAction(action) {
       if (typeof action !== 'function') {
@@ -103,6 +122,10 @@ export default {
     },
     logout() {
       this.$router.push('/');
+    },
+    showSnackbar(options) {
+      this.snackbarShown = true;
+      this.snackbarOptions = options;
     }
   }
 }

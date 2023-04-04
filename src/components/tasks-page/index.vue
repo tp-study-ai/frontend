@@ -23,7 +23,7 @@
       </tbody>
     </v-simple-table>
 
-    <v-pagination v-model="page" :total-visible="totalLength" :length="100" />
+    <v-pagination v-model="page" :total-visible="totalLength" :length="700" />
   </div>
 </div>
 </template>

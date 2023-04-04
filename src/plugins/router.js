@@ -18,6 +18,10 @@ const routes = [
   {
     path: '/tasks',
     component: components.TasksPage
+  },
+  {
+    path: '/recommendation',
+    component: components.RecommendationPage
   }
 ];
 

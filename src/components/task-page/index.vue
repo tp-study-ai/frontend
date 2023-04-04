@@ -18,7 +18,7 @@
         </v-card>
       </v-col>
 
-      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="12" sm="6">
+      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="12" md="6">
         <v-card class="card">
           <code-editor
             v-model="code"

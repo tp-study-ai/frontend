@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  name: 'RecommendationPage',
+  name: 'RecommendationsPage',
   data() {
     return {
       loading: true,

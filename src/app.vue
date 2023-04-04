@@ -17,7 +17,7 @@
         <v-toolbar-title>Study AI</v-toolbar-title>
       </router-link>
 
-      <v-btn class="pa-0 mx-5" text to="/recommendation">Рекомендации</v-btn>
+      <v-btn class="pa-0 mx-5" text to="/recommendations">Рекомендации</v-btn>
       <v-btn class="pa-0" text to="/tasks">Все задачи</v-btn>
       <v-spacer />
 
@@ -100,7 +100,7 @@ export default {
     },
     mobileMenuItems() {
       return [
-        { title: 'Рекомендации', to: '/recommendation' },
+        { title: 'Рекомендации', to: '/recommendations' },
         { title: 'Все задачи', to: '/tasks' },
         { divider: true },
         { title: 'Профиль', icon: 'mdi-star-box', to: '/profile' },

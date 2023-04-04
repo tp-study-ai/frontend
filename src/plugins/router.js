@@ -20,8 +20,8 @@ const routes = [
     component: components.TasksPage
   },
   {
-    path: '/recommendation',
-    component: components.RecommendationPage
+    path: '/recommendations',
+    component: components.RecommendationsPage
   }
 ];
 

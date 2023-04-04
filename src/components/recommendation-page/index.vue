@@ -102,11 +102,11 @@ export default {
     }
   },
   created() {
+    this.loading = true;
     this.getTasks();
   },
   methods: {
     getTasks() {
-      this.loading = true;
       const params = { page: this.selected };
 
       this.$http

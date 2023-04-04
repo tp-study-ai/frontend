@@ -16,7 +16,7 @@
       <tbody>
         <tr v-for="task in tasks" :key="task.id">
           <td>
-            <v-btn :to="getTaskPath(task)" text>{{ task.name }}</v-btn>
+            <router-link :to="getTaskPath(task)">{{ task.name }}</router-link>
           </td>
           <td>{{ task.difficulty }}</td>
         </tr>

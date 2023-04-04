@@ -4,7 +4,7 @@
     <v-progress-circular indeterminate color="primary" />
   </div>
 
-  <div v-else>
+  <v-card v-else width="350">
     <div v-if="$vuetify.breakpoint.smAndDown">
       <v-select
         v-model="selected"
@@ -32,7 +32,7 @@
       </v-simple-table>
     </div>
 
-    <v-card v-else>
+    <v-card v-else width="1000">
       <v-tabs v-model="selected" vertical>
         <v-tab v-for="(topic, id) in topics" :key="id">
           <v-icon left>{{ topic }}</v-icon>
@@ -59,7 +59,7 @@
         </v-tab-item>
       </v-tabs>
     </v-card>
-  </div>
+  </v-card>
 </div>
 </template>
 

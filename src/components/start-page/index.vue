@@ -4,7 +4,7 @@
     <v-progress-circular indeterminate color="primary" />
   </div>
 
-  <v-card v-else>
+  <v-card v-else :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'">
     <v-card-title>{{ task.title }}</v-card-title>
     <v-card-text class="pb-0">
       <vue-mathjax :formula="task.description" :safe="false" />

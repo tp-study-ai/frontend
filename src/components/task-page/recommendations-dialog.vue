@@ -1,0 +1,68 @@
+<template>
+<v-dialog :value="value" @input="handleInput">
+  <v-card>
+    <v-card-title>Поздравляем c решением задачи!</v-card-title>
+    <v-card-text>Мы подготовили для вас ряд аналогичных задач по этой теме</v-card-text>
+
+    <v-row class="mx-1 mb-1">
+      <v-col v-for="task in tasks" :key="task.id" cols="12" md="4">
+        <v-card :href="getTaskPath(task)">
+          <v-card-title>{{ task.name }}</v-card-title>
+          <v-card-text class="card-text pb-1">
+            {{ task.description }}
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-card-actions>
+      <v-spacer />
+      <v-btn to="/">Вернуться на главную</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+</template>
+
+<script>
+export default {
+  name: 'RecommendationsDialog',
+  props: {
+    value: Boolean
+  },
+  data() {
+    return {
+      loading: true,
+      tasks: []
+    };
+  },
+  created() {
+    const params = { page: 0 };
+
+    this.$http
+      .get('/tasks_list', { params })
+      .then(({ data: { tasks } }) => {
+        this.tasks = tasks.filter((_, index) => index < 6);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
+  },
+  methods: {
+    handleInput(newValue) {
+      this.$emit('input', newValue)
+    },
+    getTaskPath(task) {
+      return `/task/${task.id}`;
+    }
+  }
+}
+</script>
+
+<style scoped>
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style>

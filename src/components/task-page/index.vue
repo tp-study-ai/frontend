@@ -38,12 +38,15 @@
       </v-col>
     </v-row>
   </div>
+
+  <recommendations-dialog v-model="dialogShown" />
 </div>
 </template>
 
 <script>
 import { VueMathjax } from 'vue-mathjax';
 import CodeEditor from 'simple-code-editor';
+import RecommendationsDialog from './recommendations-dialog';
 
 export default {
   name: 'TaskPage',
@@ -52,19 +55,19 @@ export default {
   },
   components: {
     'vue-mathjax': VueMathjax,
-    CodeEditor
+    CodeEditor,
+    RecommendationsDialog
   },
   data() {
     return {
-      loading: false,
+      loading: true,
       task: {},
       code: '// #include <what_you_use>\r\n\r\nint main() {\r\n    // your code here\r\n    return 0;\r\n}',
-      checkSolutionLoading: false
+      checkSolutionLoading: false,
+      dialogShown: false
     };
   },
   created() {
-    this.loading = true;
-
     this.$http
       .get(`/get_task_by_id?id=${this.id}`)
       .then(({ data }) => {
@@ -99,6 +102,7 @@ export default {
           this.$emit('show:snackbar', { text: 'Тесты прошли', color: 'success' });
         })
         .finally(() => {
+          this.dialogShown = true;
           this.checkSolutionLoading = false;
         });
     }

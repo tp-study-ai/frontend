@@ -3,7 +3,7 @@
   <v-card>
     <div class="d-flex">
       <v-card-title>Поздравляем c решением задачи!</v-card-title>
-      <v-btn class="ml-auto my-auto mr-2" icon @click="handleInput">
+      <v-btn class="ml-auto my-auto mr-2" icon @click="() => handleInput(false)">
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </div>

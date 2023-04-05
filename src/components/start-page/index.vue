@@ -10,6 +10,7 @@
       <vue-mathjax :formula="task.description" :safe="false" />
     </v-card-text>
 
+    <v-divider />
     <v-card-actions>
       <v-spacer />
       <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>

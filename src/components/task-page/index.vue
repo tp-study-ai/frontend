@@ -28,6 +28,7 @@
             theme="light"
           />
 
+          <v-divider />
           <v-card-actions>
             <v-spacer />
             <v-btn :loading="checkSolutionLoading" text color="primary" @click="checkSolution">

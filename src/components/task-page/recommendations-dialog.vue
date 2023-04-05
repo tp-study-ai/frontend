@@ -15,6 +15,7 @@
       </v-col>
     </v-row>
 
+    <v-divider />
     <v-card-actions>
       <v-spacer />
       <v-btn text to="/">Вернуться на главную</v-btn>

@@ -62,7 +62,11 @@
       </v-container>
     </v-main>
 
-    <v-snackbar v-model="snackbarShown" :color="snackbarOptions.color" timeout="3000">
+    <v-snackbar
+      v-model="snackbarShown"
+      :color="snackbarOptions.color"
+      :timeout="snackbarOptions.timeout"
+    >
       {{ snackbarOptions.text }}
 
       <template #action="{ attrs }">
@@ -128,7 +132,8 @@ export default {
     },
     showSnackbar(options) {
       this.snackbarShown = true;
-      this.snackbarOptions = options;
+      const timeout = options.color === 'error' ? 5000 : 3000;
+      this.snackbarOptions = { ...options, timeout };
     }
   }
 }

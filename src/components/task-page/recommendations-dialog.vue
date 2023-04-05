@@ -17,7 +17,7 @@
 
     <v-card-actions>
       <v-spacer />
-      <v-btn to="/">Вернуться на главную</v-btn>
+      <v-btn text to="/">Вернуться на главную</v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>

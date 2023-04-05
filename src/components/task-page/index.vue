@@ -30,7 +30,7 @@
 
           <v-card-actions>
             <v-spacer />
-            <v-btn :loading="checkSolutionLoading" color="primary" @click="checkSolution">
+            <v-btn :loading="checkSolutionLoading" text color="primary" @click="checkSolution">
               Проверить
             </v-btn>
           </v-card-actions>

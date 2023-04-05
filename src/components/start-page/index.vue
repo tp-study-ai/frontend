@@ -6,14 +6,14 @@
 
   <v-card v-else :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'">
     <v-card-title>{{ task.title }}</v-card-title>
-    <v-card-text class="pb-0">
+    <v-card-text class="card-text">
       <vue-mathjax :formula="task.description" :safe="false" />
     </v-card-text>
 
     <v-card-actions>
       <v-spacer />
-      <v-btn :to="taskPath" color="primary">Перейти к задаче</v-btn>
-      <v-btn @click="getTask">Пропустить</v-btn>
+      <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
+      <v-btn text @click="getTask">Пропустить</v-btn>
     </v-card-actions>
   </v-card>
 </div>
@@ -65,3 +65,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style>

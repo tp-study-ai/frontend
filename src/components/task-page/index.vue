@@ -131,8 +131,8 @@ export default {
 
       this.$http
         .post('/check_solution', params)
-        .then(({ data: { testsPassed, testsTotal } }) => {
-          this.attempts.unshift({ testsPassed, testsTotal, code: this.code });
+        .then(({ data: { testsPassed, testsTotal, buildTime, checkTime } }) => {
+          this.attempts.unshift({ testsPassed, testsTotal, buildTime, checkTime, code: this.code });
 
           const text = testsPassed === testsTotal
             ? 'Все тесты прошли'

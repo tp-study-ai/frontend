@@ -7,7 +7,7 @@
   <div v-else>
     <v-row>
       <v-col cols="12" md="6">
-        <v-card :class="{ 'overflow-y-auto card': !this.$vuetify.breakpoint.smAndDown }">
+        <v-card v-if="$vuetify.breakpoint.smAndDown">
           <v-card-title>{{ task.title }}</v-card-title>
           <v-card-text>
             <vue-mathjax :formula="task.description" :safe="false" />
@@ -16,13 +16,41 @@
             <vue-mathjax :formula="task.note" :safe="false" />
           </v-card-text>
         </v-card>
+
+        <v-card v-else width="1000">
+          <v-tabs v-model="selected">
+            <v-tab href="#task">Описание</v-tab>
+            <v-tab href="#attempts">Посылки</v-tab>
+          </v-tabs>
+
+          <v-tabs-items v-model="selected">
+            <v-tab-item value="task">
+              <v-card class="overflow-y-auto left-card" flat>
+                <v-card-title>{{ task.title }}</v-card-title>
+                <v-card-text>
+                  <vue-mathjax :formula="task.description" :safe="false" />
+                  <vue-mathjax :formula="task.input" :safe="false" />
+                  <vue-mathjax :formula="task.output" :safe="false" />
+                  <vue-mathjax :formula="task.note" :safe="false" />
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="attempts">
+              <v-card class="overflow-y-auto left-card" flat>
+                <attempts-tab :attempts="attempts" />
+              </v-card>
+            </v-tab-item>
+          </v-tabs-items>
+        </v-card>
       </v-col>
 
       <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="12" md="6">
-        <v-card class="card">
+        <v-card class="right-card">
           <code-editor
             v-model="code"
             :languages="[['cpp', 'C++']]"
+            copy_code
             width="auto"
             height="650px"
             theme="light"
@@ -47,7 +75,8 @@
 <script>
 import { VueMathjax } from 'vue-mathjax';
 import CodeEditor from 'simple-code-editor';
-import RecommendationsDialog from './recommendations-dialog';
+import RecommendationsDialog from './components/recommendations-dialog';
+import AttemptsTab from './components/attempts-tab';
 
 export default {
   name: 'TaskPage',
@@ -57,7 +86,8 @@ export default {
   components: {
     'vue-mathjax': VueMathjax,
     CodeEditor,
-    RecommendationsDialog
+    RecommendationsDialog,
+    AttemptsTab
   },
   data() {
     return {
@@ -65,7 +95,9 @@ export default {
       task: {},
       code: '// #include <what_you_use>\r\n\r\nint main() {\r\n    // your code here\r\n    return 0;\r\n}',
       checkSolutionLoading: false,
-      dialogShown: false
+      dialogShown: false,
+      selected: null,
+      attempts: []
     };
   },
   created() {
@@ -93,17 +125,27 @@ export default {
     checkSolution() {
       this.checkSolutionLoading = true;
       const params = {
-        id: this.id,
+        task_id: parseInt(this.id),
         solution: this.code
       };
 
       this.$http
         .post('/check_solution', params)
-        .then(() => {
-          this.$emit('show:snackbar', { text: 'Тесты прошли', color: 'success' });
+        .then(({ data: { testsPassed, testsTotal } }) => {
+          this.attempts.unshift({ testsPassed, testsTotal, code: this.code });
+
+          const text = testsPassed === testsTotal
+            ? 'Все тесты прошли'
+            : `Прошло ${testsPassed} из ${testsTotal} тестов`;
+          const color = testsPassed === testsTotal
+            ? 'success'
+            : 'warning';
+
+          this.$emit('show:snackbar', { text, color });
+          this.dialogShown = testsPassed === testsTotal;
         })
         .finally(() => {
-          this.dialogShown = true;
+          this.selected = 'attempts';
           this.checkSolutionLoading = false;
         });
     }
@@ -112,7 +154,12 @@ export default {
 </script>
 
 <style>
-.card {
+.left-card {
+  min-height: 657px;
+  max-height: 657px;
+}
+
+.right-crad {
   min-height: 700px;
   max-height: 700px;
 }

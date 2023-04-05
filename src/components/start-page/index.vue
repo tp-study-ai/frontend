@@ -6,7 +6,7 @@
 
   <v-card v-else :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'">
     <v-card-title>{{ task.title }}</v-card-title>
-    <v-card-text class="card-text">
+    <v-card-text class="pb-1">
       <vue-mathjax :formula="task.description" :safe="false" />
     </v-card-text>
 
@@ -66,12 +66,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.card-text {
-  display: -webkit-box;
-  -webkit-line-clamp: 10;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>

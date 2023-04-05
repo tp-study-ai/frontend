@@ -57,10 +57,17 @@ export default {
     }
   },
   created() {
+    if (this.$route.query.page) {
+      this.page = parseInt(this.$route.query.page);
+    }
     this.getTasks();
   },
   methods: {
     getTasks() {
+      if (this.$route.query.page !== this.page.toString()) {
+        this.$router.push({ path: 'tasks', query: { page: this.page }});
+      }
+
       this.loading = true;
       const params = { page: this.page - 1 };
 

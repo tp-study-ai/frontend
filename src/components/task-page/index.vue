@@ -20,7 +20,7 @@
         <v-card v-else width="1000">
           <v-tabs v-model="selected">
             <v-tab href="#task">Описание</v-tab>
-            <v-tab href="#attempts">Посылки</v-tab>
+            <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="selected">

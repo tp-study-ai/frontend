@@ -4,7 +4,14 @@
     <v-card-title>Поздравляем c решением задачи!</v-card-title>
     <v-card-text>Мы подготовили для вас ряд аналогичных задач по этой теме</v-card-text>
 
-    <v-row class="mx-1 mb-1">
+    <v-progress-circular
+      v-if="loading"
+      class="d-flex align-center mx-auto my-10"
+      indeterminate
+      color="primary"
+    />
+
+    <v-row v-else class="mx-1 mb-1">
       <v-col v-for="task in tasks" :key="task.id" cols="12" md="4">
         <v-card :href="getTaskPath(task)">
           <v-card-title>{{ task.name }}</v-card-title>
@@ -36,17 +43,24 @@ export default {
       tasks: []
     };
   },
-  created() {
-    const params = { page: 0 };
+  watch: {
+    value(newValue) {
+      if (!newValue) {
+        return;
+      }
 
-    this.$http
-      .get('/tasks_list', { params })
-      .then(({ data: { tasks } }) => {
-        this.tasks = tasks.filter((_, index) => index < 6);
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+      this.loading = true;
+      const params = { page: 0 };
+
+      this.$http
+        .get('/tasks_list', { params })
+        .then(({ data: { tasks } }) => {
+          this.tasks = tasks.filter((_, index) => index < 6);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    }
   },
   methods: {
     handleInput(newValue) {

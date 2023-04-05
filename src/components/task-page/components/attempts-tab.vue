@@ -22,7 +22,12 @@
 
   <v-dialog v-model="dialogShown">
     <v-card>
-      <v-card-title>Код программы к попытке номер {{ attempt.id }}</v-card-title>
+      <div class="d-flex">
+        <v-card-title>Код программы</v-card-title>
+        <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </div>
 
       <code-editor
         v-model="attempt.code"

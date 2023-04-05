@@ -1,7 +1,13 @@
 <template>
 <v-dialog :value="value" @input="handleInput">
   <v-card>
-    <v-card-title>Поздравляем c решением задачи!</v-card-title>
+    <div class="d-flex">
+      <v-card-title>Поздравляем c решением задачи!</v-card-title>
+      <v-btn class="ml-auto my-auto mr-2" icon @click="handleInput">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </div>
+
     <v-card-text>Мы подготовили для вас ряд аналогичных задач по этой теме</v-card-text>
 
     <v-progress-circular

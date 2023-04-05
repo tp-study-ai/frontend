@@ -20,6 +20,7 @@
         <v-card v-else width="1000">
           <v-tabs v-model="selected">
             <v-tab href="#task">Описание</v-tab>
+            <v-tab href="#examples">Примеры</v-tab>
             <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>
           </v-tabs>
 
@@ -33,6 +34,12 @@
                   <vue-mathjax :formula="task.output" :safe="false" />
                   <vue-mathjax :formula="task.note" :safe="false" />
                 </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="examples">
+              <v-card class="overflow-y-auto left-card" flat>
+                <examples-tab :examples="examples" />
               </v-card>
             </v-tab-item>
 
@@ -76,6 +83,7 @@
 import { VueMathjax } from 'vue-mathjax';
 import CodeEditor from 'simple-code-editor';
 import RecommendationsDialog from './components/recommendations-dialog';
+import ExamplesTab from './components/examples-tab';
 import AttemptsTab from './components/attempts-tab';
 
 export default {
@@ -87,6 +95,7 @@ export default {
     'vue-mathjax': VueMathjax,
     CodeEditor,
     RecommendationsDialog,
+    ExamplesTab,
     AttemptsTab
   },
   data() {
@@ -97,6 +106,7 @@ export default {
       checkSolutionLoading: false,
       dialogShown: false,
       selected: null,
+      examples: [],
       attempts: []
     };
   },
@@ -116,6 +126,12 @@ export default {
           output: data.output,
           note: data.note
         };
+
+        for(let i = 1; i < data.public_tests.length; i += 4) {
+          const input = data.public_tests[i].replaceAll('\n', '<br>');
+          const output = data.public_tests[i + 2].replaceAll('\n', '<br>');
+          this.examples.push({ input, output });
+        }
       })
       .finally(() => {
         this.loading = false;

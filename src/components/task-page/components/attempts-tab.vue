@@ -1,27 +1,27 @@
 <template>
 <div>
   <v-simple-table>
-  <thead>
-    <tr>
-      <th>Номер</th>
-      <th>Количество пройденных тестов</th>
-      <th>Затраченное время на сборку</th>
-      <th>Затраченное время на прохождение тестов</th>
-      <th>Код программы</th>
-    </tr>
-  </thead>
+    <thead>
+      <tr>
+        <th>Номер</th>
+        <th>Количество пройденных тестов</th>
+        <th>Затраченное время на сборку</th>
+        <th>Затраченное время на прохождение тестов</th>
+        <th>Код программы</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr v-for="(attempt, id) in attempts" :key="id">
-      <td>{{ attempts.length - id }}</td>
-      <td>{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
-      <td>{{ attempt.buildTime }}</td>
-      <td>{{ attempt.checkTime }}</td>
-      <td>
-        <v-btn class="pa-0" text color="primary" @click="showCode(attempt)">Показать</v-btn>
-      </td>
-    </tr>
-  </tbody>
+    <tbody>
+      <tr v-for="(attempt, id) in attempts" :key="id">
+        <td>{{ attempts.length - id }}</td>
+        <td>{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
+        <td>{{ attempt.buildTime }}</td>
+        <td>{{ attempt.checkTime }}</td>
+        <td>
+          <v-btn class="pa-0" text color="primary" @click="showCode(attempt)">Показать</v-btn>
+        </td>
+      </tr>
+    </tbody>
   </v-simple-table>
 
   <v-dialog v-model="dialogShown">

@@ -102,6 +102,7 @@ export default {
         .post('/register', params)
         .then(({ data: { message } }) => {
           this.$emit('show:snackbar', { text: message, color: 'success' });
+          this.$emit('authorize:user', true);
           this.handleInput(false);
         });
     },

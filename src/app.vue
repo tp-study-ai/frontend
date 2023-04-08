@@ -75,11 +75,13 @@
       v-model="loginFormShown"
       @show:register-form="showRegisterForm"
       @show:snackbar="showSnackbar"
+      @authorize:user="authorizeUser"
     />
     <register-form
       v-model="registerFormShown"
       @show:login-form="showLoginForm"
       @show:snackbar="showSnackbar"
+      @authorize:user="authorizeUser"
     />
 
     <v-snackbar
@@ -119,13 +121,11 @@ export default {
       snackbarShown: false,
       snackbarOptions: {},
       loginFormShown: false,
-      registerFormShown: false
+      registerFormShown: false,
+      isAuthorized: false
     };
   },
   computed: {
-    isAuthorized() {
-      return false;
-    },
     menuItems() {
       return [
         { title: 'Профиль', icon: 'mdi-star-box', to: '/profile' },
@@ -149,7 +149,13 @@ export default {
     }
   },
   created() {
-    document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
+    this.$http.get('/get_user').then(({ data: { id } }) => {
+      if (id) {
+        this.isAuthorized = true;
+      }
+
+      document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
+    });
   },
   destroyed() {
     document.removeEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
@@ -171,6 +177,7 @@ export default {
     },
     logout() {
       this.$http.get('/logout').finally(() => {
+        this.authorizeUser(false);
         this.$router.push('/');
       });
     },
@@ -178,6 +185,9 @@ export default {
       this.snackbarShown = true;
       const timeout = options.color === 'error' ? 5000 : 3000;
       this.snackbarOptions = { ...options, timeout };
+    },
+    authorizeUser(isAuthorized) {
+      this.isAuthorized = isAuthorized;
     }
   }
 }

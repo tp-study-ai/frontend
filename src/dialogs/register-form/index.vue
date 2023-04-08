@@ -14,9 +14,10 @@
     </div>
 
     <v-card-text>
-      <v-form>
+      <v-form ref="form">
         <v-text-field
           v-model="username"
+          :rules="rules"
           outlined
           dense
           type="text"
@@ -24,6 +25,7 @@
         />
         <v-text-field
           v-model="password"
+          :rules="rules"
           outlined
           dense
           type="password"
@@ -31,6 +33,7 @@
         />
         <v-text-field
           v-model="confirmPassword"
+          :rules="rules"
           outlined
           dense
           type="password"
@@ -62,15 +65,19 @@ export default {
       confirmPassword: null
     };
   },
+  computed: {
+    rules() {
+      return [
+        (value) => !!value || 'Вы должны заполнить поле',
+      ];
+    }
+  },
   watch: {
     value(newValue) {
       if (!newValue) {
         return;
       }
-
-      this.username = null;
-      this.password = null;
-      this.confirmPassword = null;
+      this.$refs.form.reset();
     }
   },
   methods: {
@@ -78,6 +85,12 @@ export default {
       this.$emit('input', newValue);
     },
     sendRequest() {
+      if (!this.$refs.form.validate()) {
+        this.$emit('show:snackbar', { text: 'Не все поля заполнены', color: 'warning' });
+        return;
+      };
+      this.$refs.form.resetValidation();
+
       if (this.password !== this.confirmPassword) {
         this.$emit('show:snackbar', { text: 'Пароли не совпадают', color: 'warning' });
         return;

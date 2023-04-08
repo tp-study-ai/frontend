@@ -14,9 +14,10 @@
     </div>
 
     <v-card-text>
-      <v-form>
+      <v-form ref="form">
         <v-text-field
           v-model="username"
+          :rules="rules"
           outlined
           dense
           type="text"
@@ -24,6 +25,7 @@
         />
         <v-text-field
           v-model="password"
+          :rules="rules"
           outlined
           dense
           type="password"
@@ -54,14 +56,19 @@ export default {
       password: null
     };
   },
+  computed: {
+    rules() {
+      return [
+        (value) => !!value || 'Вы должны заполнить поле',
+      ];
+    }
+  },
   watch: {
     value(newValue) {
       if (!newValue) {
         return;
       }
-
-      this.username = null;
-      this.password = null;
+      this.$refs.form.reset();
     }
   },
   methods: {
@@ -69,6 +76,12 @@ export default {
       this.$emit('input', newValue);
     },
     sendRequest() {
+      if (!this.$refs.form.validate()) {
+        this.$emit('show:snackbar', { text: 'Не все поля заполнены', color: 'warning' });
+        return;
+      };
+      this.$refs.form.resetValidation();
+
       const params = { username: this.username, password: this.username };
 
       this.$http

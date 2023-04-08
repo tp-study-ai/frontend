@@ -171,8 +171,8 @@ export default {
 
 <style>
 .left-card {
-  min-height: 655.5px;
-  max-height: 655.5px;
+  min-height: 656px;
+  max-height: 656px;
 }
 
 .right-crad {

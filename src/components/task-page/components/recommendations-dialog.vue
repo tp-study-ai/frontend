@@ -1,5 +1,5 @@
 <template>
-<v-dialog :value="value" @input="handleInput">
+<v-dialog :value="value" persistent @input="handleInput">
   <v-card>
     <div class="d-flex">
       <v-card-title>Поздравляем c решением задачи!</v-card-title>

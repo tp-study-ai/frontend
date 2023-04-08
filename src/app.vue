@@ -67,7 +67,11 @@
 
     <v-main>
       <v-container class="justify-center align-center" fluid fill-height>
-        <router-view @show:snackbar="showSnackbar" @show:login-form="showLoginForm" />
+        <router-view
+          :isAuthorized="isAuthorized"
+          @show:login-form="showLoginForm"
+          @show:snackbar="showSnackbar"
+        />
       </v-container>
     </v-main>
 

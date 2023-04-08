@@ -90,6 +90,7 @@ export default {
   name: 'TaskPage',
   props: {
     id: String,
+    isAuthorized: Boolean
   },
   components: {
     'vue-mathjax': VueMathjax,
@@ -139,6 +140,11 @@ export default {
   },
   methods: {
     checkSolution() {
+      if (!this.isAuthorized) {
+        this.$emit('show:login-form');
+        return;
+      }
+
       this.checkSolutionLoading = true;
       const params = {
         task_id: parseInt(this.id),

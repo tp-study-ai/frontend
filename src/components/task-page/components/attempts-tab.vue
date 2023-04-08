@@ -14,7 +14,7 @@
     <tbody>
       <tr v-for="(attempt, id) in attempts" :key="id">
         <td>{{ attempts.length - id }}</td>
-        <td>{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
+        <td :class="getTextClass(attempt)">{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
         <td>{{ attempt.buildTime }}</td>
         <td>{{ attempt.checkTime }}</td>
         <td>
@@ -65,6 +65,12 @@ export default {
     };
   },
   methods: {
+    getTextClass(attempt) {
+      if (attempt.testsPassed === attempt.testsTotal) {
+        return 'success--text';
+      }
+      return 'warning--text';
+    },
     showCode(attempt) {
       this.attempt = attempt;
       this.dialogShown = true;

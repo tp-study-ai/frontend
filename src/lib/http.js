@@ -9,7 +9,14 @@ const axiosInstance = axios.create(options)
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    return response;
+    if (!response.data.error) {
+      return response;
+    }
+
+    const event = new CustomEvent('show:snackbar', { detail: { text: response.data.error, color: 'error' } });
+    document.dispatchEvent(event);
+
+    return Promise.reject(response);
   },
   function (error) {
     const event = new CustomEvent(

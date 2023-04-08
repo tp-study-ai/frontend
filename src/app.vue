@@ -128,7 +128,11 @@ export default {
       action();
     },
     logout() {
-      this.$router.push('/');
+      this.$http
+        .get('/logout')
+        .finally(() => {
+          this.$router.go('/');
+        });
     },
     showSnackbar(options) {
       this.snackbarShown = true;

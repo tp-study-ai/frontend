@@ -77,7 +77,7 @@ export default {
       if (!newValue) {
         return;
       }
-      this.$refs.form.reset();
+      this.$refs.form?.reset();
     }
   },
   methods: {

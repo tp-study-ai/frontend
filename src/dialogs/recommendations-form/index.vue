@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: 'RecommendationsDialog',
+  name: 'RecommendationsForm',
   props: {
     value: Boolean
   },
@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     handleInput(newValue) {
-      this.$emit('input', newValue)
+      this.$emit('input', newValue);
     },
     getTaskPath(task) {
       return `/task/${task.id}`;

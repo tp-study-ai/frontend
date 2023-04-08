@@ -75,14 +75,14 @@
     </v-row>
   </div>
 
-  <recommendations-dialog v-model="dialogShown" />
+  <recommendations-form v-model="dialogShown" />
 </v-container>
 </template>
 
 <script>
 import { VueMathjax } from 'vue-mathjax';
 import CodeEditor from 'simple-code-editor';
-import RecommendationsDialog from './components/recommendations-dialog';
+import RecommendationsForm from '@/dialogs/recommendations-form';
 import ExamplesTab from './components/examples-tab';
 import AttemptsTab from './components/attempts-tab';
 
@@ -94,7 +94,7 @@ export default {
   components: {
     'vue-mathjax': VueMathjax,
     CodeEditor,
-    RecommendationsDialog,
+    RecommendationsForm,
     ExamplesTab,
     AttemptsTab
   },

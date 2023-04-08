@@ -12,8 +12,8 @@
       <v-card v-if="isMobile" class="mb-4">
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text>
-          <div>Сложность: {{ item.difficulty }}</div>
-          <div>Рейтинг: {{ item.cf_rating - 6 }}</div>
+          <div>Сложность: {{ item.difficulty - 6 }}</div>
+          <div>Рейтинг: {{ item.cf_rating }}</div>
         </v-card-text>
 
         <v-card-actions>
@@ -25,8 +25,8 @@
         <td>
           <router-link :to="getTaskPath(item)">{{ item.name }}</router-link>
         </td>
-        <td>{{ item.difficulty }}</td>
-        <td>{{ item.cf_rating - 6 }}</td>
+        <td>{{ item.difficulty - 6 }}</td>
+        <td>{{ item.cf_rating }}</td>
       </tr>
     </template>
   </v-data-table>

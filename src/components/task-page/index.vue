@@ -1,5 +1,5 @@
 <template>
-<div>
+<v-container class="px-0" fluid>
   <div v-if="loading">
     <v-progress-circular indeterminate color="primary" />
   </div>
@@ -17,7 +17,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card v-else width="1000">
+        <v-card v-else>
           <v-tabs v-model="selected">
             <v-tab href="#task">Описание</v-tab>
             <v-tab href="#examples">Примеры</v-tab>
@@ -76,7 +76,7 @@
   </div>
 
   <recommendations-dialog v-model="dialogShown" />
-</div>
+</v-container>
 </template>
 
 <script>

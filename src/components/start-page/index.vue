@@ -1,10 +1,10 @@
 <template>
-<div>
+<v-container class="px-0">
   <div v-if="loading || startDialogShown">
     <v-progress-circular indeterminate color="primary" />
   </div>
 
-  <v-card v-else :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'">
+  <v-card v-else>
     <v-card-title>{{ task.title }}</v-card-title>
     <v-card-text class="pb-1">
       <vue-mathjax :formula="task.description" :safe="false" />
@@ -18,11 +18,7 @@
     </v-card-actions>
   </v-card>
 
-  <v-dialog
-    v-model="startDialogShown"
-    persistent
-    :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'"
-  >
+  <v-dialog v-model="startDialogShown" persistent>
     <v-card>
       <v-card-title>Привет!</v-card-title>
       <v-card-text>
@@ -42,7 +38,7 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
-</div>
+</v-container>
 </template>
 
 <script>

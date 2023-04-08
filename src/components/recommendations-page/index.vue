@@ -1,11 +1,11 @@
 <template>
-<div>
+<v-container class="px-0">
   <div v-if="loading">
     <v-progress-circular indeterminate color="primary" />
   </div>
 
   <div v-else>
-    <v-container class="px-0" fluid v-if="$vuetify.breakpoint.smAndDown">
+    <div v-if="$vuetify.breakpoint.smAndDown">
       <v-select
         v-model="selected"
         :items="mobileTopics"
@@ -34,9 +34,9 @@
           </tr>
         </tbody>
       </v-simple-table>
-    </v-container>
+    </div>
 
-    <v-card v-else width="1000">
+    <v-card v-else>
       <v-tabs v-model="selected" vertical background-color="primary" dark>
         <v-tab v-for="(topic, id) in topics" :key="id">{{ topic }}</v-tab>
 
@@ -64,7 +64,7 @@
       </v-tabs>
     </v-card>
   </div>
-</div>
+</v-container>
 </template>
 
 <script>

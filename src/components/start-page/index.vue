@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="loading">
+  <div v-if="loading || startDialogShown">
     <v-progress-circular indeterminate color="primary" />
   </div>
 
@@ -17,6 +17,31 @@
       <v-btn text @click="getTask">Пропустить</v-btn>
     </v-card-actions>
   </v-card>
+
+  <v-dialog
+    v-model="startDialogShown"
+    persistent
+    :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'"
+  >
+    <v-card>
+      <v-card-title>Привет!</v-card-title>
+      <v-card-text>
+        <p>
+          Study AI - это иновационная платформа для обучения алгоритмам. На этой странице тебе будут
+          показываться случайные задачи на алгоритмы. По мере прохождения задач специализированная модель
+          будет подбирать тебе наиболее подходящие к твоему уровню задачи.
+        </p>
+
+        Чтобы начать решать задачи, нажми кнопку "Начать"!
+      </v-card-text>
+
+      <v-divider />
+      <v-card-actions>
+        <v-spacer />
+        <v-btn text color="primary" @click="hideStartDialog">Начать</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </div>
 </template>
 
@@ -31,7 +56,8 @@ export default {
   data() {
     return {
       loading: true,
-      task: {}
+      task: {},
+      startDialogShown: false
     };
   },
   computed: {
@@ -40,6 +66,7 @@ export default {
     }
   },
   created() {
+    this.startDialogShown = localStorage.getItem('hideStartDialog') !== 'true';
     this.getTask();
   },
   methods: {
@@ -62,6 +89,10 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    hideStartDialog() {
+      this.startDialogShown = false;
+      localStorage.setItem('hideStartDialog', 'true');
     }
   }
 }

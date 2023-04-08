@@ -9,13 +9,13 @@ const axiosInstance = axios.create(options)
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    if (!response.data.comment) {
+    if (!response.data.error) {
       return response;
     }
 
     const event = new CustomEvent(
       'show:snackbar',
-      { detail: { text: response.data.comment, color: 'warning' } }
+      { detail: { text: response.data.error, color: 'warning' } }
     );
     document.dispatchEvent(event);
 

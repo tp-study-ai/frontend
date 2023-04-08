@@ -13,7 +13,7 @@ axiosInstance.interceptors.response.use(
       return response;
     }
 
-    const event = new CustomEvent('show:snackbar', { detail: { text: response.data.error, color: 'error' } });
+    const event = new CustomEvent('show:snackbar', { detail: { text: response.data.error, color: 'warning' } });
     document.dispatchEvent(event);
 
     return Promise.reject(response);

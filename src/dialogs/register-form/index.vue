@@ -62,11 +62,27 @@ export default {
       confirmPassword: null
     };
   },
+  watch: {
+    value(newValue) {
+      if (!newValue) {
+        return;
+      }
+
+      this.username = null;
+      this.password = null;
+      this.confirmPassword = null;
+    }
+  },
   methods: {
     handleInput(newValue) {
       this.$emit('input', newValue);
     },
     sendRequest() {
+      if (this.password !== this.confirmPassword) {
+        this.$emit('show:snackbar', { text: 'Пароли не совпадают', color: 'warning' });
+        return;
+      }
+
       const params = { username: this.username, password: this.username };
 
       this.$http

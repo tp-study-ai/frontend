@@ -54,6 +54,16 @@ export default {
       password: null
     };
   },
+  watch: {
+    value(newValue) {
+      if (!newValue) {
+        return;
+      }
+
+      this.username = null;
+      this.password = null;
+    }
+  },
   methods: {
     handleInput(newValue) {
       this.$emit('input', newValue);

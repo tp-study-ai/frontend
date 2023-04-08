@@ -151,7 +151,7 @@ export default {
           this.attempts.unshift({ testsPassed, testsTotal, buildTime, checkTime, code: this.code });
 
           const text = testsPassed === testsTotal
-            ? 'Все тесты прошли'
+            ? 'Все тесты прошли успешно'
             : `Прошло ${testsPassed} из ${testsTotal} тестов`;
           const color = testsPassed === testsTotal
             ? 'success'

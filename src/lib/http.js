@@ -2,10 +2,11 @@ import axios from 'axios';
 
 const options = {
   baseURL: 'https://study-ai.ru/api',
-  timeout: 5_000
+  timeout: 5_000,
+  withCredentials: true
 };
 
-const axiosInstance = axios.create(options)
+const axiosInstance = axios.create(options);
 
 axiosInstance.interceptors.response.use(
   function (response) {

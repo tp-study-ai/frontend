@@ -14,7 +14,7 @@
     <v-card-actions>
       <v-spacer />
       <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
-      <v-btn text @click="getTask">Пропустить</v-btn>
+      <v-btn text color="secondary" @click="getTask">Пропустить</v-btn>
     </v-card-actions>
   </v-card>
 

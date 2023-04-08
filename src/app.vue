@@ -21,25 +21,34 @@
       <v-btn class="pa-0" text to="/tasks">Все задачи</v-btn>
       <v-spacer />
 
-      <v-btn class="mr-5" icon>
-        <v-icon left>mdi-fire</v-icon>
-        0
-      </v-btn>
+      <v-btn v-if="1 === 1" class="pa-0" text @click="showLoginForm">Войти</v-btn>
+      <div v-else>
+        <v-btn class="mr-5" icon>
+          <v-icon left>mdi-fire</v-icon>
+          0
+        </v-btn>
 
-      <v-menu offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn v-bind="attrs" icon v-on="on">
-            <v-icon>mdi-account-circle</v-icon>
-          </v-btn>
-        </template>
+        <v-menu offset-y>
+          <template #activator="{ on, attrs }">
+            <v-btn v-bind="attrs" icon v-on="on">
+              <v-icon>mdi-account-circle</v-icon>
+            </v-btn>
+          </template>
 
-        <v-list>
-          <v-list-item v-for="(item, i) in menuItems" :key="i" :to="item.to" @click="handleAction(item.action)">
-            <v-icon left>{{ item.icon }}</v-icon>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+          <v-list>
+            <v-list-item
+              v-for="(item, i) in menuItems"
+              :key="i"
+              :to="item.to"
+              @click="handleAction(item.action)"
+            >
+              <v-icon left>{{ item.icon }}</v-icon>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+
       <v-spacer />
     </v-app-bar>
 
@@ -58,9 +67,12 @@
 
     <v-main>
       <v-container class="justify-center align-center" fluid fill-height>
-        <router-view @show:snackbar="showSnackbar" />
+        <router-view @show:snackbar="showSnackbar" @show:login-form="showLoginForm" />
       </v-container>
     </v-main>
+
+    <login-form v-model="loginFormShown" @show:register-form="showRegisterForm" />
+    <register-form v-model="registerFormShown" @show:login-form="showLoginForm" />
 
     <v-snackbar
       v-model="snackbarShown"
@@ -84,13 +96,22 @@
 </template>
 
 <script>
+import LoginForm from '@/dialogs/login-form';
+import RegisterForm from '@/dialogs/register-form';
+
 export default {
   name: 'App',
+  components: {
+    LoginForm,
+    RegisterForm
+  },
   data() {
     return {
       showDrawer: false,
       snackbarShown: false,
-      snackbarOptions: {}
+      snackbarOptions: {},
+      loginFormShown: false,
+      registerFormShown: false
     };
   },
   computed: {
@@ -126,6 +147,14 @@ export default {
         return;
       }
       action();
+    },
+    showLoginForm() {
+      this.loginFormShown = true;
+      this.registerFormShown = false;
+    },
+    showRegisterForm() {
+      this.loginFormShown = false;
+      this.registerFormShown = true;
     },
     logout() {
       this.$http.get('/logout').finally(() => {

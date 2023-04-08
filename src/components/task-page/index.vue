@@ -1,6 +1,6 @@
 <template>
 <v-container class="px-0" fluid>
-  <div v-if="loading">
+  <div v-if="loading" class="d-flex justify-center">
     <v-progress-circular indeterminate color="primary" />
   </div>
 

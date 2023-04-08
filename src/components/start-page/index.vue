@@ -1,6 +1,6 @@
 <template>
 <v-container class="px-0">
-  <div v-if="loading || startDialogShown">
+  <div v-if="loading || startDialogShown" class="d-flex justify-center">
     <v-progress-circular indeterminate color="primary" />
   </div>
 

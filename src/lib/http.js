@@ -9,11 +9,14 @@ const axiosInstance = axios.create(options)
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    if (!response.data.error) {
+    if (!response.data.comment) {
       return response;
     }
 
-    const event = new CustomEvent('show:snackbar', { detail: { text: response.data.error, color: 'warning' } });
+    const event = new CustomEvent(
+      'show:snackbar',
+      { detail: { text: response.data.comment, color: 'warning' } }
+    );
     document.dispatchEvent(event);
 
     return Promise.reject(response);

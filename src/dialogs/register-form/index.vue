@@ -16,7 +16,7 @@
     <v-card-text>
       <v-form>
         <v-text-field
-          v-model="login"
+          v-model="username"
           outlined
           dense
           type="text"
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      login: null,
+      username: null,
       password: null,
       confirmPassword: null
     };
@@ -67,7 +67,14 @@ export default {
       this.$emit('input', newValue);
     },
     sendRequest() {
+      const params = { username: this.username, password: this.username };
 
+      this.$http
+        .post('/register', params)
+        .then(({ data: { message } }) => {
+          this.$emit('show:snackbar', { text: message, color: 'success' });
+          this.handleInput(false);
+        });
     },
     showLoginForm() {
       this.$emit('show:login-form');

@@ -21,8 +21,7 @@
       <v-btn class="pa-0" text to="/tasks">Все задачи</v-btn>
       <v-spacer />
 
-      <v-btn v-if="1 === 1" class="pa-0" text @click="showLoginForm">Войти</v-btn>
-      <div v-else>
+      <div v-if="isAuthorized">
         <v-btn class="mr-5" icon>
           <v-icon left>mdi-fire</v-icon>
           0
@@ -48,6 +47,7 @@
           </v-list>
         </v-menu>
       </div>
+      <v-btn v-else class="pa-0" text @click="showLoginForm">Войти</v-btn>
 
       <v-spacer />
     </v-app-bar>
@@ -71,8 +71,16 @@
       </v-container>
     </v-main>
 
-    <login-form v-model="loginFormShown" @show:register-form="showRegisterForm" />
-    <register-form v-model="registerFormShown" @show:login-form="showLoginForm" />
+    <login-form
+      v-model="loginFormShown"
+      @show:register-form="showRegisterForm"
+      @show:snackbar="showSnackbar"
+    />
+    <register-form
+      v-model="registerFormShown"
+      @show:login-form="showLoginForm"
+      @show:snackbar="showSnackbar"
+    />
 
     <v-snackbar
       v-model="snackbarShown"
@@ -115,6 +123,9 @@ export default {
     };
   },
   computed: {
+    isAuthorized() {
+      return false;
+    },
     menuItems() {
       return [
         { title: 'Профиль', icon: 'mdi-star-box', to: '/profile' },
@@ -124,15 +135,17 @@ export default {
       ];
     },
     mobileMenuItems() {
-      return [
+      const items = [
         { title: 'Рекомендации', to: '/recommendations' },
         { title: 'Все задачи', to: '/tasks' },
-        { divider: true },
-        { title: 'Профиль', icon: 'mdi-star-box', to: '/profile' },
-        { title: 'Посылки', icon: 'mdi-clipboard-list', to: '/attempts' },
-        { title: 'Избранное', icon: 'mdi-heart-outline', to: '/favourites' },
-        { title: 'Выйти', icon: 'mdi-logout', action: this.logout.bind(this) }
+        { divider: true }
       ];
+
+      return items.concat(
+        this.isAuthorized
+          ? this.menuItems
+          : [{ title: 'Войти', icon: 'mdi-login', action: this.showLoginForm.bind(this) }]
+      );
     }
   },
   created() {

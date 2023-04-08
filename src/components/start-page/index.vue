@@ -18,7 +18,11 @@
     </v-card-actions>
   </v-card>
 
-  <v-dialog v-model="startDialogShown" persistent>
+  <v-dialog
+    v-model="startDialogShown"
+    persistent
+    :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'"
+  >
     <v-card>
       <v-card-title>Привет!</v-card-title>
       <v-card-text>

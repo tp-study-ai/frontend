@@ -66,7 +66,20 @@
           <v-divider />
           <v-card-actions>
             <v-spacer />
-            <v-btn :loading="checkSolutionLoading" text color="primary" @click="checkSolution">
+            <v-btn
+              v-if="isTaskSolved"
+              text
+              color="primary"
+              @click="showRecommendationsForm"
+            >
+              Открыть рекомендации
+            </v-btn>
+            <v-btn
+              :loading="checkSolutionLoading"
+              :color="checkSolutionButtonColor"
+              text
+              @click="checkSolution"
+            >
               Проверить
             </v-btn>
           </v-card-actions>
@@ -111,13 +124,29 @@ export default {
       attempts: []
     };
   },
+  computed: {
+    isTaskSolved() {
+      if (this.attempts.length === 0) {
+        return false;
+      }
+
+      const lastAttempt = this.attempts[0];
+      return lastAttempt.testsPassed === lastAttempt.testsTotal;
+    },
+    checkSolutionButtonColor() {
+      if (this.isTaskSolved) {
+        return 'secondary';
+      }
+      return 'primary';
+    }
+  },
   created() {
     this.$http
       .get(`/get_task_by_id?id=${this.id}`)
       .then(({ data }) => {
         let description = data.task_ru === '' ? data.description : data.task_ru;
         description = description.replaceAll('$$$', '$');
-        description = description.replaceAll(String.fromCharCode(92,92), String.fromCharCode(92));
+        description = description.replaceAll(String.fromCharCode(92, 92), String.fromCharCode(92));
 
         this.task = {
           id: data.id,
@@ -168,12 +197,14 @@ export default {
             : 'warning';
 
           this.$emit('show:snackbar', { text, color });
-          this.dialogShown = testsPassed === testsTotal;
         })
         .finally(() => {
           this.selected = 'attempts';
           this.checkSolutionLoading = false;
         });
+    },
+    showRecommendationsForm() {
+      this.dialogShown = true;
     }
   }
 }

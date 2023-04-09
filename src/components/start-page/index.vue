@@ -57,7 +57,7 @@ export default {
         .then(({ data }) => {
           let description = data.task_ru === '' ? data.description : data.task_ru;
           description = description.replaceAll('$$$', '$');
-          description = description.replaceAll(String.fromCharCode(92,92), String.fromCharCode(92));
+          description = description.replaceAll(String.fromCharCode(92, 92), String.fromCharCode(92));
 
           this.task = {
             id: data.id,

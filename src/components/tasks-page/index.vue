@@ -1,5 +1,30 @@
 <template>
 <v-container class="pa-0">
+  <v-menu v-if="tags.length > 0" :close-on-content-click="false" offset-y>
+    <template #activator="{ on, attrs }">
+      <v-btn
+        v-bind="attrs"
+        color="primary"
+        dark
+        v-on="on"
+      >
+        Теги
+      </v-btn>
+    </template>
+
+    <v-card class="d-flex flex-wrap pt-2 pl-2 overflow-y-auto menu-card">
+      <v-chip
+        v-for="tag in tags"
+        :key="tag.tags_id"
+        :color="tag.color"
+        class="mb-2 mr-2"
+        @click="handleTag(tag)"
+      >
+        {{ tag.tags_ru }}
+      </v-chip>
+    </v-card>
+  </v-menu>
+
   <v-data-table
     :headers="tableHeaders"
     :items="tasks"
@@ -43,7 +68,9 @@ export default {
       loading: true,
       page: 1,
       sort: 'rating_up',
-      tasks: []
+      tasks: [],
+      tags: [],
+      choosedTags: []
     };
   },
   computed: {
@@ -76,24 +103,36 @@ export default {
     if (this.$route.query.sort) {
       this.sort = this.$route.query.sort;
     }
+
+    this.getTags();
     this.getTasks();
   },
   methods: {
+    getTags() {
+      this.$http
+        .get('/get_tags')
+        .then(({ data: { tags } }) => {
+          this.tags = tags.map((tag) => ({ ...tag, color: 'normal' }));
+        });
+    },
     getTasks() {
-      const query = {};
-      if (this.$route.query.page !== this.page.toString()) {
-        query.page = this.page;
-      }
-      if (this.$route.query.sort !== this.sort) {
-        query.sort = this.sort;
+      const choosedTagsString = this.choosedTags.join(',');
+
+      const query = { page: this.page, sort: this.sort };
+      if (choosedTagsString !== '') {
+        query.tags = choosedTagsString;
       }
 
-      if (Object.keys(query).length > 0) {
+      if (query.page !== parseInt(this.$route.query.page) || query.sort !== this.$route.query.sort ||
+        query.tags !== this.$route.query.tags) {
         this.$router.push({ path: 'tasks', query });
       }
 
       this.loading = true;
       const params = { page: this.page - 1, sort: this.sort };
+      if (choosedTagsString !== '') {
+        params.tags = choosedTagsString;
+      }
 
       this.$http
         .get('/tasks_list', { params })
@@ -110,7 +149,29 @@ export default {
     updateSorting(sorting) {
       this.sort = sorting ? 'rating_down' : 'sorting_up';
       this.getTasks();
-    }
+    },
+    handleTag(tag) {
+      if (tag.color === 'normal') {
+        tag.color = 'primary';
+        this.choosedTags.push(tag.tags_id);
+        this.getTasks();
+      } else {
+        tag.color = 'normal';
+        const index = this.choosedTags.indexOf(tag.tags_id);
+        if (index !== -1) {
+          this.choosedTags.splice(index, 1);
+        }
+        this.getTasks();
+      }
+    },
   }
 }
 </script>
+
+<style scoped>
+.menu-card {
+  max-width: 400px;
+  min-height: 300px;
+  max-height: 300px;
+}
+</style>

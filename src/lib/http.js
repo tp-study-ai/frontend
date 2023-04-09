@@ -7,10 +7,11 @@ const options = {
 };
 
 const axiosInstance = axios.create(options);
+const IGNORED_URLS = ['/get_user'];
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    if (!response.data.error) {
+    if (!response.data.error || IGNORED_URLS.includes(response.config.url)) {
       return response;
     }
 

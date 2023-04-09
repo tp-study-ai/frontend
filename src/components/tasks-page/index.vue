@@ -1,22 +1,5 @@
 <template>
 <v-container class="pa-0">
-  <v-menu :close-on-click="true" offset-y>
-    <template #activator="{ on, attrs }">
-      <v-btn
-        v-bind="attrs"
-        color="primary"
-        dark
-        v-on="on"
-      >
-        Теги
-      </v-btn>
-    </template>
-
-    <div class="">
-
-    </div>
-  </v-menu>
-
   <v-data-table
     :headers="tableHeaders"
     :items="tasks"

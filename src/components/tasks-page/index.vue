@@ -4,6 +4,7 @@
     <template #activator="{ on, attrs }">
       <v-btn
         v-bind="attrs"
+        class="mt-2"
         color="primary"
         dark
         v-on="on"

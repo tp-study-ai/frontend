@@ -125,7 +125,7 @@ export default {
     },
     getTasks() {
       let choosedTagsString = this.choosedTags.join(',');
-      if (!choosedTagsString.includes(',')) {
+      if (choosedTagsString !== '' && !choosedTagsString.includes(',')) {
         choosedTagsString = choosedTagsString + ',';
       }
 

@@ -32,6 +32,7 @@
     :items-per-page="15"
     :loading="loading"
     hide-default-footer
+    no-data-text="Задач не найдено"
     @update:sort-desc="updateSorting"
   >
     <template #item="{ item, isMobile }">
@@ -105,7 +106,7 @@ export default {
       this.sort = this.$route.query.sort;
     }
     if (this.$route.query.tags) {
-      this.choosedTags = this.$route.query.tags.split(',');
+      this.choosedTags = this.$route.query.tags.split(',').map((id) => parseInt(id));
     }
 
     this.getTags();
@@ -116,7 +117,10 @@ export default {
       this.$http
         .get('/get_tags')
         .then(({ data: { tags } }) => {
-          this.tags = tags.map((tag) => ({ ...tag, color: 'normal' }));
+          this.tags = tags.map((tag) => {
+            const color = this.choosedTags.includes(tag.tags_id) ? 'primary' : 'normal';
+            return { ...tag, color };
+          });
         });
     },
     getTasks() {

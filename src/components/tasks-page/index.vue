@@ -1,15 +1,22 @@
 <template>
 <v-container class="pa-0">
-  <v-menu v-if="tags.length > 0" :close-on-content-click="false" offset-y>
+  <v-menu
+    v-if="tags.length > 0"
+    v-model="menuShown"
+    :close-on-content-click="false"
+    offset-y
+  >
     <template #activator="{ on, attrs }">
       <v-btn
         v-bind="attrs"
+        :block="$vuetify.breakpoint.xsOnly"
         class="my-2"
         color="primary"
         dark
         v-on="on"
       >
-        Теги
+        Теги {{ choosedTags.length > 0 ? `(${choosedTags.length})` : '' }}
+        <v-icon right>{{ menuShown ? 'mdi-arrow-up' : 'mdi-arrow-down' }}</v-icon>
       </v-btn>
     </template>
 
@@ -33,7 +40,7 @@
     :loading="loading"
     hide-default-footer
     no-data-text="Задач не найдено"
-    @update:sort-desc="updateSorting"
+    @update:options="updateOptions"
   >
     <template #item="{ item, isMobile }">
       <v-card v-if="isMobile" class="mb-4">
@@ -71,10 +78,11 @@ export default {
     return {
       loading: true,
       page: 1,
-      sort: 'rating_up',
+      sort: 'rating_down',
       tasks: [],
       tags: [],
-      choosedTags: []
+      choosedTags: [],
+      menuShown: false
     };
   },
   computed: {
@@ -163,8 +171,8 @@ export default {
     getTaskPath(task) {
       return `/task/${task.id}`;
     },
-    updateSorting(sorting) {
-      this.sort = sorting ? 'rating_down' : 'sorting_up';
+    updateOptions(options) {
+      this.sort = options.sortDesc[0] ? 'rating_up' : 'rating_down';
       this.getTasks();
     },
     handleTag(tag) {

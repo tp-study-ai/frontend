@@ -88,8 +88,8 @@ export default {
 
       this.$http
         .post('/login', params)
-        .then(({ data: { message } }) => {
-          this.$emit('show:snackbar', { text: message, color: 'success' });
+        .then(() => {
+          this.$emit('show:snackbar', { text: 'Авторизация прошла успешно', color: 'success' });
           this.$emit('authorize:user', true);
           this.handleInput(false);
         })

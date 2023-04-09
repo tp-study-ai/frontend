@@ -143,7 +143,7 @@ export default {
       if (!this.isAuthorized) {
         this.$emit(
           'show:snackbar',
-          { text: 'Для совершения этого действия необходимо войти', color: 'warning' }
+          { text: 'Для совершения этого действия необходимо авторизоваться', color: 'warning' }
         );
         this.$emit('show:login-form');
         return;

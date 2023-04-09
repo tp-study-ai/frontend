@@ -39,6 +39,7 @@
       <v-card v-if="isMobile" class="mb-4">
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text>
+          <div>Теги: {{ getTagsByTask(item) }}</div>
           <div>Сложность: {{ item.difficulty - 6 }}</div>
           <div>Рейтинг: {{ item.cf_rating }}</div>
         </v-card-text>
@@ -52,6 +53,7 @@
         <td>
           <router-link :to="getTaskPath(item)">{{ item.name }}</router-link>
         </td>
+        <td>{{ getTagsByTask(item) }}</td>
         <td>{{ item.difficulty - 6 }}</td>
         <td>{{ item.cf_rating }}</td>
       </tr>
@@ -80,6 +82,10 @@ export default {
       return [
         {
           text: 'Название',
+          sortable: false
+        },
+        {
+          text: 'Теги',
           sortable: false
         },
         {
@@ -175,6 +181,12 @@ export default {
         this.getTasks();
       }
     },
+    getTagsByTask(task) {
+      return this.tags
+        .filter((tag) => task.cf_tags.includes(tag.tags_id))
+        .map((tag) => tag.tags_ru)
+        .join(', ');
+    }
   }
 }
 </script>

@@ -45,8 +45,8 @@
     <v-divider />
     <v-card-actions>
       <v-spacer />
-      <v-btn color="primary" text @click="sendRequest">Зарегистрироваться</v-btn>
-      <v-btn text color="secondary" @click="showLoginForm">Войти</v-btn>
+      <v-btn :loading="loading" color="primary" text @click="sendRequest">Зарегистрироваться</v-btn>
+      <v-btn :loading="loading" text color="secondary" @click="showLoginForm">Войти</v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>
@@ -62,7 +62,8 @@ export default {
     return {
       username: null,
       password: null,
-      confirmPassword: null
+      confirmPassword: null,
+      loading: false
     };
   },
   computed: {
@@ -96,6 +97,7 @@ export default {
         return;
       }
 
+      this.loading = true;
       const params = { username: this.username, password: this.username };
 
       this.$http
@@ -104,6 +106,9 @@ export default {
           this.$emit('show:snackbar', { text: message, color: 'success' });
           this.$emit('authorize:user', true);
           this.handleInput(false);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     showLoginForm() {

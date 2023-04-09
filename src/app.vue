@@ -153,12 +153,12 @@ export default {
     }
   },
   created() {
+    document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
+
     this.$http.get('/get_user').then(({ data: { id } }) => {
       if (id) {
         this.isAuthorized = true;
       }
-
-      document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
     });
   },
   destroyed() {

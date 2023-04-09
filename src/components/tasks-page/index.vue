@@ -103,6 +103,9 @@ export default {
     if (this.$route.query.sort) {
       this.sort = this.$route.query.sort;
     }
+    if (this.$route.query.tags) {
+      this.choosedTags = this.$route.query.tags.split(',');
+    }
 
     this.getTags();
     this.getTasks();
@@ -117,6 +120,9 @@ export default {
     },
     getTasks() {
       let choosedTagsString = this.choosedTags.join(',');
+      if (!choosedTagsString.includes(',')) {
+        choosedTagsString = choosedTagsString + ',';
+      }
 
       const query = { page: this.page, sort: this.sort };
       if (choosedTagsString !== '') {
@@ -131,10 +137,6 @@ export default {
       this.loading = true;
       const params = { page: this.page - 1, sort: this.sort };
       if (choosedTagsString !== '') {
-        if (!choosedTagsString.includes(',')) {
-          choosedTagsString = choosedTagsString + ',';
-        }
-
         params.tags = choosedTagsString;
       }
 

@@ -116,7 +116,7 @@ export default {
         });
     },
     getTasks() {
-      const choosedTagsString = this.choosedTags.join(',');
+      let choosedTagsString = this.choosedTags.join(',');
 
       const query = { page: this.page, sort: this.sort };
       if (choosedTagsString !== '') {
@@ -131,6 +131,10 @@ export default {
       this.loading = true;
       const params = { page: this.page - 1, sort: this.sort };
       if (choosedTagsString !== '') {
+        if (!choosedTagsString.includes(',')) {
+          choosedTagsString = choosedTagsString + ',';
+        }
+
         params.tags = choosedTagsString;
       }
 

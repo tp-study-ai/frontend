@@ -171,8 +171,8 @@ export default {
     getTaskPath(task) {
       return `/task/${task.id}`;
     },
-    updateOptions(options) {
-      this.sort = options.sortDesc[0] ? 'rating_up' : 'rating_down';
+    updateOptions({ sortDesc }) {
+      this.sort = sortDesc[0] ? 'rating_up' : 'rating_down';
       this.getTasks();
     },
     handleTag(tag) {

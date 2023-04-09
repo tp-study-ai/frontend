@@ -88,7 +88,7 @@ export default {
       if (!this.$refs.form.validate()) {
         this.$emit('show:snackbar', { text: 'Не все поля заполнены', color: 'warning' });
         return;
-      };
+      }
       this.$refs.form.resetValidation();
 
       if (this.password !== this.confirmPassword) {

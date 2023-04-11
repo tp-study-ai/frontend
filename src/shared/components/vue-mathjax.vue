@@ -1,5 +1,5 @@
 <template>
-  <span ref="mathJaxEl">{{ formula }}</span>
+  <div :key="formula" ref="mathJaxEl">{{ formula }}</div>
 </template>
 
 <script>
@@ -17,11 +17,11 @@ export default {
   },
   watch: {
     formula() {
-      this.renderMathJax();
+      this.$nextTick().then(() => this.renderContent());
     },
   },
   mounted() {
-    this.renderMathJax();
+    this.renderContent();
   },
   methods: {
     renderContent() {
@@ -30,13 +30,7 @@ export default {
       } else {
         this.$refs.mathJaxEl.innerHTML = this.formula;
       }
-    },
-    renderMathJax() {
-      this.renderContent();
-      window.MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$$$','$$$']], displayMath: [['$$$$$$','$$$$$$']]}
-      });
-    },
+    }
   },
 };
 </script>

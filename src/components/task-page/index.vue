@@ -57,6 +57,7 @@
           <code-editor
             v-model="code"
             :languages="[['cpp', 'C++']]"
+            wrap_code
             copy_code
             width="auto"
             height="650px"

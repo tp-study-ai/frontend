@@ -38,6 +38,7 @@
         :languages="[['cpp', 'C++']]"
         read_only
         copy_code
+        wrap_code
         width="auto"
         height="650px"
         theme="light"

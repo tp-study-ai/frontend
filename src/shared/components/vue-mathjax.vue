@@ -31,6 +31,6 @@ export default {
         this.$refs.mathJaxEl.innerHTML = this.formula;
       }
     }
-  },
+  }
 };
 </script>

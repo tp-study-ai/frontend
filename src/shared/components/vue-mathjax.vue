@@ -1,5 +1,5 @@
 <template>
-  <div :key="formula" ref="mathJaxEl">{{ formula }}</div>
+  <div ref="mathJaxEl">{{ formula }}</div>
 </template>
 
 <script>

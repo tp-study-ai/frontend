@@ -12,7 +12,7 @@ export default {
     },
     safe: {
       type: Boolean,
-      default: true,
+      default: true
     }
   },
   watch: {
@@ -30,6 +30,7 @@ export default {
       } else {
         this.$refs.mathJaxEl.innerHTML = this.formula;
       }
+      window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub]);
     }
   }
 };

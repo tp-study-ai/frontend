@@ -18,7 +18,7 @@ export default {
   watch: {
     formula() {
       this.$nextTick().then(() => this.renderContent());
-    },
+    }
   },
   mounted() {
     this.renderContent();

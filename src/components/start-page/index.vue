@@ -6,7 +6,7 @@
 
   <v-card v-else>
     <v-card-title>{{ task.title }}</v-card-title>
-    <v-card-text class="pb-1">
+    <v-card-text>
       <vue-mathjax :formula="task.description" :safe="false" />
     </v-card-text>
 
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import { VueMathjax } from 'vue-mathjax';
 import OnboardingForm from '@/dialogs/onboarding-form';
+import VueMathjax from '@/shared/components/vue-mathjax';
 
 export default {
   name: 'ColdStartPage',
@@ -55,9 +55,7 @@ export default {
       this.$http
         .get('/get_task')
         .then(({ data }) => {
-          let description = data.task_ru === '' ? data.description : data.task_ru;
-          description = description.replaceAll('$$$', '$');
-          description = description.replaceAll(String.fromCharCode(92, 92), String.fromCharCode(92));
+          const description = data.task_ru === '' ? data.description : data.task_ru;
 
           this.task = {
             id: data.id,

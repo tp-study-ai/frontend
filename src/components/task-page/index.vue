@@ -93,9 +93,9 @@
 </template>
 
 <script>
-import { VueMathjax } from 'vue-mathjax';
 import CodeEditor from 'simple-code-editor';
 import RecommendationsForm from '@/dialogs/recommendations-form';
+import VueMathjax from '@/shared/components/vue-mathjax';
 import ExamplesTab from './components/examples-tab';
 import AttemptsTab from './components/attempts-tab';
 
@@ -144,9 +144,7 @@ export default {
     this.$http
       .get(`/get_task_by_id?id=${this.id}`)
       .then(({ data }) => {
-        let description = data.task_ru === '' ? data.description : data.task_ru;
-        description = description.replaceAll('$$$', '$');
-        description = description.replaceAll(String.fromCharCode(92, 92), String.fromCharCode(92));
+        const description = data.task_ru === '' ? data.description : data.task_ru;
 
         this.task = {
           id: data.id,

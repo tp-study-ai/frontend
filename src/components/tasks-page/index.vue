@@ -1,37 +1,16 @@
 <template>
 <v-container class="pa-0">
-  <v-menu
-    v-if="tags.length > 0"
-    v-model="menuShown"
-    :close-on-content-click="false"
-    offset-y
-  >
-    <template #activator="{ on, attrs }">
-      <v-btn
-        v-bind="attrs"
-        :block="$vuetify.breakpoint.xsOnly"
-        class="my-2"
-        color="primary"
-        dark
-        v-on="on"
-      >
-        Теги {{ choosedTags.length > 0 ? `(${choosedTags.length})` : '' }}
-        <v-icon right>{{ menuShown ? 'mdi-arrow-up' : 'mdi-arrow-down' }}</v-icon>
-      </v-btn>
-    </template>
-
-    <v-card class="d-flex flex-wrap pt-2 pl-2 overflow-y-auto menu-card">
-      <v-chip
-        v-for="tag in tags"
-        :key="tag.tags_id"
-        :color="tag.color"
-        class="mb-2 mr-2"
-        @click="handleTag(tag)"
-      >
-        {{ tag.tags_ru }}
-      </v-chip>
-    </v-card>
-  </v-menu>
+  <div v-if="tags.length > 0" class="d-flex flex-wrap pt-2 overflow-y-auto menu-card">
+    <v-chip
+      v-for="tag in tags"
+      :key="tag.tags_id"
+      :color="tag.color"
+      class="mr-1"
+      @click="handleTag(tag)"
+    >
+      {{ tag.tags_ru }}
+    </v-chip>
+  </div>
 
   <v-data-table
     :headers="tableHeaders"
@@ -81,8 +60,7 @@ export default {
       sort: 'rating_down',
       tasks: [],
       tags: [],
-      choosedTags: [],
-      menuShown: false
+      choosedTags: []
     };
   },
   computed: {
@@ -206,8 +184,7 @@ export default {
 
 <style scoped>
 .menu-card {
-  max-width: 400px;
-  min-height: 300px;
-  max-height: 300px;
+  min-height: 200px;
+  max-height: 200px;
 }
 </style>

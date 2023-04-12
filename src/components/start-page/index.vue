@@ -20,7 +20,7 @@
             Пропустить
           </v-btn>
         </template>
-        <span>Пропустить задачу и перейти к следующей</span>
+        <span>Пропустить задачу и получить следующую</span>
       </v-tooltip>
     </v-card-actions>
     <v-divider />

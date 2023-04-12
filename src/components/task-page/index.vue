@@ -228,13 +228,13 @@ export default {
 
 <style scoped>
 .left-card {
-  min-height: 80vh;
-  max-height: 80vh;
+  min-height: 82vh;
+  max-height: 82vh;
 }
 
 .right-card {
-  min-height: 85vh;
-  max-height: 85vh;
+  min-height: 87vh;
+  max-height: 87vh;
 }
 
 .section-title {

@@ -1,14 +1,7 @@
 <template>
 <v-container class="px-0">
-  <div v-if="loading || dialogShown" class="d-flex justify-center">
-    <v-progress-circular indeterminate color="primary" />
-  </div>
-
-  <v-card v-else>
+  <v-card :loading="loading">
     <v-card-title>{{ task.title }}</v-card-title>
-    <v-card-text>
-      <vue-mathjax :formula="task.description" :safe="false" />
-    </v-card-text>
 
     <v-divider />
     <v-card-actions>
@@ -30,6 +23,11 @@
         <span>Пропустить задачу и перейти к следующей</span>
       </v-tooltip>
     </v-card-actions>
+    <v-divider />
+
+    <v-card-text>
+      <vue-mathjax :formula="task.description" :safe="false" />
+    </v-card-text>
   </v-card>
 
   <onboarding-form v-model="dialogShown" />

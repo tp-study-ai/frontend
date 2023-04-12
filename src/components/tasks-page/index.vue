@@ -1,5 +1,5 @@
 <template>
-<v-container class="px-0 d-block" fill-height>
+<v-container class="px-0">
   <div class="text-h4 mb-2">Все задачи</div>
 
   <div v-if="tags.length > 0">

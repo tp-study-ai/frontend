@@ -66,7 +66,7 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-container fluid fill-height>
+      <v-container fluid>
         <router-view
           :isAuthorized="isAuthorized"
           @show:login-form="showLoginForm"

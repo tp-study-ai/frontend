@@ -22,6 +22,10 @@ const routes = [
   {
     path: '/recommendations',
     component: components.RecommendationsPage
+  },
+  {
+    path: '/favorites',
+    component: components.FavoritesPage
   }
 ];
 

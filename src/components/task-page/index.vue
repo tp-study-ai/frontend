@@ -68,7 +68,7 @@
           <v-card-actions>
             <v-spacer />
             <v-btn
-              v-if="isTaskSolved"
+              v-if="!isTaskSolved"
               text
               color="primary"
               @click="showRecommendationsForm"
@@ -89,7 +89,12 @@
     </v-row>
   </div>
 
-  <recommendations-form v-model="dialogShown" />
+  <recommendations-form
+    v-model="dialogShown"
+    :code="code"
+    :difficulty="difficulty"
+    :task="task"
+  />
 </v-container>
 </template>
 
@@ -118,6 +123,7 @@ export default {
       loading: true,
       task: {},
       code: '// #include <what_you_use>\r\n\r\nint main() {\r\n    // your code here\r\n    return 0;\r\n}',
+      difficulty: 1,
       checkSolutionLoading: false,
       dialogShown: false,
       selected: null,
@@ -153,7 +159,9 @@ export default {
           description,
           input: data.input,
           output: data.output,
-          note: data.note
+          note: data.note,
+          link: data.link,
+          rating: data.cf_rating
         };
 
         for(let i = 1; i < data.public_tests.length; i += 4) {

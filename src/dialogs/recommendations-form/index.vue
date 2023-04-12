@@ -1,5 +1,10 @@
 <template>
-<v-dialog :value="value" persistent @input="handleInput">
+<v-dialog
+  :value="value"
+  :width="this.$vuetify.breakpoint.smAndDown ? '' : '1200'"
+  persistent
+  @input="handleInput"
+>
   <v-card>
     <div class="d-flex">
       <v-card-title>Поздравляем c решением задачи!</v-card-title>
@@ -41,7 +46,10 @@
 export default {
   name: 'RecommendationsForm',
   props: {
-    value: Boolean
+    value: Boolean,
+    code: String,
+    difficulty: Number,
+    task: Object
   },
   data() {
     return {
@@ -56,10 +64,14 @@ export default {
       }
 
       this.loading = true;
-      const params = { page: 0 };
+      const link = this.task.link.replace('https://codeforces.com', '');
+      const params = {
+        source_code: this.code, problem_url: link,
+        rating: this.task.rating, difficulty: this.difficulty
+      };
 
       this.$http
-        .get('/tasks_list', { params })
+        .post('/get_similar', params)
         .then(({ data: { tasks } }) => {
           this.tasks = tasks.filter((_, index) => index < 6);
         })
@@ -82,7 +94,7 @@ export default {
 <style scoped>
 .card-text {
   display: -webkit-box;
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

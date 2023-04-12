@@ -236,9 +236,4 @@ export default {
   min-height: 87vh;
   max-height: 87vh;
 }
-
-.section-title {
-  font-size: 115%;
-  font-weight: bold
-}
 </style>

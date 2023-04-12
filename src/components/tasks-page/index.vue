@@ -138,10 +138,7 @@ export default {
         });
     },
     getTasks() {
-      let choosedTagsString = this.choosedTags.join(',');
-      if (choosedTagsString !== '' && !choosedTagsString.includes(',')) {
-        choosedTagsString = choosedTagsString + ',';
-      }
+      const choosedTagsString = this.choosedTags.join(',');
 
       const query = { page: this.page, sort: this.sort };
       if (choosedTagsString !== '') {
@@ -190,8 +187,12 @@ export default {
       }
     },
     getTagsByTask(task) {
+      if (!task.cf_tags_ID) {
+        return '';
+      }
+
       return this.tags
-        .filter((tag) => task.cf_tags.includes(tag.tags_id))
+        .filter((tag) => task.cf_tags_ID.includes(tag.tags_id))
         .map((tag) => tag.tags_ru)
         .join(', ');
     }

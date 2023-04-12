@@ -19,6 +19,7 @@
     :loading="loading"
     hide-default-footer
     no-data-text="Задач не найдено"
+    loading-text="Идет загрузка задач..."
     @update:options="updateOptions"
   >
     <template #item="{ item, isMobile }">

@@ -139,13 +139,13 @@ export default {
     },
     getTasks() {
       let choosedTagsString = this.choosedTags.join(',');
-      if (choosedTagsString !== '' && !choosedTagsString.includes(',')) {
+      if (choosedTagsString !== '""' && !choosedTagsString.includes(',')) {
         choosedTagsString = choosedTagsString + ',';
       }
       choosedTagsString = `"${this.choosedTags}"`;
 
       const query = { page: this.page, sort: this.sort };
-      if (choosedTagsString !== '') {
+      if (choosedTagsString !== '""') {
         query.tags = choosedTagsString;
       }
 
@@ -156,7 +156,7 @@ export default {
 
       this.loading = true;
       const params = { page: this.page - 1, sort: this.sort };
-      if (choosedTagsString !== '') {
+      if (choosedTagsString !== '""') {
         params.tags = choosedTagsString;
       }
 

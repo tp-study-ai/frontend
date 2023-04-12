@@ -5,8 +5,8 @@
       <tr>
         <th>Номер</th>
         <th>Количество пройденных тестов</th>
-        <th>Затраченное время на сборку</th>
-        <th>Затраченное время на прохождение тестов</th>
+        <th>Время сборки</th>
+        <th>Время прохождения тестов</th>
         <th>Код программы</th>
       </tr>
     </thead>
@@ -14,7 +14,10 @@
     <tbody>
       <tr v-for="(attempt, id) in attempts" :key="id">
         <td>{{ attempts.length - id }}</td>
-        <td :class="getTextClass(attempt)">{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
+
+        <td v-if="attempt.loading"><v-progress-linear indeterminate color="primary" /></td>
+        <td v-else :class="getTextClass(attempt)">{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
+
         <td>{{ attempt.buildTime }}</td>
         <td>{{ attempt.checkTime }}</td>
         <td>

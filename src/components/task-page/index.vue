@@ -20,7 +20,7 @@
         <v-card v-else>
           <v-tabs v-model="selected">
             <v-tab href="#task">Описание задачи</v-tab>
-            <v-tab href="#examples">Примеры решения</v-tab>
+            <v-tab href="#examples">Примеры тестов</v-tab>
             <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>
           </v-tabs>
 
@@ -139,7 +139,7 @@ export default {
       }
 
       const lastAttempt = this.attempts[0];
-      return lastAttempt.testsPassed === lastAttempt.testsTotal;
+      return lastAttempt.testsPassed === lastAttempt.testsTotal && !lastAttempt.loading;
     },
     checkSolutionButtonColor() {
       if (this.isTaskSolved) {
@@ -186,20 +186,40 @@ export default {
         return;
       }
 
-      this.checkSolutionLoading = true;
+     this.checkSolutionLoading = true;
+      setTimeout(() => {
+        this.checkSolutionLoading = false;
+      }, 300);
+
       const params = {
         task_id: parseInt(this.id),
         solution: this.code
       };
 
+      this.attempts.unshift({
+        testsPassed: 0,
+        testsTotal: 0,
+        buildTime: 0,
+        checkTime: 0,
+        code: this.code,
+        loading: true
+      });
+      const attempt = this.attempts[0];
+
+      this.selected = 'attempts';
       this.$http
         .post('/check_solution', params)
         .then(({ data: { testsPassed, testsTotal, buildTime, checkTime } }) => {
-          this.attempts.unshift({ testsPassed, testsTotal, buildTime, checkTime, code: this.code });
+          this.$set(attempt, 'testsPassed', testsPassed);
+          this.$set(attempt, 'testsTotal', testsTotal);
+          this.$set(attempt, 'buildTime', buildTime);
+          this.$set(attempt, 'checkTime', checkTime);
+
+          const reversedIndex = this.attempts.length - this.attempts.indexOf(attempt);
 
           const text = testsPassed === testsTotal
-            ? 'Все тесты прошли успешно'
-            : `Прошло ${testsPassed} из ${testsTotal} тестов`;
+            ? `В посылке ${reversedIndex} все тесты прошли успешно`
+            : `В посылке ${reversedIndex} прошло ${testsPassed} из ${testsTotal} тестов`;
           const color = testsPassed === testsTotal
             ? 'success'
             : 'warning';
@@ -207,8 +227,7 @@ export default {
           this.$emit('show:snackbar', { text, color });
         })
         .finally(() => {
-          this.selected = 'attempts';
-          this.checkSolutionLoading = false;
+          this.$set(attempt, 'loading', false);
         });
     },
     showRecommendationsForm() {

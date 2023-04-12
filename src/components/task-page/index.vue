@@ -65,28 +65,26 @@
             theme="light"
           />
 
-          <div>
-            <v-divider />
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                v-if="isTaskSolved"
-                text
-                color="primary"
-                @click="showRecommendationsForm"
-              >
-                Перейти к следующей задаче
-              </v-btn>
-              <v-btn
-                :loading="checkSolutionLoading"
-                :color="checkSolutionButtonColor"
-                text
-                @click="checkSolution"
-              >
-                Проверить решение
-              </v-btn>
-            </v-card-actions>
-          </div>
+          <v-divider />
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              v-if="isTaskSolved"
+              text
+              color="primary"
+              @click="showRecommendationsForm"
+            >
+              Перейти к следующей задаче
+            </v-btn>
+            <v-btn
+              :loading="checkSolutionLoading"
+              :color="checkSolutionButtonColor"
+              text
+              @click="checkSolution"
+            >
+              Проверить решение
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>

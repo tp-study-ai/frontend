@@ -68,7 +68,7 @@
           <v-card-actions>
             <v-spacer />
             <v-btn
-              v-if="isTaskSolved"
+              v-if="!isTaskSolved"
               text
               color="primary"
               @click="showRecommendationsForm"
@@ -211,6 +211,14 @@ export default {
         });
     },
     showRecommendationsForm() {
+      if (this.attempts.length < 4) {
+        this.difficulty = 2;
+      } else if (this.attempts.length < 10) {
+        this.difficulty = 1;
+      } else {
+        this.difficulty = 0;
+      }
+
       this.dialogShown = true;
     }
   }

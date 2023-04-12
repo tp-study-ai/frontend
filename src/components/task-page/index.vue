@@ -68,7 +68,7 @@
           <v-card-actions>
             <v-spacer />
             <v-btn
-              v-if="!isTaskSolved"
+              v-if="isTaskSolved"
               text
               color="primary"
               @click="showRecommendationsForm"

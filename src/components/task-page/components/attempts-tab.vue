@@ -36,8 +36,8 @@
       <code-editor
         v-model="attempt.code"
         :languages="[['cpp', 'C++']]"
+        :copy_code="false"
         read_only
-        copy_code
         wrap_code
         width="auto"
         height="650px"

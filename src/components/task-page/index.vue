@@ -1,5 +1,5 @@
 <template>
-<v-container class="px-0" fluid>
+<v-container class="px-0 d-block" fluid fill-height>
   <div v-if="loading" class="d-flex justify-center">
     <v-progress-circular indeterminate color="primary" />
   </div>
@@ -28,10 +28,6 @@
             <v-tab-item value="task">
               <v-card class="overflow-y-auto left-card" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
-                <v-card-subtitle>
-                  <div v-for="tag in task.cf_tags_RU" :key="tag">2343243</div>
-                </v-card-subtitle>
-
                 <v-card-text>
                   <vue-mathjax :formula="task.description" :safe="false" />
                   <vue-mathjax :formula="task.input" :safe="false" />
@@ -61,10 +57,10 @@
           <code-editor
             v-model="code"
             :languages="[['cpp', 'C++']]"
+            :copy_code="false"
             wrap_code
-            copy_code
             width="auto"
-            height="650px"
+            height="780px"
             theme="light"
           />
 
@@ -231,13 +227,13 @@ export default {
 
 <style>
 .left-card {
-  min-height: 656px;
-  max-height: 656px;
+  min-height: 786px;
+  max-height: 786px;
 }
 
 .right-crad {
-  min-height: 700px;
-  max-height: 700px;
+  min-height: 830px;
+  max-height: 830px;
 }
 
 .section-title {

@@ -17,8 +17,8 @@
         <v-toolbar-title>Study AI</v-toolbar-title>
       </router-link>
 
-      <v-btn class="pa-0 mx-5" text to="/recommendations">Рекомендации</v-btn>
-      <v-btn class="pa-0" text to="/tasks">Все задачи</v-btn>
+      <v-btn v-if="isAuthorized" class="pa-0 ml-5" text to="/recommendations">Рекомендованные задачи</v-btn>
+      <v-btn class="pa-0 ml-5" text to="/tasks">Все задачи</v-btn>
       <v-spacer />
 
       <div v-if="isAuthorized">
@@ -139,7 +139,7 @@ export default {
     },
     mobileMenuItems() {
       const items = [
-        { title: 'Рекомендации', to: '/recommendations' },
+        { title: 'Рекомендованные задачи', to: '/recommendations' },
         { title: 'Все задачи', to: '/tasks' },
         { divider: true }
       ];

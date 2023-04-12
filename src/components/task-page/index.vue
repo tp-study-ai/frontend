@@ -19,8 +19,8 @@
 
         <v-card v-else>
           <v-tabs v-model="selected">
-            <v-tab href="#task">Описание</v-tab>
-            <v-tab href="#examples">Примеры</v-tab>
+            <v-tab href="#task">Описание задачи</v-tab>
+            <v-tab href="#examples">Примеры решения</v-tab>
             <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>
           </v-tabs>
 
@@ -77,7 +77,7 @@
               color="primary"
               @click="showRecommendationsForm"
             >
-              Открыть рекомендации
+              Перейти к следующей задаче
             </v-btn>
             <v-btn
               :loading="checkSolutionLoading"
@@ -85,7 +85,7 @@
               text
               @click="checkSolution"
             >
-              Проверить
+              Проверить решение
             </v-btn>
           </v-card-actions>
         </v-card>

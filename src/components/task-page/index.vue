@@ -226,7 +226,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .left-card {
   min-height: 83vh;
   max-height: 83vh;

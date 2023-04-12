@@ -25,9 +25,11 @@
     </v-card-actions>
     <v-divider />
 
-    <v-card-text>
-      <vue-mathjax :formula="task.description" :safe="false" />
-    </v-card-text>
+    <v-card :class="{ 'card': $vuetify.breakpoint.mdAndUp }" class="overflow-y-auto" flat>
+      <v-card-text>
+        <vue-mathjax :formula="task.description" :safe="false" />
+      </v-card-text>
+    </v-card>
   </v-card>
 
   <onboarding-form v-model="dialogShown" />
@@ -82,3 +84,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.card {
+  max-height: 75vh;
+}
+</style>

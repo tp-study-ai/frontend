@@ -1,11 +1,13 @@
 <template>
-<v-container class="px-0">
+<v-container class="px-0 d-block" fill-height>
   <div v-if="loading" class="d-flex justify-center">
     <v-progress-circular indeterminate color="primary" />
   </div>
 
   <div v-else>
-    <div v-if="$vuetify.breakpoint.smAndDown">
+    <div class="text-h4 mb-2">Рекомендованные задачи</div>
+
+    <div v-if="$vuetify.breakpoint.smAndDown" class="mt-5">
       <v-select
         v-model="selected"
         :items="mobileTopics"

@@ -1,15 +1,20 @@
 <template>
-<v-container class="pa-0">
-  <div v-if="tags.length > 0" class="d-flex flex-wrap pt-2 overflow-y-auto menu-card">
-    <v-chip
-      v-for="tag in tags"
-      :key="tag.tags_id"
-      :color="tag.color"
-      class="mr-1"
-      @click="handleTag(tag)"
-    >
-      {{ tag.tags_ru }}
-    </v-chip>
+<v-container class="px-0 d-block" fill-height>
+  <div class="text-h4 mb-2">Все задачи</div>
+
+  <div v-if="tags.length > 0">
+    <div class="text-subtitle-1">Теги для поиска</div>
+    <div class="d-flex flex-wrap pt-2 overflow-y-auto menu-card">
+      <v-chip
+        v-for="tag in tags"
+        :key="tag.tags_id"
+        :color="tag.color"
+        class="mr-1 mb-1"
+        @click="handleTag(tag)"
+      >
+        {{ tag.tags_ru }}
+      </v-chip>
+    </div>
   </div>
 
   <v-data-table

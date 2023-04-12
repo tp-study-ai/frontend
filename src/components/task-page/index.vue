@@ -53,37 +53,40 @@
       </v-col>
 
       <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="12" md="6">
-        <v-card class="right-card">
+        <v-card class="d-flex right-card flex-column justify-space-between">
           <code-editor
             v-model="code"
             :languages="[['cpp', 'C++']]"
             :copy_code="false"
             wrap_code
             width="auto"
-            height="780px"
+            height="781px"
+            border_radius="0px"
             theme="light"
           />
 
-          <v-divider />
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              v-if="isTaskSolved"
-              text
-              color="primary"
-              @click="showRecommendationsForm"
-            >
-              Перейти к следующей задаче
-            </v-btn>
-            <v-btn
-              :loading="checkSolutionLoading"
-              :color="checkSolutionButtonColor"
-              text
-              @click="checkSolution"
-            >
-              Проверить решение
-            </v-btn>
-          </v-card-actions>
+          <div>
+            <v-divider />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                v-if="isTaskSolved"
+                text
+                color="primary"
+                @click="showRecommendationsForm"
+              >
+                Перейти к следующей задаче
+              </v-btn>
+              <v-btn
+                :loading="checkSolutionLoading"
+                :color="checkSolutionButtonColor"
+                text
+                @click="checkSolution"
+              >
+                Проверить решение
+              </v-btn>
+            </v-card-actions>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -227,13 +230,13 @@ export default {
 
 <style>
 .left-card {
-  min-height: 786px;
-  max-height: 786px;
+  min-height: 83vh;
+  max-height: 83vh;
 }
 
-.right-crad {
-  min-height: 830px;
-  max-height: 830px;
+.right-card {
+  min-height: 88vh;
+  max-height: 88vh;
 }
 
 .section-title {

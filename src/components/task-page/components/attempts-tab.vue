@@ -41,6 +41,7 @@
         wrap_code
         width="auto"
         height="650px"
+        border_radius="0px"
         theme="light"
       />
     </v-card>

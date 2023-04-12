@@ -120,7 +120,7 @@ export default {
       this.sort = this.$route.query.sort;
     }
     if (this.$route.query.tags) {
-      this.choosedTags = this.$route.query.tags.split(',').map((id) => parseInt(id));
+      this.choosedTags = this.$route.query.tags.replace('"', '').split(',').map((id) => parseInt(id));
     }
 
     this.getTags();
@@ -142,6 +142,7 @@ export default {
       if (choosedTagsString !== '' && !choosedTagsString.includes(',')) {
         choosedTagsString = choosedTagsString + ',';
       }
+      choosedTagsString = `"${this.choosedTags}"`;
 
       const query = { page: this.page, sort: this.sort };
       if (choosedTagsString !== '') {

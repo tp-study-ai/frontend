@@ -138,7 +138,10 @@ export default {
         });
     },
     getTasks() {
-      const choosedTagsString = this.choosedTags.join(',');
+      let choosedTagsString = this.choosedTags.join(',');
+      if (choosedTagsString !== '' && !choosedTagsString.includes(',')) {
+        choosedTagsString = choosedTagsString + ',';
+      }
 
       const query = { page: this.page, sort: this.sort };
       if (choosedTagsString !== '') {

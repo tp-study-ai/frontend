@@ -18,7 +18,7 @@
     :items-per-page="15"
     :loading="loading"
     hide-default-footer
-    no-data-text="Задач не найдено"
+    no-data-text="Задачи не найдены"
     loading-text="Идет загрузка задач..."
     @update:options="updateOptions"
   >

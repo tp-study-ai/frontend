@@ -60,7 +60,7 @@
             :copy_code="false"
             wrap_code
             width="auto"
-            height="781px"
+            height="771px"
             border_radius="0px"
             theme="light"
           />

@@ -28,6 +28,10 @@
             <v-tab-item value="task">
               <v-card class="overflow-y-auto left-card" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
+                <v-card-subtitle>
+                  <div v-for="tag in task.cf_tags_RU" :key="tag">2343243</div>
+                </v-card-subtitle>
+
                 <v-card-text>
                   <vue-mathjax :formula="task.description" :safe="false" />
                   <vue-mathjax :formula="task.input" :safe="false" />

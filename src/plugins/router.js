@@ -26,6 +26,10 @@ const routes = [
   {
     path: '/favorites',
     component: components.FavoritesPage
+  },
+  {
+    path: '/profile',
+    component: components.ProfilePage
   }
 ];
 

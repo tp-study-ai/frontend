@@ -1,17 +1,15 @@
 <template>
 <v-container class="px-0">
   <v-card :loading="loading">
-    <v-card-title>{{ task.title }}</v-card-title>
+    <div class="d-flex align-center">
+      <v-card-title>{{ task.title }}</v-card-title>
 
-    <v-divider />
-    <v-card-actions>
-      <v-spacer />
-
-      <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
+      <v-btn :to="taskPath" class="ml-auto" text color="primary">Перейти к задаче</v-btn>
       <v-tooltip top>
         <template #activator="{ on, attrs }">
           <v-btn
             v-on="on"
+            class="mr-4"
             text
             color="secondary"
             @click="getTask"
@@ -22,7 +20,7 @@
         </template>
         <span>Пропустить задачу и получить следующую</span>
       </v-tooltip>
-    </v-card-actions>
+    </div>
     <v-divider />
 
     <v-card :class="{ 'card': $vuetify.breakpoint.mdAndUp }" class="overflow-y-auto" flat>

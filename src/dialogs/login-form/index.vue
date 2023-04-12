@@ -84,7 +84,7 @@ export default {
       this.$refs.form.resetValidation();
 
       this.loading = true;
-      const params = { username: this.username, password: this.username };
+      const params = { username: this.username, password: this.password };
 
       this.$http
         .post('/login', params)

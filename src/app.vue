@@ -133,7 +133,6 @@ export default {
     menuItems() {
       return [
         { title: 'Профиль', icon: 'mdi-star-box', to: '/profile' },
-        { title: 'Посылки', icon: 'mdi-clipboard-list', to: '/attempts' },
         { title: 'Избранное', icon: 'mdi-heart-outline', to: '/favourites' },
         { title: 'Выйти', icon: 'mdi-logout', action: this.logout.bind(this) }
       ];

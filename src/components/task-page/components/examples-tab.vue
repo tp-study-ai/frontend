@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="mx-4 py-2 px-4 my-4 d-flex justify-space-between" outlined>
+  <div class="mx-4 py-2 px-4 mt-4 d-flex justify-space-between" outlined>
     <div class="text-subtitle-1">Ограничение по памяти: {{ memoryLimit }} Мб</div>
     <div class="text-subtitle-1">Ограничение по времени: {{ limits.time_limit }} с</div>
   </div>

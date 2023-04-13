@@ -11,11 +11,11 @@
   </v-card>
 
   <v-card v-for="(example, id) in examples" :key="id" class="mb-2 mx-4 mt-4 py-2 px-4" outlined>
-    <div class="font-bold">Входные данные</div>
-    <v-card-text v-html="example.input" class="pl-0 pt-2" />
+    <div class="text-subtitle-1">Входные данные</div>
+    <v-card-text v-html="example.input" class="pl-0 pt-0" />
 
-    <div class="font-bold">Выходные данные</div>
-    <v-card-text v-html="example.output" class="pl-0 pt-2 pb-0" />
+    <div class="text-subtitle-1">Выходные данные</div>
+    <v-card-text v-html="example.output" class="pl-0 pt-0 pb-0" />
   </v-card>
 </div>
 </template>

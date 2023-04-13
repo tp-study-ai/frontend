@@ -39,7 +39,7 @@
 
             <v-tab-item value="examples">
               <v-card class="overflow-y-auto left-card" flat>
-                <examples-tab :examples="examples" />
+                <examples-tab :examples="examples" :limits="limits" />
               </v-card>
             </v-tab-item>
 
@@ -124,6 +124,7 @@ export default {
     return {
       loading: true,
       task: {},
+      limits: {},
       code: '// #include <what_you_use>\r\n\r\nint main() {\r\n    // your code here\r\n    return 0;\r\n}',
       difficulty: 1,
       checkSolutionLoading: false,
@@ -164,6 +165,11 @@ export default {
           note: data.note,
           link: data.link,
           rating: data.cf_rating
+        };
+
+        this.limits = {
+          memory_limit_bytes: data.memory_limit_bytes,
+          time_limit: data.time_limit
         };
 
         for(let i = 1; i < data.public_tests.length; i += 4) {

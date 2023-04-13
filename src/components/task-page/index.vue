@@ -262,4 +262,9 @@ export default {
   font-size: 115%;
   font-weight: bold;
 }
+
+/* Используется для решения проблем с отображением нумерации трехзначных цифр */
+.line-numbers {
+  widows: 30px;
+}
 </style>

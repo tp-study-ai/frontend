@@ -92,7 +92,7 @@ export default {
         case 3:
           return 'Ошибка компиляции';
         case 4:
-          return 'Ошибка в тесте';
+          return 'Неверный ответ';
         default:
           return '';
       }

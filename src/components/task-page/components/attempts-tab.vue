@@ -15,12 +15,12 @@
       <tr v-for="(attempt, id) in attempts" :key="id">
         <td>{{ attempts.length - id }}</td>
 
-        <td v-if="attempt.loading"><v-progress-linear indeterminate color="primary" /></td>
+        <td v-if="attempt.loading" colspan="3"><v-progress-linear indeterminate color="primary" /></td>
         <td v-else>{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
 
-        <td>{{ attempt.loading ? '' : attempt.checkTime }}</td>
-        <th :class="getResultColor(attempt.checkResult)">
-          {{ attempt.loading ? '' : getResultMessage(attempt.checkResult) }}
+        <td v-if="!attempt.loading">{{ attempt.checkTime }}</td>
+        <th v-if="!attempt.loading" :class="getResultColor(attempt.checkResult)">
+          {{ getResultMessage(attempt.checkResult) }}
         </th>
         <td>
           <v-btn class="pa-0" text color="primary" @click="showCode(attempt)">Показать</v-btn>

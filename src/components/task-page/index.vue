@@ -264,7 +264,7 @@ export default {
 }
 
 /* Используется для решения проблем с отображением нумерации трехзначных цифр */
-.line-numbers {
-  widows: 30px;
+.code_editor > .editor > .line-numbers {
+  width: 30px;
 }
 </style>

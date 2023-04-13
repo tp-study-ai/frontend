@@ -58,7 +58,7 @@
             v-model="code"
             :languages="[['cpp', 'C++']]"
             :copy_code="false"
-            wrap_code
+            count_lines
             width="auto"
             height="771px"
             border_radius="0px"
@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import CodeEditor from 'simple-code-editor';
+import CodeEditor from 'simple-code-editor/project/package/CodeEditor';
 import RecommendationsForm from '@/dialogs/recommendations-form';
 import VueMathjax from '@/shared/components/vue-mathjax';
 import ExamplesTab from './components/examples-tab';

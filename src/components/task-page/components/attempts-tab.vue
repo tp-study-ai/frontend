@@ -41,7 +41,7 @@
         :languages="[['cpp', 'C++']]"
         :copy_code="false"
         read_only
-        wrap_code
+        count_lines
         width="auto"
         height="650px"
         border_radius="0px"
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import CodeEditor from 'simple-code-editor';
+import CodeEditor from 'simple-code-editor/project/package/CodeEditor';
 
 export default {
   name: 'AttemptsTab',

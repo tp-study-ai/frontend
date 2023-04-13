@@ -21,6 +21,18 @@
         <td v-if="!attempt.loading">{{ attempt.checkTime }}</td>
         <th v-if="!attempt.loading" :class="getResultColor(attempt.checkResult)">
           {{ getResultMessage(attempt.checkResult) }}
+          <v-tooltip v-if="attempt.checkResult !== 0" top>
+            <template #activator="{ on, attrs }">
+              <v-btn
+                v-on="on"
+                icon
+                v-bind="attrs"
+              >
+                <v-icon>mdi-comment-question-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ attempt.checkMessage }}</span>
+          </v-tooltip>
         </th>
         <td>
           <v-btn class="pa-0" text color="primary" @click="showCode(attempt)">Показать</v-btn>

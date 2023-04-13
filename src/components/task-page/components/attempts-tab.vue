@@ -6,6 +6,7 @@
         <th>Номер</th>
         <th>Пройдено тестов</th>
         <th>Общее время тестирования</th>
+        <th>Вердикт</th>
         <th>Код программы</th>
       </tr>
     </thead>
@@ -15,9 +16,12 @@
         <td>{{ attempts.length - id }}</td>
 
         <td v-if="attempt.loading"><v-progress-linear indeterminate color="primary" /></td>
-        <td v-else :class="getTextClass(attempt)">{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
+        <td v-else>{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
 
-        <td>{{ attempt.checkTime }}</td>
+        <td>{{ attempt.loading ? '' : attempt.checkTime }}</td>
+        <th :class="getResultColor(attempt.checkResult)">
+          {{ attempt.loading ? '' : getResultMessage(attempt.checkResult) }}
+        </th>
         <td>
           <v-btn class="pa-0" text color="primary" @click="showCode(attempt)">Показать</v-btn>
         </td>
@@ -69,11 +73,29 @@ export default {
     };
   },
   methods: {
-    getTextClass(attempt) {
-      if (attempt.testsPassed === attempt.testsTotal) {
-        return 'success--text';
+    getResultColor(checkResult) {
+      switch(checkResult) {
+        case 0:
+          return 'success--text';
+        case 3:
+          return 'error--text';
+        case 4:
+          return 'warning--text';
+        default:
+          return '';
       }
-      return 'warning--text';
+    },
+    getResultMessage(checkResult) {
+      switch(checkResult) {
+        case 0:
+          return 'Успех';
+        case 3:
+          return 'Ошибка компиляции';
+        case 4:
+          return 'Тестовая ошибка';
+        default:
+          return '';
+      }
     },
     showCode(attempt) {
       this.attempt = attempt;

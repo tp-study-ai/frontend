@@ -23,12 +23,25 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(response);
   },
   function (error) {
-    const event = new CustomEvent(
-      'show:snackbar',
-      { detail: { text: 'При выполнении запроса произошла неизвестная ошибка', color: 'error' }}
-    );
-    document.dispatchEvent(event);
+    let event;
+    if (error.response.data.error) {
+      if (IGNORED_URLS.includes(error.config.url)) {
+        return Promise.reject(error);;
+      }
 
+      event = new CustomEvent(
+        'show:snackbar',
+        { detail: { text: error.response.data.error, color: 'warning' } }
+      );
+      document.dispatchEvent(event);
+    } else {
+      event = new CustomEvent(
+        'show:snackbar',
+        { detail: { text: 'При выполнении запроса произошла неизвестная ошибка', color: 'error' } }
+      );
+    }
+
+    document.dispatchEvent(event);
     return Promise.reject(error);
   }
 );

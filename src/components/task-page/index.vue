@@ -207,6 +207,7 @@ export default {
         testsPassed: 0,
         testsTotal: 0,
         checkTime: 0,
+        checkResult: 0,
         code: this.code,
         loading: true
       });
@@ -215,10 +216,11 @@ export default {
       this.selected = 'attempts';
       this.$http
         .post('/check_solution', params)
-        .then(({ data: { testsPassed, testsTotal, checkTime } }) => {
+        .then(({ data: { testsPassed, testsTotal, checkTime, checkResult } }) => {
           this.$set(attempt, 'testsPassed', testsPassed);
           this.$set(attempt, 'testsTotal', testsTotal);
           this.$set(attempt, 'checkTime', checkTime);
+          this.$set(attempt, 'checkResult', checkResult);
 
           const reversedIndex = this.attempts.length - this.attempts.indexOf(attempt);
 

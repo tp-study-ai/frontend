@@ -25,6 +25,7 @@
             <template #activator="{ on, attrs }">
               <v-btn
                 v-on="on"
+                class="ml-1"
                 icon
                 v-bind="attrs"
               >

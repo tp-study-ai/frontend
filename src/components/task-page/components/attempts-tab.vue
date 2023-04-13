@@ -5,7 +5,6 @@
       <tr>
         <th>Номер</th>
         <th>Пройдено тестов</th>
-        <th>Время сборки</th>
         <th>Общее время тестирования</th>
         <th>Код программы</th>
       </tr>
@@ -18,7 +17,6 @@
         <td v-if="attempt.loading"><v-progress-linear indeterminate color="primary" /></td>
         <td v-else :class="getTextClass(attempt)">{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
 
-        <td>{{ attempt.buildTime }}</td>
         <td>{{ attempt.checkTime }}</td>
         <td>
           <v-btn class="pa-0" text color="primary" @click="showCode(attempt)">Показать</v-btn>

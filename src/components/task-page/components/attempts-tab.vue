@@ -42,6 +42,7 @@
         :copy_code="false"
         read_only
         count_lines
+        spellcheck
         width="auto"
         height="650px"
         border_radius="0px"

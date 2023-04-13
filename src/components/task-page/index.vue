@@ -245,7 +245,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .left-card {
   min-height: 82vh;
   max-height: 82vh;
@@ -254,5 +254,11 @@ export default {
 .right-card {
   min-height: 87vh;
   max-height: 87vh;
+}
+
+/* Используется для стилизации заголовков внутри описания задачи */
+.section-title {
+  font-size: 115%;
+  font-weight: bold;
 }
 </style>

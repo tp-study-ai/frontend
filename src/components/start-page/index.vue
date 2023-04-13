@@ -1,9 +1,10 @@
 <template>
 <v-container class="px-0">
   <v-card :loading="loading">
-    <div class="d-flex align-center">
+    <div :class="{ 'd-flex align-center': $vuetify.breakpoint.mdAndUp }">
       <v-card-title>{{ task.title }}</v-card-title>
 
+      <v-divider v-if="$vuetify.breakpoint.smAndDown" />
       <v-btn :to="taskPath" class="ml-auto" text color="primary">Перейти к задаче</v-btn>
       <v-tooltip top>
         <template #activator="{ on, attrs }">

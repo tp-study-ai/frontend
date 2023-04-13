@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     memoryLimit() {
-      return Math.round(this.limits.memory_limit_bytes / (1024 * 1024));
+      return Math.round(this.limits.memory_limit_bytes / (1000 * 1000));
     }
   }
 }

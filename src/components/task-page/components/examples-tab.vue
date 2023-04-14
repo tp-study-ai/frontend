@@ -10,23 +10,29 @@
     <div class="text-subtitle-1">Вывод: стандартный вывод</div>
   </div>
 
-  <v-card v-for="(example, id) in examples" :key="id" class="mb-2 mx-4 mt-4 py-2 px-4" outlined>
-    <div class="text-subtitle-1 font-weight-bold">
-      Входные данные
-      <v-btn class="ml-1" icon @click="copyText(example.input)">
-        <v-icon>mdi-content-copy</v-icon>
-      </v-btn>
-    </div>
-    <v-card-text v-html="example.input" class="pl-0 pt-0" />
+  <div v-if="examples.length > 0">
+    <v-card v-for="(example, id) in examples" :key="id" class="mb-2 mx-4 mt-4 py-2 px-4" outlined>
+      <div class="text-subtitle-1 font-weight-bold">
+        Входные данные
+        <v-btn class="ml-1" icon @click="copyText(example.input)">
+          <v-icon>mdi-content-copy</v-icon>
+        </v-btn>
+      </div>
+      <v-card-text v-html="example.input" class="pl-0 pt-0" />
 
-    <div class="text-subtitle-1 font-weight-bold">
-      Выходные данные
-      <v-btn class="ml-1" icon @click="copyText(example.output)">
-        <v-icon>mdi-content-copy</v-icon>
-      </v-btn>
-    </div>
-    <v-card-text v-html="example.output" class="pl-0 pt-0 pb-0" />
-  </v-card>
+      <div class="text-subtitle-1 font-weight-bold">
+        Выходные данные
+        <v-btn class="ml-1" icon @click="copyText(example.output)">
+          <v-icon>mdi-content-copy</v-icon>
+        </v-btn>
+      </div>
+      <v-card-text v-html="example.output" class="pl-0 pt-0 pb-0" />
+    </v-card>
+  </div>
+
+  <div v-else class="text-h6 font-weight-bold mx-8 mt-4">
+    Примеров нет
+  </div>
 </div>
 </template>
 

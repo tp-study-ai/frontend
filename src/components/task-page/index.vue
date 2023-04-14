@@ -277,6 +277,7 @@ export default {
 
 /* Используется для решения проблем с отображением нумерации трехзначных цифр */
 .code_editor > .editor > .line-numbers {
-  width: 30px;
+  width: 38px;
+  padding-right: 5px;
 }
 </style>

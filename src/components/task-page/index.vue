@@ -39,7 +39,11 @@
 
             <v-tab-item value="examples">
               <v-card class="overflow-y-auto left-card" flat>
-                <examples-tab :examples="examples" :limits="limits" />
+                <examples-tab
+                  :examples="examples"
+                  :limits="limits"
+                  @show:snackbar="(options) => $emit('show:snackbar', options)"
+                />
               </v-card>
             </v-tab-item>
 

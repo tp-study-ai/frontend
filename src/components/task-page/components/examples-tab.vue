@@ -35,7 +35,7 @@
   </div>
 
   <v-card flat>
-    <v-card-text>
+    <v-card-text class="pb-0">
       <vue-mathjax :formula="note" :safe="false" />
     </v-card-text>
   </v-card>

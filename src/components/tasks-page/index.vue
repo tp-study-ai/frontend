@@ -52,7 +52,7 @@
     </template>
   </v-data-table>
 
-  <v-pagination v-model="page" :length="522" />
+  <v-pagination v-model="page" :length="paginationLength" />
 </v-container>
 </template>
 
@@ -65,6 +65,7 @@ export default {
       page: 1,
       sort: 'rating_down',
       tasks: [],
+      paginationLength: 0,
       tags: [],
       choosedTags: []
     };
@@ -142,8 +143,9 @@ export default {
 
       this.$http
         .get('/tasks_list', { params })
-        .then(({ data: { tasks } }) => {
+        .then(({ data: { tasks, task_count } }) => {
           this.tasks = tasks;
+          this.paginationLength = Math.ceil(task_count / 15);
         })
         .finally(() => {
           this.loading = false;

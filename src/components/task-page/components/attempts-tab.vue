@@ -45,9 +45,16 @@
         </v-btn>
       </div>
 
-      <div v-if="checkMessage !== ''">
-        <div class="text-subtitle-1 font-weight-bold ml-4">Результат проверки</div>
-        <v-card-text class="pt-2">{{ attempt.checkMessage }}</v-card-text>
+      <div v-if="attempt.checkMessage !== '' || attempt.loading" class="mx-4">
+        <div class="text-subtitle-1 font-weight-bold">Результат проверки</div>
+
+        <v-progress-linear
+          v-if="attempt.loading"
+          class="mt-2 mb-4"
+          indeterminate
+          color="primary"
+        />
+        <v-card-text v-else class="px-0 pt-2">{{ attempt.checkMessage }}</v-card-text>
       </div>
 
       <div class="text-subtitle-1 font-weight-bold ml-4">Код программы</div>

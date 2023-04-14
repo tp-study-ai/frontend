@@ -1,11 +1,11 @@
 <template>
 <div>
-  <div class="mx-4 py-2 px-4 mt-4 d-flex justify-space-between" outlined>
+  <v-card class="mx-4 py-2 mt-4 d-flex justify-space-between" flat>
     <div class="text-subtitle-1">Ограничение по памяти: {{ memoryLimit }} Мб</div>
     <div class="text-subtitle-1">Ограничение по времени: {{ limits.time_limit }} с</div>
-  </div>
+  </v-card>
 
-  <div class="mx-4 py-2 px-4 d-flex justify-space-between" outlined>
+  <div class="mx-4 py-2 d-flex justify-space-between" outlined>
     <div class="text-subtitle-1">Ввод: стандартный ввод</div>
     <div class="text-subtitle-1">Вывод: стандартный вывод</div>
   </div>
@@ -30,18 +30,30 @@
     </v-card>
   </div>
 
-  <div v-else class="text-h6 font-weight-bold mx-8 mt-4">
+  <div v-else class="text-h6 font-weight-bold mx-4 mt-4">
     Примеров нет
   </div>
+
+  <v-card flat>
+    <v-card-text>
+      <vue-mathjax :formula="note" :safe="false" />
+    </v-card-text>
+  </v-card>
 </div>
 </template>
 
 <script>
+import VueMathjax from '@/shared/components/vue-mathjax';
+
 export default {
   name: 'ExamplesTab',
   props: {
     examples: Array,
-    limits: Object
+    limits: Object,
+    note: String
+  },
+  components: {
+    'vue-mathjax': VueMathjax
   },
   computed: {
     memoryLimit() {

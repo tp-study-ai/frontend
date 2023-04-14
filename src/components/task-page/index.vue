@@ -32,7 +32,6 @@
                   <vue-mathjax :formula="task.description" :safe="false" />
                   <vue-mathjax :formula="task.input" :safe="false" />
                   <vue-mathjax :formula="task.output" :safe="false" />
-                  <vue-mathjax :formula="task.note" :safe="false" />
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -42,6 +41,7 @@
                 <examples-tab
                   :examples="examples"
                   :limits="limits"
+                  :note="task.note"
                   @show:snackbar="(options) => $emit('show:snackbar', options)"
                 />
               </v-card>

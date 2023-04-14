@@ -24,7 +24,7 @@
             <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>
           </v-tabs>
 
-          <v-tabs-items v-model="selected">
+          <v-tabs-items v-model="selected" touchless>
             <v-tab-item value="task">
               <v-card class="overflow-y-auto left-card" flat>
                 <v-card-title>{{ task.title }}</v-card-title>

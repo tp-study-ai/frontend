@@ -5,12 +5,7 @@
   </div>
 
   <div v-else>
-    <v-row
-      v-touch="{
-        left: () => swipe('left'),
-        right: () => swipe('right')
-      }"
-    >
+    <v-row v-touch="swipeOptions">
       <v-col cols="12" md="6">
         <div v-if="$vuetify.breakpoint.smAndDown">
           <v-card v-if="swipeDirection === 'right'">
@@ -23,7 +18,7 @@
             </v-card-text>
           </v-card>
 
-          <v-card v-else class="pb-2">
+          <v-card v-else>
             <v-card-title>Примеры тестов</v-card-title>
             <examples-tab
               :examples="examples"
@@ -45,7 +40,7 @@
             <v-tab-item value="task">
               <v-card class="overflow-y-auto left-card" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
-                <v-card-text class="pb-0">
+                <v-card-text>
                   <vue-mathjax :formula="task.description" :safe="false" />
                   <vue-mathjax :formula="task.input" :safe="false" />
                   <vue-mathjax :formula="task.output" :safe="false" />
@@ -170,6 +165,12 @@ export default {
         return 'secondary';
       }
       return 'primary';
+    },
+    swipeOptions() {
+      return {
+        left: () => this.swipe('left'),
+        right: () => this.swipe('right')
+      };
     }
   },
   created() {

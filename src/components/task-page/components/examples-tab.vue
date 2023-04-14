@@ -48,7 +48,7 @@
     Примеров нет
   </div>
 
-  <v-card v-if="note" flat>
+  <v-card flat>
     <v-card-text>
       <vue-mathjax :formula="note" :safe="false" />
     </v-card-text>

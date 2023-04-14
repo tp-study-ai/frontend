@@ -7,7 +7,7 @@
         <th>Пройдено тестов</th>
         <th>Общее время тестирования</th>
         <th>Вердикт</th>
-        <th>Код программы</th>
+        <th>Отчет</th>
       </tr>
     </thead>
 
@@ -45,12 +45,18 @@
   <v-dialog v-model="dialogShown">
     <v-card>
       <div class="d-flex">
-        <v-card-title>Код программы</v-card-title>
+        <v-card-title>Отчет</v-card-title>
         <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </div>
 
+      <div v-if="checkMessage !== ''">
+        <div class="text-subtitle-1 ml-6">Результат проверки</div>
+        <v-card-text>{{ attempt.checkMessage }}</v-card-text>
+      </div>
+
+      <div class="text-subtitle-1 ml-6">Код программы</div>
       <code-editor
         v-model="attempt.code"
         :languages="[['cpp', 'C++']]"
@@ -90,9 +96,12 @@ export default {
       switch(checkResult) {
         case 0:
           return 'success--text';
+        case 2:
         case 3:
-          return 'error--text';
         case 4:
+          return 'error--text';
+        case 6:
+        case 7:
           return 'warning--text';
         default:
           return '';
@@ -102,10 +111,16 @@ export default {
       switch(checkResult) {
         case 0:
           return 'Успех';
-        case 3:
+        case 2:
           return 'Ошибка компиляции';
+        case 3:
+          return 'Ошибка во время исполнения';
         case 4:
           return 'Неверный ответ';
+        case 6:
+          return 'Превышено время исполнения';
+        case 7:
+          return 'Превышено время компиляции';
         default:
           return '';
       }

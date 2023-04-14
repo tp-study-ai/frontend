@@ -279,5 +279,6 @@ export default {
 .code_editor > .editor > .line-numbers {
   width: 38px;
   padding-right: 5px;
+  font-family: Consolas, Monaco, monospace;
 }
 </style>

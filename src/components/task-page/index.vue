@@ -281,4 +281,9 @@ export default {
   padding-right: 5px;
   font-family: Consolas, Monaco, monospace;
 }
+
+/* Используется для отображения цвета нумерации */
+.code_editor > .editor > .line-numbers > span::before {
+  color: #a0a1a7;
+}
 </style>

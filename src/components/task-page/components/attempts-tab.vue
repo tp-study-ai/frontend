@@ -47,7 +47,7 @@
 
       <div v-if="checkMessage !== ''">
         <div class="text-subtitle-1 font-weight-bold ml-4">Результат проверки</div>
-        <v-card-text>{{ attempt.checkMessage }}</v-card-text>
+        <v-card-text class="pt-2">{{ attempt.checkMessage }}</v-card-text>
       </div>
 
       <div class="text-subtitle-1 font-weight-bold ml-4">Код программы</div>

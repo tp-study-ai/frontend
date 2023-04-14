@@ -24,7 +24,7 @@
           </v-card>
 
           <v-card v-else class="pb-2">
-            <v-card-title class="pb-0">Примеры тестов</v-card-title>
+            <v-card-title>Примеры тестов</v-card-title>
             <examples-tab
               :examples="examples"
               :limits="limits"

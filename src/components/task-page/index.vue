@@ -65,7 +65,7 @@
             count_lines
             spellcheck
             width="auto"
-            height="771px"
+            height="753px"
             border_radius="0px"
             theme="light"
           />

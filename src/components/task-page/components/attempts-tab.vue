@@ -21,22 +21,16 @@
         <td v-if="!attempt.loading">{{ attempt.checkTime }}</td>
         <th v-if="!attempt.loading" :class="getResultColor(attempt.checkResult)">
           {{ getResultMessage(attempt.checkResult) }}
-          <v-tooltip v-if="attempt.checkResult !== 0" top>
-            <template #activator="{ on, attrs }">
-              <v-btn
-                v-on="on"
-                class="ml-1"
-                icon
-                v-bind="attrs"
-              >
-                <v-icon>mdi-comment-question-outline</v-icon>
-              </v-btn>
-            </template>
-            <span>{{ attempt.checkMessage }}</span>
-          </v-tooltip>
         </th>
         <td>
-          <v-btn class="pa-0" text color="primary" @click="showCode(attempt)">Показать</v-btn>
+          <v-btn
+            class="pa-0"
+            text
+            color="primary"
+            @click="showCode(attempt, attempts.length - id)"
+          >
+            Показать
+          </v-btn>
         </td>
       </tr>
     </tbody>
@@ -45,18 +39,18 @@
   <v-dialog v-model="dialogShown">
     <v-card>
       <div class="d-flex">
-        <v-card-title>Отчет</v-card-title>
+        <v-card-title>Отчет о посылке №{{ attemptId }}</v-card-title>
         <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </div>
 
       <div v-if="checkMessage !== ''">
-        <div class="text-subtitle-1 ml-6">Результат проверки</div>
+        <div class="text-subtitle-1 font-weight-bold ml-4">Результат проверки</div>
         <v-card-text>{{ attempt.checkMessage }}</v-card-text>
       </div>
 
-      <div class="text-subtitle-1 ml-6">Код программы</div>
+      <div class="text-subtitle-1 font-weight-bold ml-4">Код программы</div>
       <code-editor
         v-model="attempt.code"
         :languages="[['cpp', 'C++']]"
@@ -88,6 +82,7 @@ export default {
   data() {
     return {
       attempt: {},
+      attemptId: 0,
       dialogShown: false
     };
   },
@@ -125,8 +120,9 @@ export default {
           return '';
       }
     },
-    showCode(attempt) {
+    showCode(attempt, attemptId) {
       this.attempt = attempt;
+      this.attemptId = attemptId;
       this.dialogShown = true;
     }
   }

@@ -200,7 +200,7 @@ export default {
      this.checkSolutionLoading = true;
       setTimeout(() => {
         this.checkSolutionLoading = false;
-      }, 300);
+      }, 500);
 
       const params = {
         task_id: parseInt(this.id),

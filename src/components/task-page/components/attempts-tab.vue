@@ -39,7 +39,7 @@
   <v-dialog v-model="dialogShown">
     <v-card>
       <div class="d-flex">
-        <v-card-title>Отчет о посылке №{{ attemptId }}</v-card-title>
+        <v-card-title>Отчет о посылке №{{ attemptReversedId }}</v-card-title>
         <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -82,7 +82,7 @@ export default {
   data() {
     return {
       attempt: {},
-      attemptId: 0,
+      attemptReversedId: 0,
       dialogShown: false
     };
   },
@@ -120,9 +120,9 @@ export default {
           return '';
       }
     },
-    showCode(attempt, attemptId) {
+    showCode(attempt, attemptReversedId) {
       this.attempt = attempt;
-      this.attemptId = attemptId;
+      this.attemptReversedId = attemptReversedId;
       this.dialogShown = true;
     }
   }

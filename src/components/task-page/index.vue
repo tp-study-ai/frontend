@@ -227,8 +227,8 @@ export default {
           const reversedIndex = this.attempts.length - this.attempts.indexOf(attempt);
 
           const text = testsPassed === testsTotal
-            ? `В посылке ${reversedIndex} все тесты прошли успешно`
-            : `В посылке ${reversedIndex} прошло ${testsPassed} из ${testsTotal} тестов`;
+            ? `В посылке №${reversedIndex} все тесты прошли успешно`
+            : `В посылке №${reversedIndex} прошло ${testsPassed} из ${testsTotal} тестов`;
           const color = testsPassed === testsTotal
             ? 'success'
             : 'warning';

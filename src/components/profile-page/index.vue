@@ -1,11 +1,21 @@
 <template>
 <v-container class="px-0">
-  <div>Hello world</div>
+  <development-form :value="dialogShown" />
 </v-container>
 </template>
 
 <script>
+import DevelopmentForm from '@/dialogs/development-form';
+
 export default {
-  name: 'ProfilePage'
+  name: 'ProfilePage',
+  components: {
+    DevelopmentForm
+  },
+  data() {
+    return {
+      dialogShown: true
+    };
+  }
 }
 </script>

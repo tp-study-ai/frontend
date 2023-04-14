@@ -66,17 +66,27 @@
       </v-tabs>
     </v-card>
   </div>
+
+  <v-container class="px-0">
+    <development-form :value="dialogShown" />
+  </v-container>
 </v-container>
 </template>
 
 <script>
+import DevelopmentForm from '@/dialogs/development-form';
+
 export default {
   name: 'RecommendationsPage',
+  components: {
+    DevelopmentForm
+  },
   data() {
     return {
       loading: true,
       selected: 0,
-      tasks: []
+      tasks: [],
+      dialogShown: true
     };
   },
   computed: {

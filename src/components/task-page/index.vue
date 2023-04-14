@@ -264,13 +264,13 @@ export default {
 
 <style>
 .left-card {
-  min-height: 82vh;
-  max-height: 82vh;
+  min-height: 80vh;
+  max-height: 80vh;
 }
 
 .right-card {
-  min-height: 87vh;
-  max-height: 87vh;
+  min-height: calc(80vh + 48px);
+  max-height: calc(80vh + 48px);
 }
 
 /* Используется для стилизации заголовков внутри описания задачи */

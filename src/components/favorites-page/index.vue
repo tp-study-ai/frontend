@@ -1,6 +1,6 @@
 <template>
 <v-container class="px-0">
-  <development-form :value="dialogShown" />
+  <development-form :value="developmentDialogShown" />
 </v-container>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      dialogShown: true
+      developmentDialogShown: true
     };
   }
 }

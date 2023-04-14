@@ -68,7 +68,7 @@
   </div>
 
   <v-container class="px-0">
-    <development-form :value="dialogShown" />
+    <development-form :value="developmentDialogShown" />
   </v-container>
 </v-container>
 </template>
@@ -86,7 +86,7 @@ export default {
       loading: true,
       selected: 0,
       tasks: [],
-      dialogShown: true
+      developmentDialogShown: true
     };
   },
   computed: {

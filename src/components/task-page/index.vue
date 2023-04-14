@@ -5,17 +5,34 @@
   </div>
 
   <div v-else>
-    <v-row>
+    <v-row
+      v-touch="{
+        left: () => swipe('left'),
+        right: () => swipe('right')
+      }"
+    >
       <v-col cols="12" md="6">
-        <v-card v-if="$vuetify.breakpoint.smAndDown">
-          <v-card-title>{{ task.title }}</v-card-title>
-          <v-card-text>
-            <vue-mathjax :formula="task.description" :safe="false" />
-            <vue-mathjax :formula="task.input" :safe="false" />
-            <vue-mathjax :formula="task.output" :safe="false" />
-            <vue-mathjax :formula="task.note" :safe="false" />
-          </v-card-text>
-        </v-card>
+        <div v-if="$vuetify.breakpoint.smAndDown">
+          <v-card v-if="swipeDirection === 'right'">
+            <v-card-title>{{ task.title }}</v-card-title>
+            <v-card-text>
+              <vue-mathjax :formula="task.description" :safe="false" />
+              <vue-mathjax :formula="task.input" :safe="false" />
+              <vue-mathjax :formula="task.output" :safe="false" />
+              <vue-mathjax :formula="task.note" :safe="false" />
+            </v-card-text>
+          </v-card>
+
+          <v-card v-else class="pb-2">
+            <v-card-title class="pb-0">Примеры тестов</v-card-title>
+            <examples-tab
+              :examples="examples"
+              :limits="limits"
+              :note="task.note"
+              @show:snackbar="(options) => $emit('show:snackbar', options)"
+            />
+          </v-card>
+        </div>
 
         <v-card v-else>
           <v-tabs v-model="selected">
@@ -135,7 +152,8 @@ export default {
       dialogShown: false,
       selected: null,
       examples: [],
-      attempts: []
+      attempts: [],
+      swipeDirection: 'right'
     };
   },
   computed: {
@@ -257,6 +275,9 @@ export default {
       }
 
       this.dialogShown = true;
+    },
+    swipe(swipeDirection) {
+      this.swipeDirection = swipeDirection;
     }
   }
 }

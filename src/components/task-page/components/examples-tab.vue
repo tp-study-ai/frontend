@@ -14,7 +14,12 @@
     <v-card v-for="(example, id) in examples" :key="id" class="mb-2 mx-4 mt-4 py-2 px-4" outlined>
       <div class="text-subtitle-1 font-weight-bold">
         Входные данные
-        <v-btn class="ml-1" icon @click="copyText(example.input)">
+        <v-btn
+          v-if="$vuetify.breakpoint.mdAndUp"
+          class="ml-1"
+          icon
+          @click="copyText(example.input)"
+        >
           <v-icon>mdi-content-copy</v-icon>
         </v-btn>
       </div>
@@ -22,7 +27,12 @@
 
       <div class="text-subtitle-1 font-weight-bold">
         Выходные данные
-        <v-btn class="ml-1" icon @click="copyText(example.output)">
+        <v-btn
+          v-if="$vuetify.breakpoint.mdAndUp"
+          class="ml-1"
+          icon
+          @click="copyText(example.output)"
+        >
           <v-icon>mdi-content-copy</v-icon>
         </v-btn>
       </div>

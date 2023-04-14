@@ -28,7 +28,7 @@
             <v-tab-item value="task">
               <v-card class="overflow-y-auto left-card" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
-                <v-card-text>
+                <v-card-text class="pb-0">
                   <vue-mathjax :formula="task.description" :safe="false" />
                   <vue-mathjax :formula="task.input" :safe="false" />
                   <vue-mathjax :formula="task.output" :safe="false" />

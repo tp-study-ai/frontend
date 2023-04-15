@@ -140,14 +140,18 @@
           <v-divider />
           <v-card-actions>
             <v-spacer />
-            <v-btn
-              v-if="isTaskSolved"
-              text
-              color="primary"
-              @click="showRecommendationsForm"
-            >
-              Перейти к следующей задаче
-            </v-btn>
+
+            <v-menu v-if="isTaskSolved" :value="true" offset-y top>
+              <template #activator="{}">
+                <v-btn text color="primary" @click="showRecommendationsForm">
+                  Перейти к следующей задаче
+                </v-btn>
+              </template>
+
+              <v-alert class="mb-0" dense type="info">
+                Теперь можно перейти к следующей задаче
+              </v-alert>
+            </v-menu>
             <v-btn
               :loading="checkSolutionLoading"
               :color="checkSolutionButtonColor"

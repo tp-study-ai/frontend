@@ -76,7 +76,7 @@
             :copy_code="false"
             count_lines
             width="auto"
-            height="753px"
+            height="80vh"
             border_radius="0px"
             theme="light"
           />

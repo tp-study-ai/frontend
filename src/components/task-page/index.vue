@@ -254,6 +254,7 @@ export default {
       if (cf_rating <= 3500) {
         return 'red';
       }
+      return '';
     }
   },
   created() {
@@ -389,7 +390,7 @@ export default {
       const params = { task_id: this.task.id };
 
       this.$http.post('/like_task', params)
-        .then(({ data: { message } }) => {
+        .then(() => {
           this.$emit('show:snackbar', { text: 'Задача добавлена в избранное', color: 'success' });
         })
         .finally(() => {

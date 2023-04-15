@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
   },
   function (error) {
     let event;
-    if (error.response.data.error) {
+    if (error.response?.data?.error) {
       if (IGNORED_URLS.includes(error.config.url)) {
         return Promise.reject(error);
       }

@@ -14,10 +14,10 @@
               <div class="mb-2">
                 <v-chip small color="green">Легко</v-chip>
 
-                <v-btn class="mx-2" icon @click="likeTask">
+                <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
                   <v-icon>mdi-thumb-up-outline</v-icon>
                 </v-btn>
-                <v-btn icon @click="deleteLike">
+                <v-btn :disabled="!task.liked" icon @click="deleteLike">
                   <v-icon>mdi-thumb-down-outline</v-icon>
                 </v-btn>
               </div>
@@ -72,10 +72,10 @@
                   <div class="mb-2">
                     <v-chip small color="green">Легко</v-chip>
 
-                    <v-btn class="mx-2" icon @click="likeTask">
+                    <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
                       <v-icon>mdi-thumb-up-outline</v-icon>
                     </v-btn>
-                    <v-btn icon @click="deleteLike">
+                    <v-btn :disabled="!task.liked" icon @click="deleteLike">
                       <v-icon>mdi-thumb-down-outline</v-icon>
                     </v-btn>
                   </div>
@@ -245,7 +245,8 @@ export default {
           rating: data.cf_rating,
           cf_rating: data.cf_rating,
           cf_tags_RU: data.cf_tags_RU,
-          cf_tags_ID: data.cf_tags_ID
+          cf_tags_ID: data.cf_tags_ID,
+          liked: false
         };
 
         this.limits = {
@@ -350,16 +351,24 @@ export default {
     likeTask() {
       const params = { task_id: this.task.id };
 
-      this.$http.post('/like_task', params).then(({ data: { message } }) => {
-        this.$emit('show:snackbar', { text: message, color: 'success' });
-      });
+      this.$http.post('/like_task', params)
+        .then(({ data: { message } }) => {
+          this.$emit('show:snackbar', { text: message, color: 'success' });
+        })
+        .finally(() => {
+          this.task.liked = true;
+        });
     },
     deleteLike() {
       const params = { task_id: this.task.id };
 
-      this.$http.post('/delete_like', params).then(({ data: { message } }) => {
-        this.$emit('show:snackbar', { text: message, color: 'success' });
-      });
+      this.$http.post('/delete_like', params)
+        .then(({ data: { message } }) => {
+          this.$emit('show:snackbar', { text: message, color: 'success' });
+        })
+        .finally(() => {
+          this.task.liked = false;
+        });
     }
   }
 }

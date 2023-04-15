@@ -41,6 +41,9 @@ import VueMathjax from '@/shared/components/vue-mathjax';
 
 export default {
   name: 'ColdStartPage',
+  props: {
+    isAuthorized: Boolean
+  },
   components: {
     'vue-mathjax': VueMathjax,
     OnboardingForm
@@ -58,7 +61,7 @@ export default {
     }
   },
   created() {
-    this.dialogShown = localStorage.getItem('hideStartDialog') !== 'true';
+    this.dialogShown = localStorage.getItem('hideStartDialog') !== 'true' && !this.isAuthorized;
     this.getTask();
   },
   methods: {

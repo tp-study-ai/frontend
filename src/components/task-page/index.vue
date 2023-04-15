@@ -390,7 +390,7 @@ export default {
 
       this.$http.post('/like_task', params)
         .then(({ data: { message } }) => {
-          this.$emit('show:snackbar', { text: message, color: 'success' });
+          this.$emit('show:snackbar', { text: 'Задача добавлена в избранное', color: 'success' });
         })
         .finally(() => {
           this.task.liked = true;
@@ -409,8 +409,8 @@ export default {
       const params = { task_id: this.task.id };
 
       this.$http.post('/delete_like', params)
-        .then(({ data: { message } }) => {
-          this.$emit('show:snackbar', { text: message, color: 'success' });
+        .then(() => {
+          this.$emit('show:snackbar', { text: 'Задача убрана из избранного', color: 'success' });
         })
         .finally(() => {
           this.task.liked = false;

@@ -32,9 +32,50 @@
         <td>{{ getTagsByTask(item) }}</td>
         <td>{{ item.difficulty - 6 }}</td>
         <td>{{ item.cf_rating }}</td>
+        <td>
+          <v-btn icon color="error" @click="showDialog(item)">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+        </td>
       </tr>
     </template>
   </v-data-table>
+
+  <v-dialog
+    v-model="dialogShown"
+    :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'"
+  >
+    <v-card>
+      <div class="d-flex">
+        <v-card-title>
+          Вы действительно хотите убрать задачу {{ taskToRemove.name }} из избранного?
+        </v-card-title>
+        <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </div>
+
+      <v-card-actions>
+        <v-spacer />
+
+        <v-btn
+          :loading="deleteLoading"
+          text
+          color="error"
+          @click="deleteLike"
+        >
+          Убрать
+        </v-btn>
+        <v-btn
+          :loading="deleteLoading"
+          text
+          @click="dialogShown = false"
+        >
+          Отмена
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </v-container>
 </template>
 
@@ -44,7 +85,10 @@ export default {
   data() {
     return {
       loading: true,
-      tasks: []
+      tasks: [],
+      dialogShown: false,
+      taskToRemove: {},
+      deleteLoading: false
     };
   },
   computed: {
@@ -64,6 +108,10 @@ export default {
         },
         {
           text: 'Рейтинг',
+          sortable: false
+        },
+        {
+          text: 'Удалить',
           sortable: false
         }
       ];
@@ -89,6 +137,26 @@ export default {
       }
 
       return task.cf_tags_RU.join(', ');
+    },
+    showDialog(task) {
+      this.dialogShown = true;
+      this.taskToRemove = task;
+    },
+    deleteLike() {
+      const params = { task_id: this.taskToRemove.id };
+
+      this.$http.post('/delete_like', params)
+        .then(() => {
+          const index = this.tasks.indexOf(this.taskToRemove);
+          if (index !== -1) {
+            this.tasks.splice(index, 1);
+          }
+
+          this.$emit('show:snackbar', { text: 'Задача убрана из избранного', color: 'success' });
+        })
+        .finally(() => {
+          this.dialogShown = false;
+        });
     }
   }
 }

@@ -229,25 +229,25 @@ export default {
     },
     ratingColor() {
       const { cf_rating } = this.task;
-      if (cf_rating < 1200) {
+      if (cf_rating <= 1200) {
         return 'purple lighten-2';
       }
-      if (cf_rating < 1600) {
+      if (cf_rating <= 1600) {
         return 'indigo lighten-2';
       }
-      if (cf_rating < 1900) {
+      if (cf_rating <= 1900) {
         return 'blue lighten-1';
       }
-      if (cf_rating < 2200) {
+      if (cf_rating <= 2200) {
         return 'green';
       }
-      if (cf_rating < 2500) {
+      if (cf_rating <= 2500) {
         return 'yellow';
       }
-      if (cf_rating < 2900) {
+      if (cf_rating <= 2900) {
         return 'orange';
       }
-      if (cf_rating < 3500) {
+      if (cf_rating <= 3500) {
         return 'red';
       }
     }

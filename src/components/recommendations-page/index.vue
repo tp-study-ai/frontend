@@ -78,6 +78,9 @@ import DevelopmentForm from '@/dialogs/development-form';
 
 export default {
   name: 'RecommendationsPage',
+  props: {
+    isAuthorized: Boolean
+  },
   components: {
     DevelopmentForm
   },
@@ -114,6 +117,16 @@ export default {
     }
   },
   created() {
+    if (!this.isAuthorized) {
+      this.$emit(
+        'show:snackbar',
+        { text: 'Для перехода на эту страницу необходимо авторизоваться', color: 'warning' }
+      );
+      this.$router.push('/');
+      this.$emit('show:login-form');
+      return;
+    }
+
     this.loading = true;
     this.getTasks();
   },

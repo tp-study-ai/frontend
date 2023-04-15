@@ -82,6 +82,9 @@
 <script>
 export default {
   name: 'FavouritesPage',
+  props: {
+    isAuthorized: Boolean
+  },
   data() {
     return {
       loading: true,
@@ -118,6 +121,16 @@ export default {
     }
   },
   created() {
+    if (!this.isAuthorized) {
+      this.$emit(
+        'show:snackbar',
+        { text: 'Для перехода на эту страницу необходимо авторизоваться', color: 'warning' }
+      );
+      this.$router.push('/');
+      this.$emit('show:login-form');
+      return;
+    }
+
     this.$http
       .get('/get_like_tasks')
       .then(({ data: { tasks } }) => {

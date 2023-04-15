@@ -10,6 +10,23 @@
         <div v-if="$vuetify.breakpoint.smAndDown">
           <v-card v-if="swipeDirection === 'right'">
             <v-card-title>{{ task.title }}</v-card-title>
+            <v-card-subtitle>
+              <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" bottom>
+                <template #activator="{ on, attrs }">
+                  <v-chip
+                    v-on="on"
+                    :to="getTagPath(tag)"
+                    class="mr-2 mb-2"
+                    color="primary"
+                    v-bind="attrs"
+                  >
+                    {{ tag }}
+                  </v-chip>
+                </template>
+                <span>Перейти к задачам по тегу {{ tag }}</span>
+              </v-tooltip>
+            </v-card-subtitle>
+
             <v-card-text>
               <vue-mathjax :formula="task.description" :safe="false" />
               <vue-mathjax :formula="task.input" :safe="false" />
@@ -46,7 +63,7 @@
                       <v-chip
                         v-on="on"
                         :to="getTagPath(tag)"
-                        class="mr-2"
+                        class="mr-2 mb-2"
                         color="primary"
                         v-bind="attrs"
                       >

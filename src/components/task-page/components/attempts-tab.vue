@@ -54,7 +54,9 @@
           indeterminate
           color="primary"
         />
-        <v-card-text v-else class="px-0 pt-2">{{ attempt.checkMessage }}</v-card-text>
+        <v-card-text v-else class="px-0 pt-2">
+          {{ attempt.checkResult === 0 ? 'Ошибок нет' : attempt.checkMessage }}
+        </v-card-text>
       </div>
 
       <div class="text-subtitle-1 font-weight-bold ml-4">Код программы</div>

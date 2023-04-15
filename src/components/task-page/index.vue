@@ -141,14 +141,14 @@
           <v-card-actions>
             <v-spacer />
 
-            <v-menu v-if="isTaskSolved" :value="true" offset-y top>
+            <v-menu v-if="isTaskSolved" :value="true" :close-on-click="false" offset-y top>
               <template #activator="{}">
                 <v-btn text color="primary" @click="showRecommendationsForm">
                   Перейти к следующей задаче
                 </v-btn>
               </template>
 
-              <v-alert class="mb-0" dense type="info">
+              <v-alert class="mb-0" dismissible dense type="info">
                 Теперь можно перейти к следующей задаче
               </v-alert>
             </v-menu>

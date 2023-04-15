@@ -40,6 +40,23 @@
             <v-tab-item value="task">
               <v-card class="overflow-y-auto left-card" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
+                <v-card-subtitle>
+                  <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" bottom>
+                    <template #activator="{ on, attrs }">
+                      <v-chip
+                        v-on="on"
+                        :to="getTagPath(tag)"
+                        class="mr-2"
+                        color="primary"
+                        v-bind="attrs"
+                      >
+                        {{ tag }}
+                      </v-chip>
+                    </template>
+                    <span>Перейти к задачам по тегу {{ tag }}</span>
+                  </v-tooltip>
+                </v-card-subtitle>
+
                 <v-card-text>
                   <vue-mathjax :formula="task.description" :safe="false" />
                   <vue-mathjax :formula="task.input" :safe="false" />
@@ -186,7 +203,9 @@ export default {
           output: data.output,
           note: data.note,
           link: data.link,
-          rating: data.cf_rating
+          rating: data.cf_rating,
+          cf_tags_RU: data.cf_tags_RU,
+          cf_tags_ID: data.cf_tags_ID
         };
 
         this.limits = {
@@ -278,6 +297,15 @@ export default {
     },
     swipe(swipeDirection) {
       this.swipeDirection = swipeDirection;
+    },
+    getTagPath(tag) {
+      const index = this.task.cf_tags_RU.indexOf(tag);
+      if (index === -1) {
+        return '';
+      }
+
+      const id = this.task.cf_tags_ID[index];
+      return `/tasks?tags=${id}`;
     }
   }
 }

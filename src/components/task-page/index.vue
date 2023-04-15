@@ -373,6 +373,15 @@ export default {
       return `/tasks?tags=${id}`;
     },
     likeTask() {
+      if (!this.isAuthorized) {
+        this.$emit(
+          'show:snackbar',
+          { text: 'Для совершения этого действия необходимо авторизоваться', color: 'warning' }
+        );
+        this.$emit('show:login-form');
+        return;
+      }
+
       const params = { task_id: this.task.id };
 
       this.$http.post('/like_task', params)
@@ -384,6 +393,15 @@ export default {
         });
     },
     deleteLike() {
+      if (!this.isAuthorized) {
+        this.$emit(
+          'show:snackbar',
+          { text: 'Для совершения этого действия необходимо авторизоваться', color: 'warning' }
+        );
+        this.$emit('show:login-form');
+        return;
+      }
+
       const params = { task_id: this.task.id };
 
       this.$http.post('/delete_like', params)

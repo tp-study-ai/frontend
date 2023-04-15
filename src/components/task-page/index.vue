@@ -12,7 +12,7 @@
             <v-card-title>{{ task.title }}</v-card-title>
             <v-card-subtitle>
               <div class="mb-2">
-                <v-chip small color="green">Легко</v-chip>
+                <v-chip :color="ratingColor" small>{{ task.cf_rating }}</v-chip>
 
                 <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
                   <v-icon>mdi-thumb-up-outline</v-icon>
@@ -70,7 +70,7 @@
                 <v-card-title>{{ task.title }}</v-card-title>
                 <v-card-subtitle>
                   <div class="mb-2">
-                    <v-chip small color="green">Легко</v-chip>
+                    <v-chip :color="ratingColor" small>{{ task.cf_rating }}</v-chip>
 
                     <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
                       <v-icon>mdi-thumb-up-outline</v-icon>
@@ -226,6 +226,30 @@ export default {
         left: () => this.swipe('left'),
         right: () => this.swipe('right')
       };
+    },
+    ratingColor() {
+      const { cf_rating } = this.task;
+      if (cf_rating < 1200) {
+        return 'purple lighten-2';
+      }
+      if (cf_rating < 1600) {
+        return 'indigo lighten-2';
+      }
+      if (cf_rating < 1900) {
+        return 'blue lighten-1';
+      }
+      if (cf_rating < 2200) {
+        return 'green';
+      }
+      if (cf_rating < 2500) {
+        return 'yellow';
+      }
+      if (cf_rating < 2900) {
+        return 'orange';
+      }
+      if (cf_rating < 3500) {
+        return 'red';
+      }
     }
   },
   created() {

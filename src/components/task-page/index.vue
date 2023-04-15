@@ -75,7 +75,6 @@
             :languages="[['cpp', 'C++']]"
             :copy_code="false"
             count_lines
-            spellcheck
             width="auto"
             height="753px"
             border_radius="0px"

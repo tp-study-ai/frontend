@@ -173,14 +173,11 @@ export default {
       }
     },
     getTagsByTask(task) {
-      if (!task.cf_tags_ID) {
+      if (!task.cf_tags_RU) {
         return '';
       }
 
-      return this.tags
-        .filter((tag) => task.cf_tags_ID.includes(tag.tags_id))
-        .map((tag) => tag.tags_ru)
-        .join(', ');
+      return task.cf_tags_RU.join(', ');
     }
   }
 }

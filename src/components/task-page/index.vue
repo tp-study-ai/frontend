@@ -11,13 +11,24 @@
           <v-card v-if="swipeDirection === 'right'">
             <v-card-title>{{ task.title }}</v-card-title>
             <v-card-subtitle>
+              <div class="mb-2">
+                <v-chip small color="green">Легко</v-chip>
+
+                <v-btn class="mx-2" icon @click="likeTask">
+                  <v-icon>mdi-thumb-up-outline</v-icon>
+                </v-btn>
+                <v-btn icon @click="deleteLike">
+                  <v-icon>mdi-thumb-down-outline</v-icon>
+                </v-btn>
+              </div>
+
               <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" bottom>
                 <template #activator="{ on, attrs }">
                   <v-chip
                     v-on="on"
                     :to="getTagPath(tag)"
                     class="mr-2 mb-2"
-                    color="primary"
+                    small
                     v-bind="attrs"
                   >
                     {{ tag }}
@@ -58,13 +69,24 @@
               <v-card class="overflow-y-auto left-card" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
                 <v-card-subtitle>
+                  <div class="mb-2">
+                    <v-chip small color="green">Легко</v-chip>
+
+                    <v-btn class="mx-2" icon @click="likeTask">
+                      <v-icon>mdi-thumb-up-outline</v-icon>
+                    </v-btn>
+                    <v-btn icon @click="deleteLike">
+                      <v-icon>mdi-thumb-down-outline</v-icon>
+                    </v-btn>
+                  </div>
+
                   <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" bottom>
                     <template #activator="{ on, attrs }">
                       <v-chip
                         v-on="on"
                         :to="getTagPath(tag)"
                         class="mr-2 mb-2"
-                        color="primary"
+                        small
                         v-bind="attrs"
                       >
                         {{ tag }}
@@ -221,6 +243,7 @@ export default {
           note: data.note,
           link: data.link,
           rating: data.cf_rating,
+          cf_rating: data.cf_rating,
           cf_tags_RU: data.cf_tags_RU,
           cf_tags_ID: data.cf_tags_ID
         };
@@ -323,6 +346,20 @@ export default {
 
       const id = this.task.cf_tags_ID[index];
       return `/tasks?tags=${id}`;
+    },
+    likeTask() {
+      const params = { task_id: this.task.id };
+
+      this.$http.post('/like_task', params).then(({ data: { message } }) => {
+        this.$emit('show:snackbar', { text: message, color: 'success' });
+      });
+    },
+    deleteLike() {
+      const params = { task_id: this.task.id };
+
+      this.$http.post('/delete_like', params).then(({ data: { message } }) => {
+        this.$emit('show:snackbar', { text: message, color: 'success' });
+      });
     }
   }
 }

@@ -22,7 +22,7 @@
                 </v-btn>
               </div>
 
-              <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" bottom>
+              <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" top>
                 <template #activator="{ on, attrs }">
                   <v-chip
                     v-on="on"
@@ -80,7 +80,7 @@
                     </v-btn>
                   </div>
 
-                  <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" bottom>
+                  <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" top>
                     <template #activator="{ on, attrs }">
                       <v-chip
                         v-on="on"

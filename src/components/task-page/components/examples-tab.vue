@@ -80,8 +80,7 @@ export default {
         return;
       }
 
-      const textToCopy = text.replaceAll('<br>', '\n');
-      navigator.clipboard.writeText(textToCopy)
+      navigator.clipboard.writeText(text)
       this.$emit('show:snackbar', { text: 'Данные успешно скопированы', color: 'success' });
     },
     getInputLines(example) {

@@ -27,10 +27,20 @@
           <v-icon>mdi-content-copy</v-icon>
         </v-btn>
       </div>
-      <v-card-text v-html="example.input" class="pl-0 pt-0" />
+      <v-card-text class="pl-0 pt-0">
+        <div v-for="(line, index) in getInputLines(example)" :key="`input_${index}_line`">
+          {{ line }}
+          <br />
+        </div>
+      </v-card-text>
 
       <div class="text-subtitle-1 font-weight-bold">Выходные данные</div>
-      <v-card-text v-html="example.output" class="pl-0 pt-0 pb-0" />
+      <v-card-text class="pl-0 pt-0 pb-0">
+        <div v-for="(line, index) in getOutputLines(example)" :key="`output_${index}_line`">
+          {{ line }}
+          <br />
+        </div>
+      </v-card-text>
     </v-card>
   </div>
 
@@ -73,6 +83,12 @@ export default {
       const textToCopy = text.replaceAll('<br>', '\n');
       navigator.clipboard.writeText(textToCopy)
       this.$emit('show:snackbar', { text: 'Данные успешно скопированы', color: 'success' });
+    },
+    getInputLines(example) {
+      return example.input.split('\n').filter((line) => line !== '');
+    },
+    getOutputLines(example) {
+      return example.output.split('\n').filter((line) => line !== '');
     }
   }
 }

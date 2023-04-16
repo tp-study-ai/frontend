@@ -284,8 +284,8 @@ export default {
         };
 
         for(let i = 1; i < data.public_tests.length; i += 4) {
-          const input = data.public_tests[i].replaceAll('\n', '<br>');
-          const output = data.public_tests[i + 2].replaceAll('\n', '<br>');
+          const input = data.public_tests[i];
+          const output = data.public_tests[i + 2];
           if (input === '' && output === '') {
             continue;
           }

@@ -30,7 +30,7 @@
           <v-card-title>{{ task.name }}</v-card-title>
           <v-card-subtitle>
             <div class="mb-2">
-              <v-chip :color="getRatingColor(task)" small>{{ getRatingText(text) }}</v-chip>
+              <v-chip :color="getRatingColor(task)" small>{{ getRatingText(task) }}</v-chip>
             </div>
 
             <v-chip

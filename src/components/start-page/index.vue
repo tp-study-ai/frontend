@@ -25,6 +25,23 @@
     <v-divider />
 
     <v-card :class="{ 'card': $vuetify.breakpoint.mdAndUp }" class="overflow-y-auto" flat>
+      <v-card-subtitle>
+        <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" top>
+          <template #activator="{ on, attrs }">
+            <v-chip
+              v-on="on"
+              :to="getTagPath(tag)"
+              class="mr-2 mb-2"
+              small
+              v-bind="attrs"
+            >
+              {{ tag }}
+            </v-chip>
+          </template>
+          <span>Перейти к задачам по тегу {{ tag }}</span>
+        </v-tooltip>
+      </v-card-subtitle>
+
       <v-card-text>
         <vue-mathjax :formula="task.description" :safe="false" />
       </v-card-text>
@@ -76,13 +93,24 @@ export default {
           this.task = {
             id: data.id,
             title: data.name,
-            description
+            description,
+            cf_tags_RU: data.cf_tags_RU,
+            cf_tags_ID: data.cf_tags_ID
           };
         })
         .finally(() => {
           this.loading = false;
         });
-    }
+    },
+    getTagPath(tag) {
+      const index = this.task.cf_tags_RU.indexOf(tag);
+      if (index === -1) {
+        return '';
+      }
+
+      const id = this.task.cf_tags_ID[index];
+      return `/tasks?tags=${id}`;
+    },
   }
 }
 </script>

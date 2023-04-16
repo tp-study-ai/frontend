@@ -45,7 +45,9 @@
           <router-link :to="getTaskPath(item)">{{ item.name }}</router-link>
         </td>
         <td>{{ getTagsByTask(item) }}</td>
-        <td>{{ item.cf_rating }}</td>
+        <td>
+          <v-chip :color="getRatingColor(item)" small>{{ item.cf_rating }}</v-chip>
+        </td>
       </tr>
     </template>
   </v-data-table>
@@ -172,6 +174,56 @@ export default {
       }
 
       return task.cf_tags_RU.join(', ');
+    },
+    getRatingColor(task) {
+      const { cf_rating } = task;
+      if (cf_rating <= 1200) {
+        return 'purple lighten-2';
+      }
+      if (cf_rating <= 1600) {
+        return 'indigo lighten-2';
+      }
+      if (cf_rating <= 1900) {
+        return 'blue lighten-1';
+      }
+      if (cf_rating <= 2200) {
+        return 'green';
+      }
+      if (cf_rating <= 2500) {
+        return 'yellow';
+      }
+      if (cf_rating <= 2900) {
+        return 'orange';
+      }
+      if (cf_rating <= 3500) {
+        return 'red';
+      }
+      return '';
+    },
+    getRatingText(task) {
+      const { cf_rating } = task;
+      if (cf_rating <= 1200) {
+        return 'новичок';
+      }
+      if (cf_rating <= 1600) {
+        return 'ученик';
+      }
+      if (cf_rating <= 1900) {
+        return 'эксперт';
+      }
+      if (cf_rating <= 2200) {
+        return 'элита';
+      }
+      if (cf_rating <= 2500) {
+        return 'мастер';
+      }
+      if (cf_rating <= 2900) {
+        return 'гроссмейстер';
+      }
+      if (cf_rating <= 3500) {
+        return 'глобальная элита';
+      }
+      return '';
     }
   }
 }

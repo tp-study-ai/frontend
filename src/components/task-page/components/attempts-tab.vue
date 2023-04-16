@@ -55,7 +55,10 @@
           color="primary"
         />
         <v-card-text v-else class="px-0 pt-2">
-          {{ attempt.checkResult === 0 ? 'Ошибок нет' : attempt.checkMessage }}
+          <div v-for="(line, index) in checkMessageLines" :key="`line_of_message_${index}`">
+            {{ line }}
+            <br />
+          </div>
         </v-card-text>
       </div>
 
@@ -93,6 +96,15 @@ export default {
       attemptReversedId: 0,
       dialogShown: false
     };
+  },
+  computed: {
+    checkMessageLines() {
+      if (!this.attempt.checkMessage) {
+        return [];
+      }
+
+      return this.attempt.checkMessage.split('\n').filter((line) => line !== '');
+    }
   },
   methods: {
     getResultColor(checkResult) {

@@ -200,7 +200,7 @@ export default {
       loading: true,
       task: {},
       limits: {},
-      code: '// #include <what_you_use>\r\n\r\nint main() {\r\n    // your code here\r\n    return 0;\r\n}',
+      code: '// #include <bits/stdc++.h> Won\'t compile!\r\n#include <iostream>\r\n\r\nint main() {\r\n    // Your code will be here\r\n    return 0;\r\n}',
       difficulty: 1,
       checkSolutionLoading: false,
       dialogShown: false,

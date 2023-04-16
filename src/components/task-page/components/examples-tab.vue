@@ -34,7 +34,17 @@
         </div>
       </v-card-text>
 
-      <div class="text-subtitle-1 font-weight-bold">Выходные данные</div>
+      <div class="text-subtitle-1 font-weight-bold">
+        Выходные данные
+        <v-btn
+          v-if="$vuetify.breakpoint.mdAndUp"
+          class="ml-1"
+          icon
+          @click="copyText(example.output)"
+        >
+          <v-icon>mdi-content-copy</v-icon>
+        </v-btn>
+      </div>
       <v-card-text class="pl-0 pt-0 pb-0">
         <div v-for="(line, index) in getOutputLines(example)" :key="`output_${index}_line`">
           {{ line }}

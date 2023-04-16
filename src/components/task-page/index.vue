@@ -12,7 +12,7 @@
             <v-card-title>{{ task.title }}</v-card-title>
             <v-card-subtitle>
               <div class="mb-2">
-                <v-chip :color="ratingColor" small>{{ task.cf_rating }}</v-chip>
+                <v-chip :color="ratingColor" small>{{ ratingText }}</v-chip>
 
                 <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
                   <v-icon>mdi-thumb-up-outline</v-icon>
@@ -70,7 +70,7 @@
                 <v-card-title>{{ task.title }}</v-card-title>
                 <v-card-subtitle>
                   <div class="mb-2">
-                    <v-chip :color="ratingColor" small>{{ task.cf_rating }}</v-chip>
+                    <v-chip :color="ratingColor" small>{{ ratingText }}</v-chip>
 
                     <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
                       <v-icon>mdi-thumb-up-outline</v-icon>
@@ -253,6 +253,31 @@ export default {
       }
       if (cf_rating <= 3500) {
         return 'red';
+      }
+      return '';
+    },
+    ratingText() {
+      const { cf_rating } = this.task;
+      if (cf_rating <= 1200) {
+        return 'новичок';
+      }
+      if (cf_rating <= 1600) {
+        return 'ученик';
+      }
+      if (cf_rating <= 1900) {
+        return 'эксперт';
+      }
+      if (cf_rating <= 2200) {
+        return 'элита';
+      }
+      if (cf_rating <= 2500) {
+        return 'мастер';
+      }
+      if (cf_rating <= 2900) {
+        return 'гроссмейстер';
+      }
+      if (cf_rating <= 3500) {
+        return 'глобальная элита';
       }
       return '';
     }

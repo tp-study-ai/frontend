@@ -32,7 +32,6 @@
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text>
           <div>Теги: {{ getTagsByTask(item) }}</div>
-          <div>Сложность: {{ item.difficulty - 6 }}</div>
           <div>Рейтинг: {{ item.cf_rating }}</div>
         </v-card-text>
 
@@ -46,7 +45,6 @@
           <router-link :to="getTaskPath(item)">{{ item.name }}</router-link>
         </td>
         <td>{{ getTagsByTask(item) }}</td>
-        <td>{{ item.difficulty - 6 }}</td>
         <td>{{ item.cf_rating }}</td>
       </tr>
     </template>
@@ -79,10 +77,6 @@ export default {
         },
         {
           text: 'Теги',
-          sortable: false
-        },
-        {
-          text: 'Сложность',
           sortable: false
         },
         {

@@ -30,20 +30,14 @@
           <v-chip :color="ratingColor" small>{{ ratingText }}</v-chip>
         </div>
 
-        <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" top>
-          <template #activator="{ on, attrs }">
-            <v-chip
-              v-on="on"
-              :to="getTagPath(tag)"
-              class="mr-2 mb-2"
-              small
-              v-bind="attrs"
-            >
-              {{ tag }}
-            </v-chip>
-          </template>
-          <span>Перейти к задачам по тегу {{ tag }}</span>
-        </v-tooltip>
+        <v-chip
+          v-for="tag in task.cf_tags_RU"
+          :key="tag"
+          class="mr-2 mb-2"
+          small
+        >
+          {{ tag }}
+        </v-chip>
       </v-card-subtitle>
 
       <v-card-text>
@@ -149,23 +143,13 @@ export default {
             title: data.name,
             description,
             cf_rating: data.cf_rating,
-            cf_tags_RU: data.cf_tags_RU,
-            cf_tags_ID: data.cf_tags_ID
+            cf_tags_RU: data.cf_tags_RU
           };
         })
         .finally(() => {
           this.loading = false;
         });
-    },
-    getTagPath(tag) {
-      const index = this.task.cf_tags_RU.indexOf(tag);
-      if (index === -1) {
-        return '';
-      }
-
-      const id = this.task.cf_tags_ID[index];
-      return `/tasks?tags=${id}`;
-    },
+    }
   }
 }
 </script>

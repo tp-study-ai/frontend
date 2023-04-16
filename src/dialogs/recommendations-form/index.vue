@@ -28,9 +28,20 @@
       <v-col v-for="task in tasks" :key="task.id" cols="12" md="4">
         <v-card :href="getTaskPath(task)">
           <v-card-title>{{ task.name }}</v-card-title>
-          <v-card-text class="card-text pb-1">
-            {{ task.description }}
-          </v-card-text>
+          <v-card-subtitle>
+            <div class="mb-2">
+              <v-chip :color="getRatingColor(task)" small>{{ getRatingText(text) }}</v-chip>
+            </div>
+
+            <v-chip
+              v-for="tag in task.cf_tags_RU"
+              :key="tag"
+              class="mr-2 mb-2"
+              small
+            >
+              {{ tag }}
+            </v-chip>
+          </v-card-subtitle>
         </v-card>
       </v-col>
     </v-row>
@@ -88,16 +99,57 @@ export default {
     },
     getTaskPath(task) {
       return `/task/${task.id}`;
+    },
+    getRatingColor(task) {
+      const { cf_rating } = task;
+      if (cf_rating <= 1200) {
+        return 'purple lighten-2';
+      }
+      if (cf_rating <= 1600) {
+        return 'indigo lighten-2';
+      }
+      if (cf_rating <= 1900) {
+        return 'blue lighten-1';
+      }
+      if (cf_rating <= 2200) {
+        return 'green';
+      }
+      if (cf_rating <= 2500) {
+        return 'yellow';
+      }
+      if (cf_rating <= 2900) {
+        return 'orange';
+      }
+      if (cf_rating <= 3500) {
+        return 'red';
+      }
+      return '';
+    },
+    getRatingText(task) {
+      const { cf_rating } = task;
+      if (cf_rating <= 1200) {
+        return 'новичок';
+      }
+      if (cf_rating <= 1600) {
+        return 'ученик';
+      }
+      if (cf_rating <= 1900) {
+        return 'эксперт';
+      }
+      if (cf_rating <= 2200) {
+        return 'элита';
+      }
+      if (cf_rating <= 2500) {
+        return 'мастер';
+      }
+      if (cf_rating <= 2900) {
+        return 'гроссмейстер';
+      }
+      if (cf_rating <= 3500) {
+        return 'глобальная элита';
+      }
+      return '';
     }
   }
 }
 </script>
-
-<style scoped>
-.card-text {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>

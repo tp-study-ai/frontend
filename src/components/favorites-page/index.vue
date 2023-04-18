@@ -50,7 +50,7 @@
     <v-card>
       <div class="d-flex">
         <v-card-title>
-          Вы действительно хотите убрать задачу {{ taskToRemove.name }} из избранного?
+          Вы действительно хотите удалить задачу {{ taskToRemove.name }} из избранного?
         </v-card-title>
         <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
           <v-icon>mdi-close</v-icon>
@@ -164,7 +164,7 @@ export default {
             this.tasks.splice(index, 1);
           }
 
-          this.$emit('show:snackbar', { text: 'Задача убрана из избранного', color: 'success' });
+          this.$emit('show:snackbar', { text: 'Задача удалена из избранного', color: 'success' });
         })
         .finally(() => {
           this.dialogShown = false;

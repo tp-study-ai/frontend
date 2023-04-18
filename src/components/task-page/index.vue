@@ -443,7 +443,7 @@ export default {
 
       this.$http.post('/delete_like', params)
         .then(() => {
-          this.$emit('show:snackbar', { text: 'Задача убрана из избранного', color: 'success' });
+          this.$emit('show:snackbar', { text: 'Задача удалена из избранного', color: 'success' });
         })
         .finally(() => {
           this.task.liked = false;

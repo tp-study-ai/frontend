@@ -26,11 +26,8 @@
                   <span>{{ ratingText }}</span>
                 </v-tooltip>
 
-                <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
-                  <v-icon>mdi-thumb-up-outline</v-icon>
-                </v-btn>
-                <v-btn :disabled="!task.liked" icon @click="deleteLike">
-                  <v-icon>mdi-thumb-down-outline</v-icon>
+                <v-btn class="mx-2" icon color="red" @click="likeHandler">
+                  <v-icon>{{ task.liked ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
                 </v-btn>
               </div>
 
@@ -96,11 +93,8 @@
                       <span>{{ ratingText }}</span>
                     </v-tooltip>
 
-                    <v-btn :disabled="task.liked" class="mx-2" icon @click="likeTask">
-                      <v-icon>mdi-thumb-up-outline</v-icon>
-                    </v-btn>
-                    <v-btn :disabled="!task.liked" icon @click="deleteLike">
-                      <v-icon>mdi-thumb-down-outline</v-icon>
+                    <v-btn class="mx-2" icon color="red" @click="likeHandler">
+                      <v-icon>{{ task.liked ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
                     </v-btn>
                   </div>
 
@@ -421,7 +415,7 @@ export default {
       const id = this.task.cf_tags_ID[index];
       return `/tasks?tags=${id}`;
     },
-    likeTask() {
+    likeHandler() {
       if (!this.isAuthorized) {
         this.$emit(
           'show:snackbar',
@@ -431,6 +425,13 @@ export default {
         return;
       }
 
+      if (this.task.liked) {
+        this.deleteLike();
+      } else {
+        this.likeTask();
+      }
+    },
+    likeTask() {
       const params = { task_id: this.task.id };
 
       this.$http.post('/like_task', params)
@@ -442,15 +443,6 @@ export default {
         });
     },
     deleteLike() {
-      if (!this.isAuthorized) {
-        this.$emit(
-          'show:snackbar',
-          { text: 'Для совершения этого действия необходимо авторизоваться', color: 'warning' }
-        );
-        this.$emit('show:login-form');
-        return;
-      }
-
       const params = { task_id: this.task.id };
 
       this.$http.post('/delete_like', params)

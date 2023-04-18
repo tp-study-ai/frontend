@@ -27,7 +27,19 @@
     <v-card :class="{ 'card': $vuetify.breakpoint.mdAndUp }" class="overflow-y-auto" flat>
       <v-card-subtitle>
         <div class="mb-2">
-          <v-chip :color="ratingColor" small>{{ ratingText }}</v-chip>
+          <v-tooltip top>
+            <template #activator="{ on, attrs }">
+              <v-chip
+                v-on="on"
+                :color="ratingColor"
+                small
+                v-bind="attrs"
+              >
+                {{ task.cf_rating }}
+              </v-chip>
+            </template>
+            <span>{{ ratingText }}</span>
+          </v-tooltip>
         </div>
 
         <v-chip

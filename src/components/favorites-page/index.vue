@@ -16,7 +16,6 @@
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text>
           <div>Теги: {{ getTagsByTask(item) }}</div>
-          <div>Сложность: {{ item.difficulty - 6 }}</div>
           <div>Рейтинг: {{ item.cf_rating }}</div>
         </v-card-text>
 
@@ -30,8 +29,21 @@
           <router-link :to="getTaskPath(item)">{{ item.name }}</router-link>
         </td>
         <td>{{ getTagsByTask(item) }}</td>
-        <td>{{ item.difficulty - 6 }}</td>
-        <td>{{ item.cf_rating }}</td>
+        <td>
+          <v-tooltip top>
+            <template #activator="{ on, attrs }">
+              <v-chip
+                v-on="on"
+                :color="getRatingColor(item)"
+                small
+                v-bind="attrs"
+              >
+                {{ item.cf_rating }}
+              </v-chip>
+            </template>
+            <span>{{ getRatingText(item) }}</span>
+          </v-tooltip>
+        </td>
         <td>
           <v-btn icon color="error" @click="showDialog(item)">
             <v-icon>mdi-delete</v-icon>
@@ -106,10 +118,6 @@ export default {
           sortable: false
         },
         {
-          text: 'Сложность',
-          sortable: false
-        },
-        {
           text: 'Рейтинг',
           sortable: false
         },
@@ -171,6 +179,56 @@ export default {
         .finally(() => {
           this.dialogShown = false;
         });
+    },
+    getRatingColor(task) {
+      const { cf_rating } = task;
+      if (cf_rating <= 1200) {
+        return 'purple lighten-2';
+      }
+      if (cf_rating <= 1600) {
+        return 'indigo lighten-2';
+      }
+      if (cf_rating <= 1900) {
+        return 'blue lighten-1';
+      }
+      if (cf_rating <= 2200) {
+        return 'green';
+      }
+      if (cf_rating <= 2500) {
+        return 'yellow';
+      }
+      if (cf_rating <= 2900) {
+        return 'orange';
+      }
+      if (cf_rating <= 3500) {
+        return 'red lighten-1';
+      }
+      return '';
+    },
+    getRatingText(task) {
+      const { cf_rating } = task;
+      if (cf_rating <= 1200) {
+        return 'новичок';
+      }
+      if (cf_rating <= 1600) {
+        return 'ученик';
+      }
+      if (cf_rating <= 1900) {
+        return 'эксперт';
+      }
+      if (cf_rating <= 2200) {
+        return 'элита';
+      }
+      if (cf_rating <= 2500) {
+        return 'мастер';
+      }
+      if (cf_rating <= 2900) {
+        return 'гроссмейстер';
+      }
+      if (cf_rating <= 3500) {
+        return 'глобальная элита';
+      }
+      return '';
     }
   }
 }

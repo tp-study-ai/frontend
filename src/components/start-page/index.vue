@@ -95,7 +95,7 @@ export default {
         return 'orange';
       }
       if (cf_rating <= 3500) {
-        return 'red';
+        return 'red lighten-1';
       }
       return '';
     },

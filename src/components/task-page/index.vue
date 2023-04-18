@@ -135,17 +135,15 @@
           <v-card-actions>
             <v-spacer />
 
-            <v-menu v-if="isTaskSolved" :value="true" :close-on-click="false" offset-y top>
-              <template #activator="{}">
-                <v-btn text color="primary" @click="showRecommendationsForm">
-                  Перейти к следующей задаче
-                </v-btn>
-              </template>
+            <v-btn
+              v-if="isTaskSolved"
+              :text="!highlightButton"
+              color="primary"
+              @click="showRecommendationsForm"
+            >
+              Перейти к следующей задаче
+            </v-btn>
 
-              <v-alert class="mb-0" dismissible dense type="info">
-                Теперь можно перейти к следующей задаче
-              </v-alert>
-            </v-menu>
             <v-btn
               :loading="checkSolutionLoading"
               :color="checkSolutionButtonColor"
@@ -201,12 +199,19 @@ export default {
       selected: null,
       examples: [],
       attempts: [],
-      swipeDirection: 'right'
+      swipeDirection: 'right',
+      highlightButton: false,
+      intervalId: null
     };
   },
   computed: {
     isTaskSolved() {
-      return this.attempts.some((attempt) => !attempt.loading && attempt.testsPassed === attempt.testsTotal);
+      if (this.attempts.length === 0) {
+        return false;
+      }
+
+      const latAttempt = this.attempts[0];
+      return !latAttempt.loading && latAttempt.testsPassed === latAttempt.testsTotal;
     },
     checkSolutionButtonColor() {
       if (this.isTaskSolved) {
@@ -339,7 +344,8 @@ export default {
         checkResult: 0,
         checkMessage: '',
         code: this.code,
-        loading: true
+        loading: true,
+        highlightButton: false
       });
       const attempt = this.attempts[0];
 
@@ -363,6 +369,20 @@ export default {
             : 'warning';
 
           this.$emit('show:snackbar', { text, color });
+          if (this.intervalId) {
+            return;
+          }
+
+          this.intervalId = setInterval(() => {
+            this.highlightButton = !this.highlightButton;
+            if (!this.isTaskSolved) {
+              this.$set(attempt, 'highlightButton', this.highlightButton);
+            }
+          }, 600);
+          setTimeout(() => {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+          }, 6000);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

@@ -30,6 +30,10 @@ const routes = [
   {
     path: '/profile',
     component: components.ProfilePage
+  },
+  {
+    path: '/history',
+    component: components.HistoryPage
   }
 ];
 

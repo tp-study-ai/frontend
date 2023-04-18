@@ -4,6 +4,7 @@ import TasksPage from './tasks-page';
 import RecommendationsPage from './recommendations-page';
 import FavoritesPage from './favorites-page';
 import ProfilePage from './profile-page';
+import HistoryPage from './history-page';
 
 export default {
   StartPage,
@@ -11,5 +12,6 @@ export default {
   TasksPage,
   RecommendationsPage,
   FavoritesPage,
-  ProfilePage
+  ProfilePage,
+  HistoryPage
 };

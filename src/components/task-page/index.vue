@@ -137,6 +137,7 @@
               <v-icon left>mdi-upload</v-icon>
               Загрузить файл
             </v-btn>
+            <input ref="fileInput" class="d-none" type="file" @change="handleFileChange">
 
             <div class="ml-auto">
               <v-btn
@@ -147,7 +148,6 @@
               >
                 Перейти к следующей задаче
               </v-btn>
-              <input ref="fileInput" class="d-none" type="file" @change="handleFileChange">
 
               <v-btn
                 :loading="checkSolutionLoading"

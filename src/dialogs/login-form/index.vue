@@ -13,7 +13,7 @@
       </v-btn>
     </div>
 
-    <v-card-text>
+    <v-card-text class="pb-0">
       <v-form ref="form">
         <v-text-field
           v-model="username"
@@ -35,10 +35,21 @@
     </v-card-text>
 
     <v-divider />
-    <v-card-actions>
-      <v-spacer />
-      <v-btn :loading="loading" text color="primary" @click="sendRequest">Войти</v-btn>
-      <v-btn :loading="loading" text color="secondary" @click="showRegisterForm">Зарегистрироваться</v-btn>
+    <v-card-actions class="d-block">
+      <div class="mb-2">
+        <v-btn :loading="loading" block color="primary" @click="sendRequest">Войти</v-btn>
+      </div>
+      <div>
+        <v-btn
+          :loading="loading"
+          text
+          block
+          color="secondary"
+          @click="showRegisterForm"
+        >
+          <span class="primary--text">Войти</span>&nbsp;|&nbsp;Зарегистрироваться
+        </v-btn>
+      </div>
     </v-card-actions>
   </v-card>
 </v-dialog>

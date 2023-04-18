@@ -126,7 +126,7 @@
             :copy_code="false"
             count_lines
             width="auto"
-            height="80vh"
+            height="calc(80vh - 4px)"
             border_radius="0px"
             theme="light"
           />

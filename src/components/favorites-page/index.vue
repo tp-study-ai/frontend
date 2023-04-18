@@ -30,19 +30,9 @@
         </td>
         <td>{{ getTagsByTask(item) }}</td>
         <td>
-          <v-tooltip top>
-            <template #activator="{ on, attrs }">
-              <v-chip
-                v-on="on"
-                :color="getRatingColor(item)"
-                small
-                v-bind="attrs"
-              >
-                {{ item.cf_rating }}
-              </v-chip>
-            </template>
-            <span>{{ getRatingText(item) }}</span>
-          </v-tooltip>
+          <v-chip :color="getRatingColor(item)" small>
+            {{ `${getRatingText(item)} (${item.cf_rating})` }}
+          </v-chip>
         </td>
         <td>
           <v-btn icon color="error" @click="showDialog(item)">

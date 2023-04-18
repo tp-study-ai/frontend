@@ -30,19 +30,9 @@
           <v-card-title>{{ task.name }}</v-card-title>
           <v-card-subtitle>
             <div class="mb-2">
-              <v-tooltip top>
-                <template #activator="{ on, attrs }">
-                  <v-chip
-                    v-on="on"
-                    :color="getRatingColor(task)"
-                    small
-                    v-bind="attrs"
-                  >
-                    {{ task.cf_rating }}
-                  </v-chip>
-                </template>
-                <span>{{ getRatingText(task) }}</span>
-              </v-tooltip>
+              <v-chip :color="getRatingColor(task)" small>
+                {{ `${getRatingText(task)} (${task.cf_rating})` }}
+              </v-chip>
             </div>
 
             <v-chip

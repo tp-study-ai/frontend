@@ -47,7 +47,6 @@
             <thead>
               <tr>
                 <th>Название</th>
-                <th>Сложность</th>
                 <th>Рейтинг</th>
               </tr>
             </thead>
@@ -57,7 +56,6 @@
                 <td>
                   <router-link :to="getTaskPath(task)">{{ task.name }}</router-link>
                 </td>
-                <td>{{ task.difficulty - 6 }}</td>
                 <td>{{ task.cf_rating }}</td>
               </tr>
             </tbody>

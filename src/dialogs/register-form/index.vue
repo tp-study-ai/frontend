@@ -55,7 +55,7 @@
           color="secondary"
           @click="showLoginForm"
         >
-          Войти&nbsp;|&nbsp;<span class="primary--text">Зарегистрироваться</span>
+          Вход&nbsp;|&nbsp;<span class="primary--text">Регистрация</span>
         </v-btn>
       </div>
     </v-card-actions>

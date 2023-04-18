@@ -133,25 +133,31 @@
 
           <v-divider />
           <v-card-actions>
-            <v-spacer />
-
-            <v-btn
-              v-if="isTaskSolved"
-              :text="!highlightButton"
-              color="primary"
-              @click="showRecommendationsForm"
-            >
-              Перейти к следующей задаче
+            <v-btn text color="secondary" @click="$refs.fileInput.click()">
+              <v-icon left>mdi-upload</v-icon>
+              Загрузить файл
             </v-btn>
 
-            <v-btn
-              :loading="checkSolutionLoading"
-              :color="checkSolutionButtonColor"
-              text
-              @click="checkSolution"
-            >
-              Проверить решение
-            </v-btn>
+            <div class="ml-auto">
+              <v-btn
+                v-if="isTaskSolved"
+                :text="!highlightButton"
+                color="primary"
+                @click="showRecommendationsForm"
+              >
+                Перейти к следующей задаче
+              </v-btn>
+              <input ref="fileInput" class="d-none" type="file" @change="handleFileChange">
+
+              <v-btn
+                :loading="checkSolutionLoading"
+                :color="checkSolutionButtonColor"
+                text
+                @click="checkSolution"
+              >
+                Проверить решение
+              </v-btn>
+            </div>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -456,6 +462,18 @@ export default {
         .finally(() => {
           this.task.liked = false;
         });
+    },
+    handleFileChange(e) {
+      const file = e.target.files[0];
+      const fileReader = new FileReader();
+
+      fileReader.onload = (() => {
+        return (e) => {
+          this.code = e.target.result;
+        };
+      })(file);
+
+      fileReader.readAsText(file);
     }
   }
 }

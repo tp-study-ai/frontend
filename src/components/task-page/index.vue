@@ -236,12 +236,7 @@ export default {
   },
   computed: {
     isTaskSolved() {
-      if (this.attempts.length === 0) {
-        return false;
-      }
-
-      const lastAttempt = this.attempts[0];
-      return lastAttempt.testsPassed === lastAttempt.testsTotal && !lastAttempt.loading;
+      return this.attempts.some((attempt) => !attempt.loading && attempt.testsPassed === attempt.testsTotal);
     },
     checkSolutionButtonColor() {
       if (this.isTaskSolved) {

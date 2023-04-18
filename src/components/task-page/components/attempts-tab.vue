@@ -25,7 +25,6 @@
         <td>
           <v-btn
             :text="!attempt.highlightButton"
-            class="pa-0"
             color="primary"
             @click="showCode(attempt, attempts.length - id)"
           >

@@ -473,7 +473,6 @@ export default {
           this.$emit('show:snackbar', { text: 'Файл успешно загружен', color: 'success' });
         };
       })(file);
-
       fileReader.readAsText(file);
     }
   }

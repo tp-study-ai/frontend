@@ -470,6 +470,7 @@ export default {
       fileReader.onload = (() => {
         return (e) => {
           this.code = e.target.result;
+          this.$emit('show:snackbar', { text: 'Файл успешно загружен', color: 'success' });
         };
       })(file);
 

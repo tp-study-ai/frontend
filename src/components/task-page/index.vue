@@ -136,7 +136,13 @@
               <v-icon left>mdi-upload</v-icon>
               Загрузить файл
             </v-btn>
-            <input ref="fileInput" class="d-none" type="file" @change="handleFileChange">
+            <input
+              ref="fileInput"
+              class="d-none"
+              type="file"
+              accept=".cpp"
+              @change="handleFileChange"
+            >
 
             <div class="ml-auto">
               <v-btn

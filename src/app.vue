@@ -22,14 +22,14 @@
       <v-spacer />
 
       <div v-if="isAuthorized">
-        <v-btn class="mr-5" icon>
-          <v-icon left>mdi-fire</v-icon>
+        <v-btn plain>
+          <v-icon class="mr-1">mdi-fire</v-icon>
           0
         </v-btn>
 
         <v-menu offset-y>
           <template #activator="{ on, attrs }">
-            <v-btn v-bind="attrs" icon v-on="on">
+            <v-btn v-bind="attrs" plain v-on="on">
               <v-icon>mdi-account-circle</v-icon>
             </v-btn>
           </template>

@@ -132,7 +132,7 @@
 
           <v-divider />
           <v-card-actions>
-            <v-btn text color="secondary" @click="$refs.fileInput.click()">
+            <v-btn plain color="secondary" @click="$refs.fileInput.click()">
               <v-icon left>mdi-upload</v-icon>
               Загрузить файл
             </v-btn>

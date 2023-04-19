@@ -14,7 +14,7 @@
     <v-divider />
     <v-card-actions>
       <v-spacer />
-      <v-btn text color="primary" @click="goBack">Вернуться назад</v-btn>
+      <v-btn plain color="primary" @click="goBack">Вернуться назад</v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>

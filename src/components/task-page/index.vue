@@ -412,7 +412,7 @@ export default {
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, 4000);
+          }, 5000);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

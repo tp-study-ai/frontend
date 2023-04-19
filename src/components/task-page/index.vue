@@ -401,10 +401,12 @@ export default {
           }
 
           // Запускаем мерцание
-          this.highlightButton = true;
-          if (!this.isTaskSolved) {
-            this.$set(attempt, 'highlightButton', this.highlightButton);
-          }
+          setTimeout(() => {
+            this.highlightButton = true;
+            if (!this.isTaskSolved) {
+              this.$set(attempt, 'highlightButton', this.highlightButton);
+            }
+          }, 0);
 
           // Останавливаем мерцание
           setTimeout(() => {

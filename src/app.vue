@@ -12,13 +12,13 @@
 
     <v-app-bar v-else app>
       <v-spacer />
-      <router-link class="d-flex align-center" to="/" tag="div" style="cursor: pointer">
+      <router-link class="d-flex align-center mr-2" to="/" tag="div" style="cursor: pointer">
         <img class="mr-2" src="/logo.png" width="50" height="50" />
         <v-toolbar-title>Study AI</v-toolbar-title>
       </router-link>
 
-      <v-btn v-if="isAuthorized" class="pa-0 ml-5" plain to="/recommendations">Рекомендованные задачи</v-btn>
-      <v-btn class="pa-0 ml-5" plain to="/tasks">Все задачи</v-btn>
+      <v-btn v-if="isAuthorized" plain to="/recommendations">Рекомендованные задачи</v-btn>
+      <v-btn plain to="/tasks">Все задачи</v-btn>
       <v-spacer />
 
       <div v-if="isAuthorized">

@@ -302,14 +302,6 @@ export default {
           liked: false
         };
 
-        this.$http
-          .get('/get_like_tasks')
-          .then(({ data: { tasks } }) => {
-            const id = parseInt(this.id);
-            const liked = tasks.findIndex(((task) => task.id === id)) !== -1;
-            this.$set(this.task, 'liked', liked);
-          });
-
         this.limits = {
           memory_limit_bytes: data.memory_limit_bytes,
           time_limit: data.time_limit
@@ -324,6 +316,18 @@ export default {
 
           this.examples.push({ input, output });
         }
+
+        if (!this.isAuthorized) {
+          return;
+        }
+
+        this.$http
+          .get('/get_like_tasks')
+          .then(({ data: { tasks } }) => {
+            const id = parseInt(this.id);
+            const liked = tasks.findIndex(((task) => task.id === id)) !== -1;
+            this.$set(this.task, 'liked', liked);
+          });
       })
       .finally(() => {
         this.loading = false;

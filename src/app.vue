@@ -12,7 +12,7 @@
 
     <v-app-bar v-else app>
       <v-spacer />
-      <router-link class="d-flex align-center mr-2" to="/" tag="div" style="cursor: pointer">
+      <router-link class="d-flex align-center mr-4" to="/" tag="div" style="cursor: pointer">
         <img class="mr-2" src="/logo.png" width="50" height="50" />
         <v-toolbar-title>Study AI</v-toolbar-title>
       </router-link>

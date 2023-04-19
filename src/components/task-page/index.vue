@@ -409,9 +409,7 @@ export default {
           // Останавливаем мерцание
           setTimeout(() => {
             this.highlightButton = false;
-            if (!this.isTaskSolved) {
-              this.$set(attempt, 'highlightButton', this.highlightButton);
-            }
+            this.$set(attempt, 'highlightButton', this.highlightButton);
           }, 5000);
         })
         .finally(() => {

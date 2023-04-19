@@ -406,13 +406,13 @@ export default {
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          });
 
-          // Останавливаем мерцание
-          setTimeout(() => {
-            this.highlightButton = false;
-            this.$set(attempt, 'highlightButton', this.highlightButton);
-          }, 5000);
+            // Останавливаем мерцание
+            setTimeout(() => {
+              this.highlightButton = false;
+              this.$set(attempt, 'highlightButton', this.highlightButton);
+            }, 5000);
+          });
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

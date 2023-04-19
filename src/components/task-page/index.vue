@@ -475,6 +475,14 @@ export default {
     },
     handleFileChange(e) {
       const file = e.target.files[0];
+      if (!file.name.endsWith('.cpp')) {
+        this.$emit(
+          'show:snackbar',
+          { text: 'Файл должен иметь следующее расширение - cpp', color: 'error' }
+        );
+        return;
+      }
+
       const fileReader = new FileReader();
 
       fileReader.onload = (e) => {

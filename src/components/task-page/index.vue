@@ -132,7 +132,7 @@
 
           <v-divider />
           <v-card-actions>
-            <v-btn plain color="secondary" @click="$refs.fileInput.click()">
+            <v-btn text color="secondary" @click="$refs.fileInput.click()">
               <v-icon left>mdi-upload</v-icon>
               Загрузить файл
             </v-btn>
@@ -147,7 +147,7 @@
             <div class="ml-auto">
               <v-btn
                 v-if="isTaskSolved"
-                :plain="!highlightButton"
+                :text="!highlightButton"
                 color="primary"
                 @click="showRecommendationsForm"
               >
@@ -157,7 +157,7 @@
               <v-btn
                 :loading="checkSolutionLoading"
                 :color="checkSolutionButtonColor"
-                plain
+                text
                 @click="checkSolution"
               >
                 Проверить решение

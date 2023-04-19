@@ -5,13 +5,13 @@
       <v-card-title>{{ task.title }}</v-card-title>
 
       <v-divider v-if="$vuetify.breakpoint.smAndDown" />
-      <v-btn :to="taskPath" class="ml-auto" plain color="primary">Перейти к задаче</v-btn>
+      <v-btn :to="taskPath" class="ml-auto" text color="primary">Перейти к задаче</v-btn>
       <v-tooltip top>
         <template #activator="{ on, attrs }">
           <v-btn
             v-on="on"
             class="ml-2 mr-4"
-            plain
+            text
             color="secondary"
             @click="getTask"
             v-bind="attrs"

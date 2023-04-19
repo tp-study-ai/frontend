@@ -36,7 +36,7 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-btn :to="getTaskPath(item)" plain color="primary">Перейти</v-btn>
+          <v-btn :to="getTaskPath(item)" text color="primary">Перейти</v-btn>
         </v-card-actions>
       </v-card>
 

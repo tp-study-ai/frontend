@@ -24,7 +24,7 @@
         </th>
         <td>
           <v-btn
-            :plain="!attempt.highlightButton"
+            :text="!attempt.highlightButton"
             color="primary"
             @click="showCode(attempt, attempts.length - id)"
           >

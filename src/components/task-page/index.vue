@@ -212,8 +212,7 @@ export default {
       examples: [],
       attempts: [],
       swipeDirection: 'right',
-      highlightButton: false,
-      intervalId: null
+      highlightButton: false
     };
   },
   computed: {
@@ -397,7 +396,7 @@ export default {
             : 'warning';
 
           this.$emit('show:snackbar', { text, color });
-          if (this.intervalId) {
+          if (this.highlightButton) {
             return;
           }
 
@@ -409,14 +408,11 @@ export default {
 
           // Останавливаем мерцание
           setTimeout(() => {
-            clearInterval(this.intervalId);
-            this.intervalId = null;
-
             this.highlightButton = false;
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, 5000);
+          }, 4000);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

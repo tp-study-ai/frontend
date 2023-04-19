@@ -401,7 +401,7 @@ export default {
           }
 
           // Запускаем мерцание
-          this.$nextTick(() => {
+          this.$nextTick().then(() => {
             this.highlightButton = true;
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);

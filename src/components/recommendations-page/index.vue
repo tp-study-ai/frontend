@@ -120,7 +120,7 @@ export default {
 
       this.$emit(
         'show:snackbar',
-        { text: 'Для перехода на эту страницу необходимо авторизоваться', color: 'warning' }
+        { text: 'Для перехода на эту страницу необходимо авторизоваться', color: 'error' }
       );
       this.$emit('show:login-form');
       return;

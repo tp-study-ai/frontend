@@ -17,8 +17,8 @@
         <v-toolbar-title>Study AI</v-toolbar-title>
       </router-link>
 
-      <v-btn v-if="isAuthorized" class="pa-0 ml-5" text to="/recommendations">Рекомендованные задачи</v-btn>
-      <v-btn class="pa-0 ml-5" text to="/tasks">Все задачи</v-btn>
+      <v-btn v-if="isAuthorized" class="pa-0 ml-5" plain to="/recommendations">Рекомендованные задачи</v-btn>
+      <v-btn class="pa-0 ml-5" plain to="/tasks">Все задачи</v-btn>
       <v-spacer />
 
       <div v-if="isAuthorized">
@@ -47,7 +47,7 @@
           </v-list>
         </v-menu>
       </div>
-      <v-btn v-else class="pa-0" text @click="showLoginForm">Войти</v-btn>
+      <v-btn v-else class="pa-0" plain @click="showLoginForm">Войти</v-btn>
 
       <v-spacer />
     </v-app-bar>

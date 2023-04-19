@@ -62,7 +62,7 @@
 
         <v-btn
           :loading="deleteLoading"
-          text
+          plain
           color="error"
           @click="deleteLike"
         >
@@ -70,7 +70,7 @@
         </v-btn>
         <v-btn
           :loading="deleteLoading"
-          text
+          plain
           @click="dialogShown = false"
         >
           Отмена

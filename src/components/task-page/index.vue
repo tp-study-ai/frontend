@@ -147,7 +147,7 @@
             <div class="ml-auto">
               <v-btn
                 v-if="isTaskSolved"
-                :text="!highlightButton"
+                :plain="!highlightButton"
                 color="primary"
                 @click="showRecommendationsForm"
               >
@@ -157,7 +157,7 @@
               <v-btn
                 :loading="checkSolutionLoading"
                 :color="checkSolutionButtonColor"
-                text
+                plain
                 @click="checkSolution"
               >
                 Проверить решение

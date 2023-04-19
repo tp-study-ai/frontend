@@ -50,7 +50,7 @@
       <div>
         <v-btn
           :loading="loading"
-          text
+          plain
           block
           color="secondary"
           @click="showLoginForm"

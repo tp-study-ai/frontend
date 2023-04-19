@@ -125,7 +125,7 @@
             :copy_code="false"
             count_lines
             width="auto"
-            height="calc(82vh - 5px)"
+            height="calc(80vh - 5px)"
             border_radius="0px"
             theme="light"
           />
@@ -510,13 +510,13 @@ export default {
 
 <style>
 .left-card {
-  min-height: 82vh;
-  max-height: 82vh;
+  min-height: 80vh;
+  max-height: 80vh;
 }
 
 .right-card {
-  min-height: calc(82vh + 48px);
-  max-height: calc(82vh + 48px);
+  min-height: calc(80vh + 48px);
+  max-height: calc(80vh + 48px);
 }
 
 /* Используется для стилизации заголовков внутри описания задачи */

@@ -17,19 +17,19 @@
         <v-toolbar-title>Study AI</v-toolbar-title>
       </router-link>
 
-      <v-btn v-if="isAuthorized" plain to="/recommendations">Рекомендованные задачи</v-btn>
-      <v-btn plain to="/tasks">Все задачи</v-btn>
+      <v-btn v-if="isAuthorized" text to="/recommendations">Рекомендованные задачи</v-btn>
+      <v-btn text to="/tasks">Все задачи</v-btn>
       <v-spacer />
 
       <div v-if="isAuthorized">
-        <v-btn plain>
+        <v-btn text>
           <v-icon class="mr-1">mdi-fire</v-icon>
           0
         </v-btn>
 
         <v-menu offset-y>
           <template #activator="{ on, attrs }">
-            <v-btn v-bind="attrs" plain v-on="on">
+            <v-btn v-bind="attrs" text v-on="on">
               <v-icon>mdi-account-circle</v-icon>
             </v-btn>
           </template>
@@ -47,7 +47,7 @@
           </v-list>
         </v-menu>
       </div>
-      <v-btn v-else class="pa-0" plain @click="showLoginForm">Войти</v-btn>
+      <v-btn v-else class="pa-0" text @click="showLoginForm">Войти</v-btn>
 
       <v-spacer />
     </v-app-bar>

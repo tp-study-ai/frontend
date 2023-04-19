@@ -147,8 +147,8 @@
             <div class="ml-auto">
               <v-btn
                 v-if="isTaskSolved"
-                :color="highlightButton ? 'green' : 'primary'"
-                text
+                :text="!highlightButton"
+                color="primary"
                 @click="showRecommendationsForm"
               >
                 Перейти к следующей задаче
@@ -421,7 +421,7 @@ export default {
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, timeout + 4000);
+          }, timeout + 1600);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

@@ -391,11 +391,11 @@ export default {
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, 450);
+          }, 400);
           setTimeout(() => {
             clearInterval(this.intervalId);
             this.intervalId = null;
-          }, 4500);
+          }, 4800);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

@@ -7,6 +7,8 @@ import vuetify from '@/plugins/vuetify';
 
 import App from '@/app';
 
+import 'animate.css';
+
 Vue.config.productionTip = false;
 Vue.prototype.$http = http;
 

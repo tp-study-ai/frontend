@@ -147,7 +147,8 @@
             <div class="ml-auto">
               <v-btn
                 v-if="isTaskSolved"
-                :text="!highlightButton"
+                :class="{ 'animate__animated animate__flash animate__infinite' : highlightButton }"
+                text
                 color="primary"
                 @click="showRecommendationsForm"
               >
@@ -402,17 +403,15 @@ export default {
 
           const timeout = 2000;
 
-          // Запускаем интервал мерцания кнопки
+          // Запускаем мерцание
           setTimeout(() => {
-            this.intervalId = setInterval(() => {
-              this.highlightButton = !this.highlightButton;
-              if (!this.isTaskSolved) {
-                this.$set(attempt, 'highlightButton', this.highlightButton);
-              }
-            }, 300);
+            this.highlightButton = true;
+            if (!this.isTaskSolved) {
+              this.$set(attempt, 'highlightButton', this.highlightButton);
+            }
           }, timeout);
 
-          // Останавливаем интервал мерцания кнопки
+          // Останавливаем мерцание
           setTimeout(() => {
             clearInterval(this.intervalId);
             this.intervalId = null;
@@ -421,7 +420,7 @@ export default {
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, timeout + 3000);
+          }, timeout + 4000);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

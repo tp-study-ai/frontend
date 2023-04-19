@@ -401,15 +401,11 @@ export default {
             return;
           }
 
-          const timeout = 2000;
-
           // Запускаем мерцание
-          setTimeout(() => {
-            this.highlightButton = true;
-            if (!this.isTaskSolved) {
-              this.$set(attempt, 'highlightButton', this.highlightButton);
-            }
-          }, timeout);
+          this.highlightButton = true;
+          if (!this.isTaskSolved) {
+            this.$set(attempt, 'highlightButton', this.highlightButton);
+          }
 
           // Останавливаем мерцание
           setTimeout(() => {
@@ -420,7 +416,7 @@ export default {
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, timeout + 4000);
+          }, 5000);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

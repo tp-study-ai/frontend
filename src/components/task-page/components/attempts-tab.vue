@@ -25,6 +25,7 @@
         <td>
           <v-btn
             :class="{ 'animate__animated animate__flash animate__infinite' : attempt.highlightButton }"
+            class="px-0"
             text
             color="primary"
             @click="showCode(attempt, attempts.length - id)"

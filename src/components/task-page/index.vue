@@ -395,7 +395,7 @@ export default {
           setTimeout(() => {
             clearInterval(this.intervalId);
             this.intervalId = null;
-          }, 4800);
+          }, 4000);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

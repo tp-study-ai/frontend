@@ -39,7 +39,6 @@
               <vue-mathjax :formula="task.description" :safe="false" />
               <vue-mathjax :formula="task.input" :safe="false" />
               <vue-mathjax :formula="task.output" :safe="false" />
-              <vue-mathjax :formula="task.note" :safe="false" />
             </v-card-text>
           </v-card>
 
@@ -467,12 +466,20 @@ export default {
       const file = e.target.files[0];
       const fileReader = new FileReader();
 
-      fileReader.onload = (() => {
-        return (e) => {
-          this.code = e.target.result;
-          this.$emit('show:snackbar', { text: 'Файл успешно загружен', color: 'success' });
-        };
-      })(file);
+      fileReader.onload = (e) => {
+        this.code = e.target.result;
+        this.$emit(
+          'show:snackbar',
+          { text: 'Файл успешно загружен', color: 'success' }
+        );
+      };
+      fileReader.onerror = () => {
+        this.$emit(
+          'show:snackbar',
+          { text: 'В ходе загрузки файла произошла неизвестная ошибка', color: 'error' }
+        );
+      };
+
       fileReader.readAsText(file);
     }
   }

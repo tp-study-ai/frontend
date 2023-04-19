@@ -24,8 +24,9 @@
         </th>
         <td>
           <v-btn
-            :text="!attempt.highlightButton"
-            color="primary"
+            :color="attempt.highlightButton ? 'warning' : 'primary'"
+            class="pa-0"
+            text
             @click="showCode(attempt, attempts.length - id)"
           >
             Показать

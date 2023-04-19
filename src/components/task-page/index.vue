@@ -395,6 +395,7 @@ export default {
           setTimeout(() => {
             clearInterval(this.intervalId);
             this.intervalId = null;
+            this.highlightButton = false;
           }, 4000);
         })
         .finally(() => {

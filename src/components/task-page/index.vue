@@ -409,7 +409,7 @@ export default {
               if (!this.isTaskSolved) {
                 this.$set(attempt, 'highlightButton', this.highlightButton);
               }
-            }, 300);
+            }, 100);
           }, timeout);
 
           // Останавливаем интервал мерцания кнопки
@@ -421,7 +421,7 @@ export default {
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, timeout + 4200);
+          }, timeout + 4000);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

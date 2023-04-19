@@ -330,6 +330,10 @@ export default {
         this.$http
           .get('/get_like_tasks')
           .then(({ data: { tasks } }) => {
+            if (!tasks) {
+              return;
+            }
+
             const id = parseInt(this.id);
             const liked = tasks.findIndex(((task) => task.id === id)) !== -1;
             this.$set(this.task, 'liked', liked);
@@ -396,17 +400,28 @@ export default {
             return;
           }
 
-          this.intervalId = setInterval(() => {
-            this.highlightButton = !this.highlightButton;
-            if (!this.isTaskSolved) {
-              this.$set(attempt, 'highlightButton', this.highlightButton);
-            }
-          }, 400);
+          const timeout = 2000;
+
+          // Запускаем интервал мерцания кнопки
+          setTimeout(() => {
+            this.intervalId = setInterval(() => {
+              this.highlightButton = !this.highlightButton;
+              if (!this.isTaskSolved) {
+                this.$set(attempt, 'highlightButton', this.highlightButton);
+              }
+            }, 300);
+          }, timeout);
+
+          // Останавливаем интервал мерцания кнопки
           setTimeout(() => {
             clearInterval(this.intervalId);
             this.intervalId = null;
+
             this.highlightButton = false;
-          }, 4000);
+            if (!this.isTaskSolved) {
+              this.$set(attempt, 'highlightButton', this.highlightButton);
+            }
+          }, timeout + 4200);
         })
         .finally(() => {
           this.$set(attempt, 'loading', false);

@@ -401,12 +401,12 @@ export default {
           }
 
           // Запускаем мерцание
-          setTimeout(() => {
+          this.$nextTick(() => {
             this.highlightButton = true;
             if (!this.isTaskSolved) {
               this.$set(attempt, 'highlightButton', this.highlightButton);
             }
-          }, 0);
+          });
 
           // Останавливаем мерцание
           setTimeout(() => {

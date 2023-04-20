@@ -132,7 +132,7 @@ export default {
       snackbarOptions: {},
       loginFormShown: false,
       registerFormShown: false,
-      isAuthorized: false,
+      isAuthorized: null,
       shockMode: 0
     };
   },
@@ -167,14 +167,20 @@ export default {
   created() {
     document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
 
-    this.$http.get('/get_user').then(({ data: { id } }) => {
-      if (!id) {
-        return;
-      }
+    this.$http
+      .get('/get_user')
+      .then(({ data: { id } }) => {
+        if (!id) {
+          this.isAuthorized = false;
+          return;
+        }
 
-      this.isAuthorized = true;
-      this.updateShockMode();
-    });
+        this.isAuthorized = true;
+        this.updateShockMode();
+      })
+      .catch(() => {
+        this.isAuthorized = false;
+      });
   },
   destroyed() {
     document.removeEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));

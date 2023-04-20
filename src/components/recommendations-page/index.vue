@@ -112,10 +112,12 @@ export default {
   watch: {
     selected() {
       this.getTasks();
-    }
-  },
-  created() {
-    if (!this.isAuthorized) {
+    },
+    isAuthorized(value) {
+      if (value) {
+        return;
+      }
+
       this.$router.push('/');
 
       this.$emit(
@@ -123,9 +125,9 @@ export default {
         { text: 'Для перехода на эту страницу необходимо авторизоваться', color: 'error' }
       );
       this.$emit('show:login-form');
-      return;
     }
-
+  },
+  created() {
     this.loading = true;
     this.getTasks();
   },

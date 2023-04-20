@@ -29,7 +29,7 @@
               {{ shockMode }}
             </v-btn>
           </template>
-          <span>Ударный режим</span>
+          <span>{{ shockModeText }}</span>
         </v-tooltip>
 
         <v-menu offset-y>
@@ -157,6 +157,11 @@ export default {
           ? this.menuItems
           : [{ title: 'Войти', icon: 'mdi-login', action: this.showLoginForm.bind(this) }]
       );
+    },
+    shockModeText() {
+      return this.shockMode === 0
+        ? 'Решайте задачи каждый день...'
+        : `Вы в ударе уже ${this.shockMode} (дня/дней)`;
     }
   },
   created() {

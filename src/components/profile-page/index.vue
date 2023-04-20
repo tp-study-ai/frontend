@@ -127,7 +127,10 @@ export default {
     },
     getDate(dateString) {
       const milliseconds = Date.parse(dateString);
-      return new Date(milliseconds).toLocaleDateString();
+      return new Date(milliseconds).toLocaleDateString(
+        'ru-RU',
+        { year: 'numeric', month: 'long', day: 'numeric' }
+      );
     }
   }
 }

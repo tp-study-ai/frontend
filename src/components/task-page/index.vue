@@ -338,6 +338,23 @@ export default {
             const liked = tasks.findIndex(((task) => task.id === id)) !== -1;
             this.$set(this.task, 'liked', liked);
           });
+
+        this.$http
+          .get(`/get_send_tasks_by_task_id?id=${this.id}`)
+          .then(({ data: { tasks } }) => {
+            this.attempts = tasks.map((task) => {
+              return {
+                testsPassed: task.tests_passed,
+                testsTotal: task.tests_total,
+                checkTime: task.check_time,
+                checkResult: task.check_result,
+                checkMessage: task.check_message,
+                code: task.code_text,
+                loading: false,
+                highlightButton: false
+              };
+            });
+          });
       })
       .finally(() => {
         this.loading = false;

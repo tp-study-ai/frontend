@@ -2,7 +2,7 @@
 <v-container class="px-0">
   <div class="text-h4 mb-2">Профиль</div>
 
-  <v-card>
+  <v-card class="mb-4">
     <v-card-text class="pb-0">
       <v-form ref="form">
         <v-text-field

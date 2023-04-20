@@ -202,7 +202,10 @@ export default {
     },
     authorizeUser(isAuthorized) {
       this.isAuthorized = isAuthorized;
-      this.updateShockMode();
+
+      if (this.isAuthorized) {
+        this.updateShockMode();
+      }
     },
     updateShockMode() {
       this.$http('/shock_mode').then(( { data: { chock_mode } }) => {

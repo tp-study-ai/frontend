@@ -47,7 +47,7 @@
         <td>{{ getTagsByTask(item) }}</td>
         <td>
           <v-chip :color="getRatingColor(item)" small>
-            {{ getRatingText(item) + item.cf_rating ? ` (${item.cf_rating})` : '' }}
+            {{ getRatingText(item) + (item.cf_rating ? ` (${item.cf_rating})` : '') }}
           </v-chip>
         </td>
       </tr>

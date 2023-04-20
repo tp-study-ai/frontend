@@ -28,7 +28,7 @@
       <v-card-subtitle>
         <div class="mb-2">
           <v-chip :color="ratingColor" small>
-            {{ ratingText + task.cf_rating ? ` (${task.cf_rating})` : '' }}
+            {{ ratingText + (task.cf_rating ? ` (${task.cf_rating})` : '') }}
           </v-chip>
         </div>
 

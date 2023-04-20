@@ -31,7 +31,7 @@
           <v-card-subtitle>
             <div class="mb-2">
               <v-chip :color="getRatingColor(task)" small>
-                {{ getRatingText(task) + task.cf_rating ? ` (${task.cf_rating})` : '' }}
+                {{ getRatingText(task) + (task.cf_rating ? ` (${task.cf_rating})` : '') }}
               </v-chip>
             </div>
 

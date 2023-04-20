@@ -13,7 +13,7 @@
             <v-card-subtitle>
               <div class="mb-2">
                 <v-chip :color="ratingColor" small>
-                  {{ ratingText + task.cf_rating ? ` (${task.cf_rating})` : '' }}
+                  {{ ratingText + (task.cf_rating ? ` (${task.cf_rating})` : '') }}
                 </v-chip>
 
                 <v-btn class="mx-2" icon color="red" @click="likeHandler">
@@ -69,7 +69,7 @@
                 <v-card-subtitle>
                   <div class="mb-2">
                     <v-chip :color="ratingColor" small>
-                      {{ ratingText + task.cf_rating ? ` (${task.cf_rating})` : '' }}
+                      {{ ratingText + (task.cf_rating ? ` (${task.cf_rating})` : '') }}
                     </v-chip>
 
                     <v-btn class="mx-2" icon color="red" @click="likeHandler">

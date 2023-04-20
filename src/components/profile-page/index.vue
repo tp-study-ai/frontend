@@ -2,7 +2,7 @@
 <v-container class="px-0">
   <div class="text-h4 mb-2">Профиль</div>
 
-  <v-card :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'" class="mb-4">
+  <v-card>
     <v-card-text class="pb-0">
       <v-form ref="form">
         <v-text-field
@@ -32,7 +32,7 @@
     </v-card-text>
   </v-card>
 
-  <v-card :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'">
+  <v-card>
     <v-card-title>История активности</v-card-title>
 
     <v-card-text>
@@ -41,10 +41,10 @@
         :key="index"
         :color="getColor(day)"
         class="pa-0 mr-1 mb-1"
-        max-height="28px"
-        min-height="28px"
-        max-width="28px"
-        min-width="28px"
+        max-height="30px"
+        min-height="30px"
+        max-width="30px"
+        min-width="30px"
       />
     </v-card-text>
   </v-card>

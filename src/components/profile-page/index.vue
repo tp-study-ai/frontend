@@ -36,16 +36,21 @@
     <v-card-title>История активности</v-card-title>
 
     <v-card-text>
-      <v-btn
-        v-for="(day, index) in days"
-        :key="index"
-        :color="getColor(day.count_task)"
-        class="pa-0 mr-1 mb-1"
-        max-height="30px"
-        min-height="30px"
-        max-width="30px"
-        min-width="30px"
-      />
+      <v-tooltip v-for="(day, index) in days" :key="index" bottom>
+        <template #activator="{ on, attrs }">
+          <v-btn
+            v-on="on"
+            :color="getColor(day.count_task)"
+            class="pa-0 mr-1 mb-1"
+            max-height="30px"
+            min-height="30px"
+            max-width="30px"
+            min-width="30px"
+            v-bind="attrs"
+          />
+        </template>
+        <span>{{ getDate(day.day) }}</span>
+      </v-tooltip>
     </v-card-text>
   </v-card>
 </v-container>
@@ -102,23 +107,27 @@ export default {
     sendRequest() {
 
     },
-    getColor(day) {
-      if (day === 0) {
+    getColor(count) {
+      if (count === 0) {
         return '#8cd98c';
       }
-      if (day === 1) {
+      if (count === 1) {
         return '#66cc66';
       }
-      if (day === 2) {
+      if (count === 2) {
         return '#40bf40';
       }
-      if (day === 3) {
+      if (count === 3) {
         return '#339933';
       }
-      if (day === 4) {
+      if (count === 4) {
         return '#267326';
       }
       return '#194d19';
+    },
+    getDate(dateString) {
+      const milliseconds = Date.parse(dateString);
+      return new Date(milliseconds).toLocaleDateString();
     }
   }
 }

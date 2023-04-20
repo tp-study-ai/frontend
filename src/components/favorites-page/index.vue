@@ -201,6 +201,9 @@ export default {
     },
     getRatingText(task) {
       const { cf_rating } = task;
+      if (!cf_rating) {
+        return 'рейтинг неизвествен';
+      }
       if (cf_rating <= 1200) {
         return 'новичок';
       }

@@ -100,21 +100,18 @@ export default {
     },
     getColor(day) {
       if (day === 0) {
-        return '#b3e6b3';
-      }
-      if (day === 1) {
         return '#8cd98c';
       }
-      if (day === 2) {
+      if (day === 1) {
         return '#66cc66';
       }
-      if (day === 3) {
+      if (day === 2) {
         return '#40bf40';
       }
-      if (day === 4) {
+      if (day === 3) {
         return '#339933';
       }
-      if (day === 5) {
+      if (day === 4) {
         return '#267326';
       }
       return '#194d19';

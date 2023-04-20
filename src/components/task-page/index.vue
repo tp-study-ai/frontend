@@ -264,7 +264,7 @@ export default {
     ratingText() {
       const { cf_rating } = this.task;
       if (!cf_rating) {
-        return 'рейтинг неизвествен';
+        return 'рейтинг неизвестен';
       }
       if (cf_rating <= 1200) {
         return 'новичок';

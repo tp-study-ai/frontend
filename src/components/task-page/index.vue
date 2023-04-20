@@ -396,22 +396,30 @@ export default {
             : 'warning';
 
           this.$emit('show:snackbar', { text, color });
+          if (testsPassed === testsTotal) {
+            this.$emit('update:shock-mode');
+          }
+
           if (this.highlightButton) {
             return;
           }
 
           // Запускаем мерцание
           this.$nextTick().then(() => {
-            this.highlightButton = true;
-            if (!this.isTaskSolved) {
-              this.$set(attempt, 'highlightButton', this.highlightButton);
-            }
+            const timeout = 1500;
+
+            setTimeout(() => {
+              this.highlightButton = true;
+              if (!this.isTaskSolved) {
+                this.$set(attempt, 'highlightButton', this.highlightButton);
+              }
+            }, timeout);
 
             // Останавливаем мерцание
             setTimeout(() => {
               this.highlightButton = false;
               this.$set(attempt, 'highlightButton', this.highlightButton);
-            }, 5000);
+            }, timeout + 4000);
           });
         })
         .finally(() => {

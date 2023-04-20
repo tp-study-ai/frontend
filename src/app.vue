@@ -22,10 +22,15 @@
       <v-spacer />
 
       <div v-if="isAuthorized">
-        <v-btn text>
-          <v-icon class="mr-1">mdi-fire</v-icon>
-          0
-        </v-btn>
+        <v-tooltip bottom>
+          <template #activator="{ on, attrs }">
+            <v-btn v-on="on" text v-bind="attrs">
+              <v-icon class="mr-1">mdi-fire</v-icon>
+              {{ shockMode }}
+            </v-btn>
+          </template>
+          <span>Ударный режим</span>
+        </v-tooltip>
 
         <v-menu offset-y>
           <template #activator="{ on, attrs }">
@@ -71,6 +76,7 @@
           :isAuthorized="isAuthorized"
           @show:login-form="showLoginForm"
           @show:snackbar="showSnackbar"
+          @update:shock-mode="updateShockMode"
         />
       </v-container>
     </v-main>
@@ -126,7 +132,8 @@ export default {
       snackbarOptions: {},
       loginFormShown: false,
       registerFormShown: false,
-      isAuthorized: false
+      isAuthorized: false,
+      shockMode: 0
     };
   },
   computed: {
@@ -156,9 +163,12 @@ export default {
     document.addEventListener('show:snackbar', (e) => this.showSnackbar(e.detail));
 
     this.$http.get('/get_user').then(({ data: { id } }) => {
-      if (id) {
-        this.isAuthorized = true;
+      if (!id) {
+        return;
       }
+
+      this.isAuthorized = true;
+      this.updateShockMode();
     });
   },
   destroyed() {
@@ -192,6 +202,12 @@ export default {
     },
     authorizeUser(isAuthorized) {
       this.isAuthorized = isAuthorized;
+      this.updateShockMode();
+    },
+    updateShockMode() {
+      this.$http('/shock_mode').then(( { data: { chock_mode } }) => {
+        this.shockMode = chock_mode;
+      });
     }
   }
 }

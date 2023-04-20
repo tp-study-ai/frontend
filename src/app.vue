@@ -160,7 +160,7 @@ export default {
     },
     shockModeText() {
       return this.shockMode === 0
-        ? 'Решайте задачи каждый день...'
+        ? 'Решайте задачи каждый день'
         : `Вы в ударе уже ${this.shockMode} (дня/дней)`;
     }
   },

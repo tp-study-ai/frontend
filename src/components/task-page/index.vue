@@ -12,7 +12,9 @@
             <v-card-title>{{ task.title }}</v-card-title>
             <v-card-subtitle>
               <div class="mb-2">
-                <v-chip :color="ratingColor" small>{{ `${ratingText} (${task.cf_rating})` }}</v-chip>
+                <v-chip :color="ratingColor" small>
+                  {{ ratingText + task.cf_rating ? ` (${task.cf_rating})` : '' }}
+                </v-chip>
 
                 <v-btn class="mx-2" icon color="red" @click="likeHandler">
                   <v-icon>{{ task.liked ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
@@ -66,7 +68,9 @@
                 <v-card-title>{{ task.title }}</v-card-title>
                 <v-card-subtitle>
                   <div class="mb-2">
-                    <v-chip :color="ratingColor" small>{{ `${ratingText} (${task.cf_rating})` }}</v-chip>
+                    <v-chip :color="ratingColor" small>
+                      {{ ratingText + task.cf_rating ? ` (${task.cf_rating})` : '' }}
+                    </v-chip>
 
                     <v-btn class="mx-2" icon color="red" @click="likeHandler">
                       <v-icon>{{ task.liked ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>

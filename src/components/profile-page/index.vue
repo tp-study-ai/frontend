@@ -39,7 +39,7 @@
       <v-btn
         v-for="(day, index) in days"
         :key="index"
-        :color="getColor(day)"
+        :color="getColor(day.count_task)"
         class="pa-0 mr-1 mb-1"
         max-height="30px"
         min-height="30px"

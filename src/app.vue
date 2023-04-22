@@ -52,7 +52,10 @@
           </v-list>
         </v-menu>
       </div>
-      <v-btn v-else class="pa-0" text @click="showLoginForm">Войти</v-btn>
+      <v-btn v-else class="pa-0" text @click="showLoginForm">
+        <v-icon class="mr-1">mdi-login</v-icon>
+        Войти
+      </v-btn>
 
       <v-spacer />
     </v-app-bar>
@@ -146,17 +149,19 @@ export default {
       ];
     },
     mobileMenuItems() {
-      const items = [
-        { title: 'Рекомендованные задачи', to: '/recommendations' },
+      let items = [
         { title: 'Все задачи', to: '/tasks' },
         { divider: true }
       ];
 
-      return items.concat(
-        this.isAuthorized
-          ? this.menuItems
-          : [{ title: 'Войти', icon: 'mdi-login', action: this.showLoginForm.bind(this) }]
-      );
+      if (this.isAuthorized) {
+        items.unshift({ title: 'Рекомендованные задачи', to: '/recommendations' });
+        items = items.concat(this.menuItems);
+      } else {
+        items = items.concat([{ title: 'Войти', icon: 'mdi-login', action: this.showLoginForm.bind(this) }]);
+      }
+
+      return items;
     },
     shockModeText() {
       return this.shockMode === 0

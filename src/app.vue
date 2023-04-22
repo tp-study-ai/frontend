@@ -11,7 +11,7 @@
     </v-app-bar>
 
     <v-app-bar v-else app>
-      <v-spacer />
+      <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
       <router-link class="d-flex align-center mr-4" to="/" tag="div" style="cursor: pointer">
         <img class="mr-2" src="/logo.png" width="50" height="50" />
         <v-toolbar-title>Study AI</v-toolbar-title>
@@ -57,7 +57,7 @@
         Войти
       </v-btn>
 
-      <v-spacer />
+      <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
     </v-app-bar>
 
     <v-navigation-drawer v-if="$vuetify.breakpoint.smAndDown" v-model="showDrawer" app>

@@ -22,6 +22,7 @@
           <v-btn
             v-if="$vuetify.breakpoint.mdAndUp"
             class="ml-1"
+            x-small
             icon
             @click="copyText(example.input)"
           >
@@ -40,6 +41,7 @@
           <v-btn
             v-if="$vuetify.breakpoint.mdAndUp"
             class="ml-1"
+            x-small
             icon
             @click="copyText(example.output)"
           >

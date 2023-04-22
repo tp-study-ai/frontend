@@ -16,7 +16,7 @@
 
   <div v-if="examples.length > 0">
     <v-card v-for="(example, id) in examples" :key="id" class="mx-4 mt-4" outlined>
-      <v-card-text>
+      <v-card-text class="pb-0">
         <div class="text-subtitle-1 font-weight-bold px-0">
           Входные данные
           <v-btn

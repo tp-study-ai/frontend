@@ -60,7 +60,7 @@
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
     </v-app-bar>
 
-    <v-navigation-drawer v-if="$vuetify.breakpoint.smAndDown" v-model="showDrawer" app>
+    <v-navigation-drawer v-if="$vuetify.breakpoint.xsOnly" v-model="showDrawer" app>
       <v-list>
         <template v-for="(item, i) in mobileMenuItems">
           <v-divider v-if="item.divider" :key="i" />

@@ -1,7 +1,7 @@
 <template>
 <v-dialog
   :value="value"
-  :width="this.$vuetify.breakpoint.smAndDown ? '' : '1200'"
+  :width="this.$vuetify.breakpoint.xsOnly ? '' : '1200'"
   @input="handleInput"
 >
   <v-card>

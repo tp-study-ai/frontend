@@ -45,7 +45,7 @@
 
   <v-dialog
     v-model="dialogShown"
-    :width="this.$vuetify.breakpoint.smAndDown ? '' : '1000'"
+    :width="this.$vuetify.breakpoint.xsOnly ? '' : '1000'"
   >
     <v-card>
       <div class="d-flex">

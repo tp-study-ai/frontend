@@ -115,18 +115,21 @@ export default {
     },
     getColor(count) {
       if (count === 0) {
-        return '#8cd98c';
+        return '#ffffff';
       }
       if (count === 1) {
-        return '#66cc66';
+        return '#8cd98c';
       }
       if (count === 2) {
-        return '#40bf40';
+        return '#66cc66';
       }
       if (count === 3) {
-        return '#339933';
+        return '#40bf40';
       }
       if (count === 4) {
+        return '#339933';
+      }
+      if (count === 5) {
         return '#267326';
       }
       return '#194d19';

@@ -6,7 +6,7 @@
 
   <div v-else>
     <v-row v-touch="swipeOptions">
-      <v-col cols="12" md="6">
+      <v-col cols="12" sm="6">
         <div v-if="$vuetify.breakpoint.xsOnly">
           <v-card v-if="swipeDirection === 'right'">
             <v-card-title>{{ task.title }}</v-card-title>
@@ -121,7 +121,7 @@
         </v-card>
       </v-col>
 
-      <v-col v-if="!$vuetify.breakpoint.xsOnly" cols="12" md="6">
+      <v-col v-if="!$vuetify.breakpoint.xsOnly" cols="12" sm="6">
         <v-card class="d-flex right-card flex-column justify-space-between">
           <code-editor
             v-model="code"

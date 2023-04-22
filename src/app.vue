@@ -168,6 +168,9 @@ export default {
       if (this.shockMode === 0) {
         return 'Решайте задачи каждый день';
       }
+      if (this.shockMode === 1) {
+        return `Вы в ударе уже ${this.shockMode} день`;
+      }
 
       const x = this.shockMode % 100; // Предпоследняя цифра
       const y = this.shockMode % 10; // Последняя цифра

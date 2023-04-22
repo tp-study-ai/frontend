@@ -164,9 +164,27 @@ export default {
       return items;
     },
     shockModeText() {
-      return this.shockMode === 0
-        ? 'Решайте задачи каждый день'
-        : `Вы в ударе уже ${this.shockMode} (дня/дней)`;
+      if (this.shockMode === 0) {
+        return 'Решайте задачи каждый день';
+      }
+
+      const x = this.shockMode % 100; // Предпоследняя цифра
+      const y = this.shockMode % 10; // Последняя цифра
+
+      if (x === 1) {
+        return `Вы в ударе уже ${this.shockMode} дней`;
+      }
+      if (y === 0 || y >= 5) {
+        return `Вы в ударе уже ${this.shockMode} дней`;
+      }
+      if (y >= 2 && y <= 4) {
+        return `Вы в ударе уже ${this.shockMode} дня`;
+      }
+      if (y === 1) {
+        return `Вы в ударе уже ${this.shockMode} день`;
+      }
+
+      return '';
     }
   },
   created() {

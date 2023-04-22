@@ -54,7 +54,7 @@
     </template>
   </v-data-table>
 
-  <v-pagination v-model="page" :length="paginationLength" />
+  <v-pagination v-model="page" :length="paginationLength" @input="getTasks" />
 </v-container>
 </template>
 
@@ -88,11 +88,6 @@ export default {
           sortable: true
         }
       ];
-    }
-  },
-  watch: {
-    page() {
-      this.getTasks();
     }
   },
   created() {
@@ -157,6 +152,8 @@ export default {
       this.getTasks();
     },
     handleTag(tag) {
+      this.page = 1;
+
       if (tag.color === 'normal') {
         tag.color = 'primary';
         this.choosedTags.push(tag.tags_id);

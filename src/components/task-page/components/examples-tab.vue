@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-card :class="{ 'mt-4': $vuetify.breakpoint.mdAndUp }" flat>
+  <v-card flat>
     <v-card-text class="d-flex justify-space-between pb-0">
       <div class="text-subtitle-1">Ограничение по памяти: {{ memoryLimit }} Мб</div>
       <div class="text-subtitle-1">Ограничение по времени: {{ limits.time_limit }} с</div>

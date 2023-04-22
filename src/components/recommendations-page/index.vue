@@ -65,7 +65,7 @@
     </v-card>
   </div>
 
-  <v-container class="px-0">
+  <v-container class="pa-0">
     <development-form :value="developmentDialogShown" />
   </v-container>
 </v-container>

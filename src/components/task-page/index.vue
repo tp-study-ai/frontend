@@ -56,7 +56,7 @@
         </div>
 
         <v-card v-else>
-          <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smOnly">
+          <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smOnly" height="48px">
             <v-tab href="#task">Описание задачи</v-tab>
             <v-tab href="#examples">Примеры тестов</v-tab>
             <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>

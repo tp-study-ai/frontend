@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <v-app>
-    <v-app-bar v-if="$vuetify.breakpoint.smAndDown" app>
+    <v-app-bar v-if="$vuetify.breakpoint.xsOnly" app>
       <v-app-bar-nav-icon @click="showDrawer = true" />
 
       <router-link class="d-flex align-center mx-auto" to="/" tag="div" style="cursor: pointer">

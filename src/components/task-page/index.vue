@@ -129,7 +129,7 @@
             :copy_code="false"
             count_lines
             width="auto"
-            height="calc(100vh - 56px - 24px - 48px - 5px)"
+            height="calc(100vh - 60px - 24px - 48px - 5px)"
             border_radius="0px"
             theme="light"
           />
@@ -542,13 +542,13 @@ export default {
 
 <style>
 .left-card {
-  min-height: calc(100vh - 56px - 24px - 48px);
-  max-height: calc(100vh - 56px - 24px - 48px);
+  min-height: calc(100vh - 60px - 24px - 48px);
+  max-height: calc(100vh - 60px - 24px - 48px);
 }
 
 .right-card {
-  min-height: calc(100vh - 56px - 24px);
-  max-height: calc(100vh - 56px - 24px);
+  min-height: calc(100vh - 60px - 24px);
+  max-height: calc(100vh - 60px - 24px);
 }
 
 /* Используется для стилизации заголовков внутри описания задачи */

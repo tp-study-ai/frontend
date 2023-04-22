@@ -2,7 +2,6 @@
 <v-dialog
   :value="value"
   :width="this.$vuetify.breakpoint.smAndDown ? '' : '500'"
-  persistent
   @input="handleInput"
 >
   <v-card>

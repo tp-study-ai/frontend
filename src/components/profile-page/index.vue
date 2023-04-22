@@ -33,7 +33,7 @@
   <v-card>
     <v-card-title>История активности</v-card-title>
 
-    <v-card-text>
+    <v-card-text v-if="days.length > 0">
       <v-tooltip v-for="(day, index) in days" :key="index" bottom>
         <template #activator="{ on, attrs }">
           <v-btn
@@ -49,6 +49,10 @@
         </template>
         <span>{{ getDate(day.day) }}</span>
       </v-tooltip>
+    </v-card-text>
+
+    <v-card-text v-else>
+      Активность не найдена
     </v-card-text>
   </v-card>
 </v-container>

@@ -1,5 +1,5 @@
 <template>
-<v-container class="px-0" fluid>
+<v-container class="pa-0" fluid>
   <div v-if="loading" class="d-flex justify-center">
     <v-progress-circular indeterminate color="primary" />
   </div>
@@ -542,13 +542,13 @@ export default {
 
 <style>
 .left-card {
-  min-height: calc(100vh - 64px - 24px - 24px - 48px);
-  max-height: calc(100vh - 64px - 24px - 24px - 48px);
+  min-height: calc(100vh - 64px - 24px - 48px);
+  max-height: calc(100vh - 64px - 24px - 48px);
 }
 
 .right-card {
-  min-height: calc(100vh - 64px - 24px - 24px);
-  max-height: calc(100vh - 64px - 24px - 24px);
+  min-height: calc(100vh - 64px - 24px);
+  max-height: calc(100vh - 64px - 24px);
 }
 
 /* Используется для стилизации заголовков внутри описания задачи */

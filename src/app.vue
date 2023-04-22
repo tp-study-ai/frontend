@@ -24,7 +24,7 @@
       <div v-if="isAuthorized">
         <v-tooltip bottom>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" text v-bind="attrs">
+            <v-btn v-on="on" text :color="isSolvedToday ? 'error' : undefined" v-bind="attrs">
               <v-icon class="mr-1">mdi-fire</v-icon>
               {{ shockMode }}
             </v-btn>
@@ -136,7 +136,8 @@ export default {
       loginFormShown: false,
       registerFormShown: false,
       isAuthorized: null,
-      shockMode: 0
+      shockMode: 0,
+      isSolvedToday: false
     };
   },
   computed: {
@@ -242,8 +243,9 @@ export default {
       }
     },
     updateShockMode() {
-      this.$http('/shock_mode').then(( { data: { chock_mode } }) => {
+      this.$http('/shock_mode').then(( { data: { chock_mode, today } }) => {
         this.shockMode = chock_mode;
+        this.isSolvedToday = today;
       });
     }
   }

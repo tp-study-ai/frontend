@@ -8,7 +8,6 @@
         <v-text-field
           v-model="username"
           :rules="rules"
-          disabled
           outlined
           dense
           type="text"
@@ -17,7 +16,6 @@
         <v-text-field
           v-model="password"
           :rules="rules"
-          disabled
           outlined
           dense
           type="password"
@@ -27,7 +25,7 @@
 
       <v-divider />
       <v-card-actions>
-        <v-btn :loading="loading" disabled color="primary" @click="sendRequest">Сохранить</v-btn>
+        <v-btn :loading="loading" color="primary" @click="sendRequest">Сохранить</v-btn>
       </v-card-actions>
     </v-card-text>
   </v-card>
@@ -105,7 +103,15 @@ export default {
   },
   methods: {
     sendRequest() {
+      const params = { new_username: this.username, new_password: this.password };
 
+      this.$http.post('/update', params)
+        .then(() => {
+          this.$emit('show:snackbar', { text: 'Данные обновлены', color: 'success' });
+        })
+        .finally(() => {
+          this.loading = false;
+        })
     },
     getColor(count) {
       if (count === 0) {

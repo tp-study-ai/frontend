@@ -12,8 +12,8 @@
     </thead>
 
     <tbody>
-      <tr v-for="(attempt, index) in attempts.slice().reverse()" :key="index">
-        <td>{{ index }}</td>
+      <tr v-for="(attempt, id) in attempts.slice().reverse()" :key="id">
+        <td>{{ attempts.length - id }}</td>
 
         <td v-if="attempt.loading" colspan="3"><v-progress-linear indeterminate color="primary" /></td>
         <td v-else>{{ attempt.testsPassed }} / {{ attempt.testsTotal }}</td>
@@ -28,7 +28,7 @@
             class="px-0"
             text
             color="primary"
-            @click="showCode(attempt, index)"
+            @click="showCode(attempt, attempts.length - id)"
           >
             Показать
           </v-btn>
@@ -40,7 +40,7 @@
   <v-dialog v-model="dialogShown">
     <v-card>
       <div class="d-flex">
-        <v-card-title>Отчет о посылке №{{ attemptIndex }}</v-card-title>
+        <v-card-title>Отчет о посылке №{{ attemptReversedId }}</v-card-title>
         <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -104,7 +104,7 @@ export default {
   data() {
     return {
       attempt: {},
-      attemptIndex: 0,
+      attemptReversedId: 0,
       dialogShown: false
     };
   },
@@ -151,9 +151,9 @@ export default {
           return '';
       }
     },
-    showCode(attempt, attemptIndex) {
+    showCode(attempt, attemptReversedId) {
       this.attempt = attempt;
-      this.attemptIndex = attemptIndex;
+      this.attemptReversedId = attemptReversedId;
       this.dialogShown = true;
     },
     copyText(text) {

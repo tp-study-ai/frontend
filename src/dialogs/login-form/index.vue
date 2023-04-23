@@ -16,7 +16,7 @@
       <v-form ref="form">
         <v-text-field
           v-model="username"
-          :rules="rules"
+          :rules="loginRules"
           outlined
           dense
           type="text"
@@ -24,7 +24,7 @@
         />
         <v-text-field
           v-model="password"
-          :rules="rules"
+          :rules="passwordRules"
           outlined
           dense
           type="password"
@@ -68,9 +68,23 @@ export default {
     };
   },
   computed: {
-    rules() {
+    loginRules() {
       return [
-        (value) => !!value || 'Вы должны заполнить поле',
+        (value) => !!value || 'Заполните поле',
+        (value) => value.length > 5 || 'Используйте не менее 5 символов',
+        (value) => {
+          return /^([a-z0-9]{5,})$/.test(value) ||
+            'Используйте буквы (a-z, A-Z) и/или цифры';
+        }
+      ];
+    },
+    passwordRules() {
+      return [
+        (value) => !!value || 'Заполните поле',
+        (value) => value.length > 8 || 'Используйте не менее 8 символов',
+        (value) => {
+          return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value) || 'Используйте буквы (a-z, A-Z) и цифры';
+        }
       ];
     }
   },

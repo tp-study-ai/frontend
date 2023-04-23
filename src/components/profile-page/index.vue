@@ -77,7 +77,7 @@ export default {
       return [
         (value) => !!value || 'Заполните поле',
         (value) => value.length >= 5 && value.length <= 31 || 'Логин должен быть длиной от 5 до 31 символов',
-        (value) => /^([a-z0-9]{6,31})$/.test(value) || 'Используйте буквы (a-z, A-Z) и/или цифры'
+        (value) => /^([a-z0-9]{5,31})$/.test(value) || 'Используйте буквы (a-z, A-Z) и/или цифры'
       ];
     },
     passwordRules() {
@@ -85,7 +85,7 @@ export default {
         (value) => !!value || 'Заполните поле',
         (value) => value.length >= 8 || 'Используйте не менее 8 символов',
         (value) => {
-          return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{9,}$/.test(value) || 'Используйте буквы (a-z, A-Z) и цифры';
+          return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value) || 'Используйте буквы (a-z, A-Z) и цифры';
         }
       ];
     }

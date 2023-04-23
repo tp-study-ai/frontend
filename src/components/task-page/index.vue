@@ -181,7 +181,7 @@ export default {
       return !this.lastAttempt.loading && this.lastAttempt.testsPassed === this.lastAttempt.testsTotal;
     },
     lastAttempt() {
-      return this.attempts.length === 0 ? {} : this.attempts[0];
+      return this.attempts.length === 0 ? {} : this.attempts[this.attempts.length - 1];
     },
     checkSolutionButtonColor() {
       return this.isTaskSolved ? 'secondary' : 'primary';
@@ -334,7 +334,7 @@ export default {
         solution: this.code
       };
 
-      this.attempts.unshift({
+      this.attempts.push({
         testsPassed: 0,
         testsTotal: 0,
         checkTime: 0,
@@ -344,7 +344,7 @@ export default {
         loading: true,
         highlightButton: false
       });
-      const attempt = this.attempts[0];
+      const attempt = this.attempts[this.attempts.length - 1];
 
       this.selected = 'attempts';
       this.$http
@@ -356,11 +356,11 @@ export default {
           this.$set(attempt, 'checkResult', checkResult);
           this.$set(attempt, 'checkMessage', checkMessage);
 
-          const reversedIndex = this.attempts.length - this.attempts.indexOf(attempt);
+          const attemptIndex = this.attempts.indexOf(attempt);
 
           const text = testsPassed === testsTotal
-            ? `В посылке №${reversedIndex} все тесты прошли успешно`
-            : `В посылке №${reversedIndex} прошло ${testsPassed} из ${testsTotal} тестов`;
+            ? `В посылке №${attemptIndex} все тесты прошли успешно`
+            : `В посылке №${attemptIndex} прошло ${testsPassed} из ${testsTotal} тестов`;
           const color = testsPassed === testsTotal
             ? 'success'
             : 'warning';

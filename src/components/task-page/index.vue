@@ -8,7 +8,7 @@
     <v-row v-touch="swipeOptions">
       <v-col cols="12" sm="6">
         <v-card>
-          <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smAndDown" height="48px">
+          <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smAndDown" height="44px">
             <v-tab href="#task">Описание задачи</v-tab>
             <v-tab href="#examples">Примеры тестов</v-tab>
             <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>
@@ -81,7 +81,7 @@
             :copy_code="false"
             count_lines
             width="auto"
-            height="calc(100vh - 60px - 24px - 48px - 5px)"
+            height="calc(100vh - 60px - 24px - 44px - 5px)"
             border_radius="0px"
             theme="light"
           />
@@ -494,8 +494,8 @@ export default {
 
 <style>
 .left-card {
-  min-height: calc(100vh - 60px - 24px - 48px);
-  max-height: calc(100vh - 60px - 24px - 48px);
+  min-height: calc(100vh - 60px - 24px - 44px);
+  max-height: calc(100vh - 60px - 24px - 44px);
 }
 
 .right-card {

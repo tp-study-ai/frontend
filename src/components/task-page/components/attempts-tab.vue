@@ -71,7 +71,7 @@
         read_only
         count_lines
         width="auto"
-        height="650px"
+        height="80vh"
         border_radius="0px"
         theme="light"
       />

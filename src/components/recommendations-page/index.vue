@@ -24,7 +24,7 @@
 
     <v-row>
       <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
-        <v-card :to="getTaskPath(task)">
+        <v-card :to="getTaskPath(task)" height="100%">
           <v-card-title>{{ task.name }}</v-card-title>
           <v-card-subtitle>
             <div class="mb-2">

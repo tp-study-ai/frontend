@@ -10,7 +10,7 @@
         <template #activator="{ on, attrs }">
           <v-btn
             v-on="on"
-            class="ml-2 mr-4"
+            class="mr-4"
             text
             color="secondary"
             @click="getTask"

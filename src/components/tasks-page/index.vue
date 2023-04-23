@@ -28,16 +28,24 @@
     @update:options="updateOptions"
   >
     <template #item="{ item, isMobile }">
-      <v-card v-if="isMobile" class="mb-4">
+      <v-card v-if="isMobile" class="mb-4" :to="getTaskPath(item)">
         <v-card-title>{{ item.name }}</v-card-title>
-        <v-card-text>
-          <div>Теги: {{ getTagsByTask(item) }}</div>
-          <div>Рейтинг: {{ item.cf_rating }}</div>
-        </v-card-text>
+        <v-card-subtitle>
+          <div class="mb-2">
+            <v-chip :color="getRatingColor(item)" small>
+              {{ getRatingText(item) + (item.cf_rating ? ` (${item.cf_rating})` : '') }}
+            </v-chip>
+          </div>
 
-        <v-card-actions>
-          <v-btn :to="getTaskPath(item)" text color="primary">Перейти</v-btn>
-        </v-card-actions>
+          <v-chip
+            v-for="tag in item.cf_tags_RU"
+            :key="tag"
+            class="mr-2 mb-2"
+            small
+          >
+            {{ tag }}
+          </v-chip>
+        </v-card-subtitle>
       </v-card>
 
       <tr v-else>

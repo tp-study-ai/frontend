@@ -2,6 +2,11 @@
 <v-container class="pa-0">
   <div class="text-h4 mb-2">История</div>
 
+  <v-radio-group v-model="taskStatus" label="Статус">
+    <v-radio label="Решена" value="solved" />
+    <v-radio label="В процессе" value="started" />
+  </v-radio-group>
+
   <v-data-table
     :headers="tableHeaders"
     :items="tasks"
@@ -49,7 +54,8 @@ export default {
   data() {
     return {
       loading: true,
-      tasks: []
+      tasks: [],
+      taskStatus: 'solved'
     };
   },
   computed: {
@@ -83,13 +89,26 @@ export default {
         { text: 'Для перехода на эту страницу необходимо авторизоваться', color: 'error' }
       );
       this.$emit('show:login-form');
+    },
+    taskStatus(value) {
+      this.loading = true;
+      const url = value === 'solved' ? '/get_done_task' : '/get_not_done_task';
+
+      this.$http
+        .get(url)
+        .then(({ data: { done_task } }) => {
+          this.tasks = done_task ? done_task : [];
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     }
   },
   created() {
     this.$http
       .get('/get_done_task')
-      .then(({ data: { tasks } }) => {
-        this.tasks = tasks ? tasks : [];
+      .then(({ data: { done_task } }) => {
+        this.tasks = done_task ? done_task : [];
       })
       .finally(() => {
         this.loading = false;

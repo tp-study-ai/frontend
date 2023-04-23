@@ -24,8 +24,8 @@
     />
 
     <v-row v-else class="mx-1 mb-1">
-      <v-col v-for="task in tasks" :key="task.id" cols="12" md="4">
-        <v-card :href="getTaskPath(task)">
+      <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
+        <v-card :href="getTaskPath(task)" height="180px">
           <v-card-title>{{ task.name }}</v-card-title>
           <v-card-subtitle>
             <div class="mb-2">

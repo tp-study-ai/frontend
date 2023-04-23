@@ -7,62 +7,44 @@
   <div v-else>
     <div class="text-h4 mb-2">Рекомендованные задачи</div>
 
-    <div v-if="$vuetify.breakpoint.smAndDown" class="mt-5">
-      <v-select
-        v-model="selected"
-        :items="mobileTopics"
-        label="Выберите топик"
-        outlined
-        dense
-        hide-details
-      />
-
-      <v-simple-table>
-        <thead>
-          <tr>
-            <th>Название</th>
-            <th>Сложность</th>
-            <th>Рейтинг</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr v-for="task in tasks" :key="task.id">
-            <td>
-              <router-link :to="getTaskPath(task)">{{ task.name }}</router-link>
-            </td>
-            <td>{{ task.difficulty - 6 }}</td>
-            <td>{{ task.cf_rating }}</td>
-          </tr>
-        </tbody>
-      </v-simple-table>
+    <div v-if="tags.length > 0" class="mb-4">
+      <div class="text-subtitle-1">Теги для прокачки</div>
+      <div class="d-flex flex-wrap pt-2 overflow-y-auto menu-card">
+        <v-chip
+          v-for="tag in tags"
+          :key="tag.tags_id"
+          :color="tag.color"
+          class="mr-1 mb-1"
+          @click="handleTag(tag)"
+        >
+          {{ tag.tags_ru }}
+        </v-chip>
+      </div>
     </div>
 
-    <v-card v-else>
-      <v-tabs v-model="selected" vertical background-color="primary" dark>
-        <v-tab v-for="(topic, id) in topics" :key="id">{{ topic }}</v-tab>
+    <v-row>
+      <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
+        <v-card :to="getTaskPath(task)">
+          <v-card-title>{{ task.name }}</v-card-title>
+          <v-card-subtitle>
+            <div class="mb-2">
+              <v-chip :color="getRatingColor(task)" small>
+                {{ getRatingText(task) + (task.cf_rating ? ` (${task.cf_rating})` : '') }}
+              </v-chip>
+            </div>
 
-        <v-tab-item v-for="(topic, id) in topics" :key="id">
-          <v-simple-table>
-            <thead>
-              <tr>
-                <th>Название</th>
-                <th>Рейтинг</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr v-for="task in tasks" :key="task.id">
-                <td>
-                  <router-link :to="getTaskPath(task)">{{ task.name }}</router-link>
-                </td>
-                <td>{{ task.cf_rating }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
-        </v-tab-item>
-      </v-tabs>
-    </v-card>
+            <v-chip
+              v-for="tag in task.cf_tags_RU"
+              :key="tag"
+              class="mr-2 mb-2"
+              small
+            >
+              {{ tag }}
+            </v-chip>
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </v-container>
 </template>
@@ -77,7 +59,9 @@ export default {
     return {
       loading: true,
       selected: 0,
-      tasks: []
+      tasks: [],
+      tags: [],
+      choosedTags: []
     };
   },
   computed: {
@@ -119,9 +103,21 @@ export default {
   },
   created() {
     this.loading = true;
+
+    this.getTags();
     this.getTasks();
   },
   methods: {
+    getTags() {
+      this.$http
+        .get('/get_tags')
+        .then(({ data: { tags } }) => {
+          this.tags = tags.map((tag) => {
+            const color = this.choosedTags.includes(tag.tags_id) ? 'primary' : 'normal';
+            return { ...tag, color };
+          });
+        });
+    },
     getTasks() {
       const params = { page: this.selected };
 
@@ -134,8 +130,77 @@ export default {
           this.loading = false;
         });
     },
+    handleTag(tag) {
+      this.page = 1;
+
+      if (tag.color === 'normal') {
+        tag.color = 'primary';
+        this.choosedTags.push(tag.tags_id);
+        this.getTasks();
+      } else {
+        tag.color = 'normal';
+        const index = this.choosedTags.indexOf(tag.tags_id);
+        if (index !== -1) {
+          this.choosedTags.splice(index, 1);
+        }
+        this.getTasks();
+      }
+    },
     getTaskPath(task) {
       return `/task/${task.id}`;
+    },
+    getRatingColor(task) {
+      const { cf_rating } = task;
+      if (cf_rating <= 1200) {
+        return 'purple lighten-2';
+      }
+      if (cf_rating <= 1600) {
+        return 'indigo lighten-2';
+      }
+      if (cf_rating <= 1900) {
+        return 'blue lighten-1';
+      }
+      if (cf_rating <= 2200) {
+        return 'green';
+      }
+      if (cf_rating <= 2500) {
+        return 'yellow';
+      }
+      if (cf_rating <= 2900) {
+        return 'orange';
+      }
+      if (cf_rating <= 3500) {
+        return 'red lighten-2';
+      }
+      return '';
+    },
+    getRatingText(task) {
+      const { cf_rating } = task;
+      if (!cf_rating) {
+        return 'рейтинг неизвестен';
+      }
+      if (cf_rating <= 1200) {
+        return 'новичок';
+      }
+      if (cf_rating <= 1600) {
+        return 'ученик';
+      }
+      if (cf_rating <= 1900) {
+        return 'эксперт';
+      }
+      if (cf_rating <= 2200) {
+        return 'элита';
+      }
+      if (cf_rating <= 2500) {
+        return 'мастер';
+      }
+      if (cf_rating <= 2900) {
+        return 'гроссмейстер';
+      }
+      if (cf_rating <= 3500) {
+        return 'глобальная элита';
+      }
+      return '';
     }
   }
 }

@@ -46,24 +46,35 @@
         </v-btn>
       </div>
 
-      <div v-if="attempt.checkMessage !== '' || attempt.loading" class="mx-4">
-        <div class="text-subtitle-1 font-weight-bold">Результат проверки</div>
+      <v-card-text class="pb-1">
+        <div v-if="attempt.checkMessage !== '' || attempt.loading">
+          <div class="text-subtitle-1 font-weight-bold mb-1">Результат проверки</div>
 
-        <v-progress-linear
-          v-if="attempt.loading"
-          class="mt-2 mb-4"
-          indeterminate
-          color="primary"
-        />
-        <v-card-text v-else class="px-0 pt-2">
+          <v-progress-linear
+            v-if="attempt.loading"
+            indeterminate
+            color="primary"
+          />
           <div v-for="(line, index) in checkMessageLines" :key="`line_of_message_${index}`">
             {{ line }}
             <br />
           </div>
-        </v-card-text>
-      </div>
+        </div>
 
-      <div class="text-subtitle-1 font-weight-bold ml-4">Код программы</div>
+        <div class="text-subtitle-1 font-weight-bold mt-4">
+          Код программы
+          <v-btn
+            v-if="$vuetify.breakpoint.mdAndUp"
+            class="ml-1"
+            x-small
+            icon
+            @click="copyText(attempt.code)"
+          >
+            <v-icon>mdi-content-copy</v-icon>
+          </v-btn>
+        </div>
+      </v-card-text>
+
       <code-editor
         v-model="attempt.code"
         :languages="[['cpp', 'C++']]"
@@ -71,7 +82,6 @@
         read_only
         count_lines
         width="auto"
-        height="80vh"
         border_radius="0px"
         theme="light"
       />
@@ -145,7 +155,15 @@ export default {
       this.attempt = attempt;
       this.attemptReversedId = attemptReversedId;
       this.dialogShown = true;
-    }
+    },
+    copyText(text) {
+      if (!window.navigator) {
+        return;
+      }
+
+      navigator.clipboard.writeText(text)
+      this.$emit('show:snackbar', { text: 'Данные успешно скопированы', color: 'success' });
+    },
   }
 }
 </script>

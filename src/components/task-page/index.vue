@@ -66,7 +66,10 @@
 
             <v-tab-item value="attempts">
               <v-card class="overflow-y-auto left-card" flat>
-                <attempts-tab :attempts="attempts" />
+                <attempts-tab
+                  :attempts="attempts"
+                  @show:snackbar="(options) => $emit('show:snackbar', options)"
+                />
               </v-card>
             </v-tab-item>
           </v-tabs-items>

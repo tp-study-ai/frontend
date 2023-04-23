@@ -5,7 +5,7 @@
   </div>
 
   <div v-else>
-    <v-row v-touch="swipeOptions">
+    <v-row>
       <v-col cols="12" sm="6">
         <v-card>
           <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smAndDown" height="44px">
@@ -131,7 +131,7 @@
 
   <recommendations-form
     v-model="dialogShown"
-    :code="code"
+    :code="lastAttempt.code"
     :difficulty="difficulty"
     :task="task"
   />
@@ -170,7 +170,6 @@ export default {
       selected: null,
       examples: [],
       attempts: [],
-      swipeDirection: 'right',
       highlightButton: false
     };
   },
@@ -179,21 +178,13 @@ export default {
       if (this.attempts.length === 0) {
         return false;
       }
-
-      const latAttempt = this.attempts[0];
-      return !latAttempt.loading && latAttempt.testsPassed === latAttempt.testsTotal;
+      return !this.lastAttempt.loading && this.lastAttempt.testsPassed === this.lastAttempt.testsTotal;
+    },
+    lastAttempt() {
+      return this.attempts.length === 0 ? {} : this.attempts[0];
     },
     checkSolutionButtonColor() {
-      if (this.isTaskSolved) {
-        return 'secondary';
-      }
-      return 'primary';
-    },
-    swipeOptions() {
-      return {
-        left: () => this.swipe('left'),
-        right: () => this.swipe('right')
-      };
+      return this.isTaskSolved ? 'secondary' : 'primary';
     },
     ratingColor() {
       const { cf_rating } = this.task;
@@ -415,9 +406,6 @@ export default {
       }
 
       this.dialogShown = true;
-    },
-    swipe(swipeDirection) {
-      this.swipeDirection = swipeDirection;
     },
     getTagPath(tag) {
       const index = this.task.cf_tags_RU.indexOf(tag);

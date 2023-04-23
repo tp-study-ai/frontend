@@ -7,56 +7,8 @@
   <div v-else>
     <v-row v-touch="swipeOptions">
       <v-col cols="12" sm="6">
-        <div v-if="$vuetify.breakpoint.xsOnly">
-          <v-card v-if="swipeDirection === 'right'">
-            <v-card-title>{{ task.title }}</v-card-title>
-            <v-card-subtitle>
-              <div class="mb-2">
-                <v-chip :color="ratingColor" small>
-                  {{ ratingText + (task.cf_rating ? ` (${task.cf_rating})` : '') }}
-                </v-chip>
-
-                <v-btn class="mx-2" icon color="red" @click="likeHandler">
-                  <v-icon>{{ task.liked ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
-                </v-btn>
-              </div>
-
-              <v-tooltip v-for="tag in task.cf_tags_RU" :key="tag" top>
-                <template #activator="{ on, attrs }">
-                  <v-chip
-                    v-on="on"
-                    :to="getTagPath(tag)"
-                    class="mr-2 mb-2"
-                    small
-                    v-bind="attrs"
-                  >
-                    {{ tag }}
-                  </v-chip>
-                </template>
-                <span>Перейти к задачам по тегу {{ tag }}</span>
-              </v-tooltip>
-            </v-card-subtitle>
-
-            <v-card-text>
-              <vue-mathjax :formula="task.description" :safe="false" />
-              <vue-mathjax :formula="task.input" :safe="false" />
-              <vue-mathjax :formula="task.output" :safe="false" />
-            </v-card-text>
-          </v-card>
-
-          <v-card v-else>
-            <v-card-title>Примеры тестов</v-card-title>
-            <examples-tab
-              :examples="examples"
-              :limits="limits"
-              :note="task.note"
-              @show:snackbar="(options) => $emit('show:snackbar', options)"
-            />
-          </v-card>
-        </div>
-
-        <v-card v-else>
-          <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smOnly" height="48px">
+        <v-card>
+          <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smAndDown" height="48px">
             <v-tab href="#task">Описание задачи</v-tab>
             <v-tab href="#examples">Примеры тестов</v-tab>
             <v-tab :disabled="attempts.length === 0" href="#attempts">Посылки</v-tab>

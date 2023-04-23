@@ -2,7 +2,7 @@
 <v-container class="pa-0">
   <div class="text-h4 mb-2">История</div>
 
-  <v-radio-group v-model="taskStatus" label="Статус" hide-details>
+  <v-radio-group v-model="taskStatus" label="Статус">
     <v-radio label="Решена" value="solved" />
     <v-radio label="В процессе" value="started" />
   </v-radio-group>

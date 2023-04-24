@@ -55,7 +55,7 @@
               </template>
               <span>Пропустить задачу и получить задачу попроще</span>
             </v-tooltip>
-            <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
+            <v-btn :to="getTaskPath(task)" text color="primary">Перейти к задаче</v-btn>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
                 <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">

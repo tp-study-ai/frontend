@@ -1,4 +1,2 @@
-# study-ai.ru
-
 User-agent: *
 Disallow: /

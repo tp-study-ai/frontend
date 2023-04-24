@@ -40,10 +40,10 @@
             v-on="on"
             :color="getColor(day.count_task)"
             class="pa-0 mr-1 mb-1"
-            max-height="30px"
-            min-height="30px"
-            max-width="30px"
-            min-width="30px"
+            max-height="26px"
+            min-height="26px"
+            max-width="26px"
+            min-width="26px"
             v-bind="attrs"
           />
         </template>
@@ -122,6 +122,7 @@ export default {
   },
   methods: {
     sendRequest() {
+      this.loading = true;
       const params = { new_username: this.username, new_password: this.password };
 
       this.$http.post('/update', params)

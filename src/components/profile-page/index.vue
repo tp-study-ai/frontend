@@ -115,8 +115,6 @@ export default {
     });
 
     this.$http.get('/calendar').then(({ data: { days } }) => {
-      // Для тестов
-      // this.days = Array.from(Array(60).keys());
       this.days = days;
     });
   },

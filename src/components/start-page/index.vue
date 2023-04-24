@@ -142,10 +142,11 @@ export default {
         .get('/get_task')
         .then(({ data }) => {
           const description = data.task_ru === '' ? data.description : data.task_ru;
+          const title = data.name_ru === '' ? data.name : `${data.cf_contest_id}_${data.name_ru}`;
 
           this.task = {
             id: data.id,
-            title: data.name,
+            title,
             description,
             cf_rating: data.cf_rating,
             cf_tags_RU: data.cf_tags_RU

@@ -29,7 +29,9 @@
   >
     <template #item="{ item, isMobile }">
       <v-card v-if="isMobile" class="mb-4" :to="getTaskPath(item)">
-        <v-card-title>{{ item.name }}</v-card-title>
+        <v-card-title>
+          {{ item.name_ru === '' ? item.name : `${item.cf_contest_id}_${item.name_ru}` }}
+        </v-card-title>
         <v-card-subtitle>
           <div class="mb-2">
             <v-chip :color="getRatingColor(item)" small>
@@ -50,7 +52,9 @@
 
       <tr v-else>
         <td>
-          <router-link :to="getTaskPath(item)">{{ item.name }}</router-link>
+          <router-link :to="getTaskPath(item)">
+            {{ item.name_ru === '' ? item.name : `${item.cf_contest_id}_${item.name_ru}` }}
+          </router-link>
         </td>
         <td>{{ getTagsByTask(item) }}</td>
         <td>

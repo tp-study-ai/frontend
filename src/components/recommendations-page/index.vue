@@ -79,7 +79,7 @@
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" :to="getTaskPath(task)" icon color="primary" v-bind="attrs">
+                <v-btn v-on="on" :to="getTaskPath(task)" class="mx-2" icon color="primary" v-bind="attrs">
                   <v-icon>mdi-xml</v-icon>
                 </v-btn>
               </template>

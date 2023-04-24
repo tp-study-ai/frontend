@@ -5,11 +5,10 @@
       <v-card-title>{{ task.title }}</v-card-title>
 
       <v-divider v-if="$vuetify.breakpoint.xsOnly" />
-      <div class="d-flex justify-space-between ml-sm-auto">
+      <div v-if="$vuetify.breakpoint.xsOnly" class="d-flex justify-space-between mx-2">
         <v-tooltip top>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" text color="secondary" @click="getTask" v-bind="attrs">
-              <span v-if="$vuetify.breakpoint.smAndUp" class="mr-1">Проще</span>
+            <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
               <v-icon>mdi-arrow-down-bold</v-icon>
             </v-btn>
           </template>
@@ -18,9 +17,30 @@
         <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
         <v-tooltip top>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" class="mr-sm-4" text color="secondary" @click="getTask" v-bind="attrs">
-              <span v-if="$vuetify.breakpoint.smAndUp" class="mr-1">Сложнее</span>
+            <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
               <v-icon>mdi-arrow-up-bold</v-icon>
+            </v-btn>
+          </template>
+          <span>Пропустить задачу и получить задачу попроще</span>
+        </v-tooltip>
+      </div>
+
+      <div v-else class="ml-auto">
+        <v-tooltip top>
+          <template #activator="{ on, attrs }">
+            <v-btn v-on="on" text color="secondary" @click="getTask" v-bind="attrs">
+              <span>Проще</span>
+              <v-icon right>mdi-arrow-down-bold</v-icon>
+            </v-btn>
+          </template>
+          <span>Пропустить задачу и получить задачу попроще</span>
+        </v-tooltip>
+        <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
+        <v-tooltip top>
+          <template #activator="{ on, attrs }">
+            <v-btn v-on="on" class="mr-4" text color="secondary" @click="getTask" v-bind="attrs">
+              <span>Сложнее</span>
+              <v-icon right>mdi-arrow-up-bold</v-icon>
             </v-btn>
           </template>
           <span>Пропустить задачу и получить задачу посложнее</span>

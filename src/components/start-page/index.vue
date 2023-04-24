@@ -21,7 +21,7 @@
               <v-icon>mdi-arrow-up-bold</v-icon>
             </v-btn>
           </template>
-          <span>Пропустить задачу и получить задачу попроще</span>
+          <span>Пропустить задачу и получить задачу посложнее</span>
         </v-tooltip>
       </div>
 

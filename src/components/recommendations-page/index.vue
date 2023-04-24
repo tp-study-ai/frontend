@@ -82,7 +82,7 @@
                   <v-icon>mdi-xml</v-icon>
                 </v-btn>
               </template>
-              <span>Перейти к решению задачи</span>
+              <span>Перейти к задаче</span>
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">

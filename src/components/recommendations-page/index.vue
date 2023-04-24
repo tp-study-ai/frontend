@@ -26,7 +26,7 @@
       <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
         <v-card :to="getTaskPath(task)" height="100%">
           <v-card-title>
-            {{ task.name_ru === '' ? task.name : `${task.cf_contest_id}_${task.name_ru}` }}
+            {{ task.name_ru === '' ? task.name :task.name_ru }}
           </v-card-title>
           <v-card-subtitle>
             <div class="mb-2">

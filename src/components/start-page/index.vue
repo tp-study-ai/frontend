@@ -5,7 +5,7 @@
       <v-card-title>{{ task.title }}</v-card-title>
 
       <v-divider v-if="$vuetify.breakpoint.xsOnly" />
-      <div class="d-flex justify-space-between ml-md-auto">
+      <div class="d-flex justify-space-between ml-sm-auto">
         <v-tooltip top>
           <template #activator="{ on, attrs }">
             <v-btn v-on="on" text color="secondary" @click="getTask" v-bind="attrs">
@@ -18,7 +18,7 @@
         <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
         <v-tooltip top>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" class="mr-md-4" text color="secondary" @click="getTask" v-bind="attrs">
+            <v-btn v-on="on" class="mr-sm-4" text color="secondary" @click="getTask" v-bind="attrs">
               <span v-if="$vuetify.breakpoint.smAndUp" class="mr-1">Сложнее</span>
               <v-icon>mdi-arrow-up-bold</v-icon>
             </v-btn>

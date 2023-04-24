@@ -28,7 +28,7 @@
           <v-card-title>
             {{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}
           </v-card-title>
-          <v-card-subtitle>
+          <v-card-text>
             <div class="mb-2">
               <v-chip :color="getRatingColor(task)" small>
                 {{ getRatingText(task) + (task.cf_rating ? ` (${task.cf_rating})` : '') }}
@@ -43,7 +43,7 @@
             >
               {{ tag }}
             </v-chip>
-          </v-card-subtitle>
+          </v-card-text>
 
           <v-divider />
           <v-card-actions v-if="$vuetify.breakpoint.xsOnly" class="justify-space-between mx-2">

@@ -46,7 +46,28 @@
           </v-card-subtitle>
 
           <v-divider />
-          <v-card-actions>
+          <v-card-actions v-if="$vuetify.breakpoint.xsOnly" class="justify-space-between mx-2">
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                  <v-icon>mdi-arrow-down-bold</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить задачу и получить задачу попроще</span>
+            </v-tooltip>
+            <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                  <v-icon>mdi-arrow-up-bold</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить задачу и получить задачу посложнее</span>
+            </v-tooltip>
+          </v-card-actions>
+
+
+          <v-card-actions v-else>
             <v-spacer />
             <v-tooltip top>
               <template #activator="{ on, attrs }">

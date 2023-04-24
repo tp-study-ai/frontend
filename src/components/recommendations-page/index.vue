@@ -53,7 +53,7 @@
                   <v-icon>mdi-arrow-down-bold</v-icon>
                 </v-btn>
               </template>
-              <span>Пропустить задачу и получить задачу попроще</span>
+              <span>Пропустить и получить задачу попроще</span>
             </v-tooltip>
             <v-btn :to="getTaskPath(task)" text color="primary">Перейти к задаче</v-btn>
             <v-tooltip top>
@@ -62,7 +62,7 @@
                   <v-icon>mdi-arrow-up-bold</v-icon>
                 </v-btn>
               </template>
-              <span>Пропустить задачу и получить задачу посложнее</span>
+              <span>Пропустить и получить задачу посложнее</span>
             </v-tooltip>
           </v-card-actions>
 
@@ -74,7 +74,7 @@
                   <v-icon>mdi-arrow-down</v-icon>
                 </v-btn>
               </template>
-              <span>Пропустить задачу и получить задачу попроще</span>
+              <span>Пропустить и получить задачу попроще</span>
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
@@ -90,7 +90,7 @@
                   <v-icon>mdi-arrow-up</v-icon>
                 </v-btn>
               </template>
-              <span>Пропустить задачу и получить задачу посложнее</span>
+              <span>Пропустить и получить задачу посложнее</span>
             </v-tooltip>
           </v-card-actions>
         </v-card>

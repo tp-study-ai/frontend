@@ -245,7 +245,7 @@ export default {
       .get(`/get_task_by_id?id=${this.id}`)
       .then(({ data }) => {
         const description = data.task_ru === '' ? data.description : data.task_ru;
-        const title = data.name_ru === '' ? data.name : data.name_ru;
+        const title = data.name_ru === '' ? data.name.split('_')[1] : data.name_ru;
 
         this.task = {
           id: data.id,

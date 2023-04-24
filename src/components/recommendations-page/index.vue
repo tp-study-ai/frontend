@@ -66,7 +66,6 @@
             </v-tooltip>
           </v-card-actions>
 
-
           <v-card-actions v-else>
             <v-spacer />
             <v-tooltip top>

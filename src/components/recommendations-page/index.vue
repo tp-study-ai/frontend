@@ -24,7 +24,7 @@
 
     <v-row>
       <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
-        <v-card height="100%">
+        <v-card height="100%" class="d-flex flex-column">
           <v-card-title>
             {{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}
           </v-card-title>
@@ -45,7 +45,7 @@
             </v-chip>
           </v-card-text>
 
-          <v-divider />
+          <v-divider class="mt-auto" />
           <v-card-actions v-if="$vuetify.breakpoint.xsOnly" class="justify-space-between mx-2">
             <v-tooltip top>
               <template #activator="{ on, attrs }">

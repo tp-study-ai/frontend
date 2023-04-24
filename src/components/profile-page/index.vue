@@ -1,60 +1,66 @@
 <template>
 <v-container class="pa-0">
-  <div class="text-h4 mb-2">Профиль</div>
+  <div v-if="loading" class="d-flex justify-center">
+    <v-progress-circular indeterminate color="primary" />
+  </div>
 
-  <v-card class="mb-4">
-    <v-card-text class="pb-0">
-      <v-form ref="form">
-        <v-text-field
-          v-model="username"
-          :rules="loginRules"
-          outlined
-          dense
-          type="text"
-          label="Введите логин"
-        />
-        <v-text-field
-          v-model="password"
-          :rules="passwordRules"
-          outlined
-          dense
-          type="password"
-          label="Введите пароль"
-        />
-      </v-form>
+  <div v-else>
+    <div class="text-h4 mb-2">Профиль</div>
 
-      <v-divider />
-      <v-card-actions>
-        <v-btn :loading="loading" color="primary" @click="sendRequest">Сохранить</v-btn>
-      </v-card-actions>
-    </v-card-text>
-  </v-card>
-
-  <v-card>
-    <v-card-title>История активности</v-card-title>
-
-    <v-card-text v-if="days.length > 0">
-      <v-tooltip v-for="(day, index) in days" :key="index" bottom>
-        <template #activator="{ on, attrs }">
-          <v-btn
-            v-on="on"
-            :color="getColor(day.count_task)"
-            class="pa-0 mr-1 mb-1"
-            max-height="26px"
-            min-height="26px"
-            max-width="26px"
-            min-width="26px"
-            v-bind="attrs"
+    <v-card class="mb-4">
+      <v-card-text class="pb-0">
+        <v-form ref="form">
+          <v-text-field
+            v-model="username"
+            :rules="loginRules"
+            outlined
+            dense
+            type="text"
+            label="Введите логин"
           />
-        </template>
-        <span>{{ getDate(day.day) }}</span>
-      </v-tooltip>
-    </v-card-text>
+          <v-text-field
+            v-model="password"
+            :rules="passwordRules"
+            outlined
+            dense
+            type="password"
+            label="Введите пароль"
+          />
+        </v-form>
 
-    <v-card-text v-else>
-      Активность не найдена
-    </v-card-text>
-  </v-card>
+        <v-divider />
+        <v-card-actions>
+          <v-btn :loading="updateLoading" color="primary" @click="sendRequest">Сохранить</v-btn>
+        </v-card-actions>
+      </v-card-text>
+    </v-card>
+
+    <v-card>
+      <v-card-title>История активности</v-card-title>
+
+      <v-card-text v-if="days.length > 0">
+        <v-tooltip v-for="(day, index) in days" :key="index" bottom>
+          <template #activator="{ on, attrs }">
+            <v-btn
+              v-on="on"
+              :color="getColor(day.count_task)"
+              class="pa-0 mr-1 mb-1"
+              max-height="26px"
+              min-height="26px"
+              max-width="26px"
+              min-width="26px"
+              v-bind="attrs"
+            />
+          </template>
+          <span>{{ getDate(day.day) }}</span>
+        </v-tooltip>
+      </v-card-text>
+
+      <v-card-text v-else>
+        Активность не найдена
+      </v-card-text>
+    </v-card>
+  </div>
 </v-container>
 </template>
 
@@ -66,10 +72,11 @@ export default {
   },
   data() {
     return {
+      loading: true,
       username: null,
       password: null,
       days: [],
-      loading: false
+      updateLoading: false
     };
   },
   computed: {
@@ -114,13 +121,17 @@ export default {
       this.username = username;
     });
 
-    this.$http.get('/calendar').then(({ data: { days } }) => {
-      this.days = days;
-    });
+    this.$http.get('/calendar')
+      .then(({ data: { days } }) => {
+        this.days = days;
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   },
   methods: {
     sendRequest() {
-      this.loading = true;
+      this.updateLoading = true;
       const params = { new_username: this.username, new_password: this.password };
 
       this.$http.post('/update', params)
@@ -128,7 +139,7 @@ export default {
           this.$emit('show:snackbar', { text: 'Данные обновлены', color: 'success' });
         })
         .finally(() => {
-          this.loading = false;
+          this.updateLoading = false;
         })
     },
     getColor(count) {

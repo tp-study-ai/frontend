@@ -5,22 +5,27 @@
       <v-card-title>{{ task.title }}</v-card-title>
 
       <v-divider v-if="$vuetify.breakpoint.xsOnly" />
-      <v-btn :to="taskPath" class="ml-auto" text color="primary">Перейти к задаче</v-btn>
-      <v-tooltip top>
-        <template #activator="{ on, attrs }">
-          <v-btn
-            v-on="on"
-            class="mr-4"
-            text
-            color="secondary"
-            @click="getTask"
-            v-bind="attrs"
-          >
-            Пропустить
-          </v-btn>
-        </template>
-        <span>Пропустить задачу и получить следующую</span>
-      </v-tooltip>
+      <div class="d-flex justify-space-between ml-md-auto">
+        <v-tooltip top>
+          <template #activator="{ on, attrs }">
+            <v-btn v-on="on" text color="secondary" @click="getTask" v-bind="attrs">
+              <span v-if="$vuetify.breakpoint.smAndUp" class="mr-1">Проще</span>
+              <v-icon>mdi-arrow-down-bold</v-icon>
+            </v-btn>
+          </template>
+          <span>Пропустить задачу и получить задачу попроще</span>
+        </v-tooltip>
+        <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
+        <v-tooltip top>
+          <template #activator="{ on, attrs }">
+            <v-btn v-on="on" class="mr-md-4" text color="secondary" @click="getTask" v-bind="attrs">
+              <span v-if="$vuetify.breakpoint.smAndUp" class="mr-1">Сложнее</span>
+              <v-icon>mdi-arrow-up-bold</v-icon>
+            </v-btn>
+          </template>
+          <span>Пропустить задачу и получить задачу посложнее</span>
+        </v-tooltip>
+      </div>
     </div>
     <v-divider />
 

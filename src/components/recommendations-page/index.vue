@@ -24,7 +24,7 @@
 
     <v-row>
       <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
-        <v-card :to="getTaskPath(task)" height="100%">
+        <v-card height="100%">
           <v-card-title>
             {{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}
           </v-card-title>
@@ -44,6 +44,35 @@
               {{ tag }}
             </v-chip>
           </v-card-subtitle>
+
+          <v-divider />
+          <v-card-actions>
+            <v-spacer />
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                  <v-icon>mdi-arrow-down</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить задачу и получить задачу попроще</span>
+            </v-tooltip>
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" :to="getTaskPath(task)" icon color="primary" v-bind="attrs">
+                  <v-icon>mdi-xml</v-icon>
+                </v-btn>
+              </template>
+              <span>Перейти к решению задачу</span>
+            </v-tooltip>
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                  <v-icon>mdi-arrow-up</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить задачу и получить задачу посложнее</span>
+            </v-tooltip>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>

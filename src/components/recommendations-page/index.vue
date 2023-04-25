@@ -11,19 +11,18 @@
       <div class="text-subtitle-1">Теги для прокачки</div>
       <div class="d-flex flex-wrap pt-2 overflow-y-auto menu-card">
         <v-chip
-          v-for="tag in tags"
-          :key="tag.tags_id"
+          v-for="(tag, index) in tags"
+          :key="`tag_${index}`"
           :color="tag.color"
           class="mr-1 mb-1"
-          @click="handleTag(tag)"
         >
-          {{ tag.tags_ru }}
+          {{ tag.recommended_tag }}
         </v-chip>
       </div>
     </div>
 
     <v-row>
-      <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
+      <v-col v-for="task in tasks" :key="`task_${task.id}`" cols="12" sm="4">
         <v-card height="100%" class="d-flex flex-column">
           <v-card-title>
             {{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}
@@ -109,10 +108,8 @@ export default {
   data() {
     return {
       loading: true,
-      selected: 0,
       tasks: [],
-      tags: [],
-      choosedTags: []
+      tags: []
     };
   },
   computed: {
@@ -135,9 +132,6 @@ export default {
     }
   },
   watch: {
-    selected() {
-      this.getTasks();
-    },
     isAuthorized(value) {
       if (value) {
         return;
@@ -155,48 +149,18 @@ export default {
   created() {
     this.loading = true;
 
-    this.getTags();
-    this.getTasks();
+    this.$http.get('/recommendations')
+      .then(({ data: { rec } }) => {
+        rec.forEach(({ recommended_tag, priority, problems }) => {
+          this.tags.push({ recommended_tag, priority, color: 'normal' });
+          this.tasks = this.tasks.concat(problems);
+        })
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   },
   methods: {
-    getTags() {
-      this.$http
-        .get('/get_tags')
-        .then(({ data: { tags } }) => {
-          this.tags = tags.map((tag) => {
-            const color = this.choosedTags.includes(tag.tags_id) ? 'primary' : 'normal';
-            return { ...tag, color };
-          });
-        });
-    },
-    getTasks() {
-      const params = { page: this.selected };
-
-      this.$http
-        .get('/tasks_list', { params })
-        .then(({ data: { tasks } }) => {
-          this.tasks = tasks;
-        })
-        .finally(() => {
-          this.loading = false;
-        });
-    },
-    handleTag(tag) {
-      this.page = 1;
-
-      if (tag.color === 'normal') {
-        tag.color = 'primary';
-        this.choosedTags.push(tag.tags_id);
-        this.getTasks();
-      } else {
-        tag.color = 'normal';
-        const index = this.choosedTags.indexOf(tag.tags_id);
-        if (index !== -1) {
-          this.choosedTags.splice(index, 1);
-        }
-        this.getTasks();
-      }
-    },
     getTaskPath(task) {
       return `/task/${task.id}`;
     },

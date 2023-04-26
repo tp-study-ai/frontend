@@ -264,7 +264,7 @@ export default {
     }
   },
   created() {
-    window.addEventListener('beforeunload', this.handleReload);
+    window.addEventListener('beforeunload', this.handleReload, { capture: true });
 
     this.$http
       .get(`/get_task_by_id?id=${this.id}`)
@@ -340,7 +340,7 @@ export default {
       });
   },
   beforeDestroy() {
-    window.removeEventListener('beforeunload', this.handleReload);
+    window.removeEventListener('beforeunload', this.handleReload, { capture: true });
   },
   methods: {
     handleReload(e) {

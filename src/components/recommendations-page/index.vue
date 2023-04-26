@@ -8,7 +8,18 @@
     <div class="text-h4 mb-2">Задачи для вас</div>
 
     <div v-if="tags.length > 0" class="mb-4">
-      <div class="text-subtitle-1">Теги для прокачки</div>
+      <div class="text-subtitle-1">
+        Теги для прокачки
+        <v-tooltip right>
+          <template #activator="{ on, attrs }">
+            <v-btn v-bind="attrs" class="ml-1" icon small v-on="on">
+              <v-icon>mdi-comment-question-outline</v-icon>
+            </v-btn>
+          </template>
+          <span>Зеленый - наиболее приоритетный тег, серый - наименее приоритетный тег</span>
+        </v-tooltip>
+      </div>
+
       <div class="d-flex flex-wrap pt-2 overflow-y-auto menu-card">
         <v-chip
           v-for="(tag, index) in tags"

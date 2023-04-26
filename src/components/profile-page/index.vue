@@ -44,7 +44,7 @@
             <v-card
               v-on="on"
               :color="getColor(day.count_task)"
-              class="pa-0 mr-1 mb-1"
+              class="mr-1 mb-1"
               outlined
               max-height="26px"
               min-height="26px"

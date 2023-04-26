@@ -36,9 +36,12 @@
     <v-row>
       <v-col v-for="task in tasks" :key="`task_${task.id}`" cols="12" sm="4">
         <v-card :id="`id_task_${task.id}`" class="d-flex flex-column" height="100%">
-          <v-card-title>
-            {{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}
-          </v-card-title>
+          <div class="d-flex">
+            <v-card-title>{{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}</v-card-title>
+            <v-btn class="ml-auto my-auto mr-2" icon @click="() => showTaskForm(task)">
+              <v-icon>mdi-arrow-expand</v-icon>
+            </v-btn>
+          </div>
           <v-card-text>
             <div class="mb-2">
               <v-chip :color="getRatingColor(task)" small>
@@ -60,7 +63,7 @@
           <v-card-actions v-if="$vuetify.breakpoint.xsOnly" class="justify-space-between mx-2">
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
                   <v-icon>mdi-arrow-down-bold</v-icon>
                 </v-btn>
               </template>
@@ -69,7 +72,7 @@
             <v-btn :to="getTaskPath(task)" text color="primary">Перейти к задаче</v-btn>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
                   <v-icon>mdi-arrow-up-bold</v-icon>
                 </v-btn>
               </template>
@@ -81,7 +84,7 @@
             <v-spacer />
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
                   <v-icon>mdi-arrow-down</v-icon>
                 </v-btn>
               </template>
@@ -97,7 +100,7 @@
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
                   <v-icon>mdi-arrow-up</v-icon>
                 </v-btn>
               </template>
@@ -107,15 +110,22 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <task-form v-model="taskFormShown" :task="taskToShow" @set:defficulty="setDifficulty" />
   </div>
 </v-container>
 </template>
 
 <script>
+import TaskForm from '@/dialogs/task-form';
+
 export default {
   name: 'RecommendationsPage',
   props: {
     isAuthorized: Boolean
+  },
+  components: {
+    TaskForm
   },
   data() {
     return {
@@ -123,7 +133,9 @@ export default {
       tasks: [],
       tags: [],
       allTasks: [],
-      choosedTags: []
+      choosedTags: [],
+      taskFormShown: false,
+      taskToShow: {}
     };
   },
   watch: {
@@ -149,7 +161,7 @@ export default {
         rec.forEach(({ recommended_tag, priority, problems }) => {
           this.tags.push({ recommended_tag, priority });
           this.tasks = this.tasks.concat(problems);
-        })
+        });
 
         this.tasks = [...new Map(this.tasks.map((task) => [task['id'], task])).values()];
         this.allTasks = this.tasks.slice();
@@ -259,7 +271,8 @@ export default {
       }
       return '';
     },
-    setDifficaulty(task, difficulty) {
+    setDifficulty(task, difficulty) {
+      this.taskFormShown = false;
       const params = { task_id: task.id, difficulty };
 
       this.$http.post('/set_difficulty', params).then(() => {
@@ -281,6 +294,10 @@ export default {
           );
         });
       });
+    },
+    showTaskForm(task) {
+      this.taskFormShown = true;
+      this.taskToShow = task;
     }
   }
 }

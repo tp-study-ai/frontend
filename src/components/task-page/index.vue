@@ -82,7 +82,7 @@
             <v-spacer />
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" text color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
+                <v-btn v-on="on" text color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
                   <span>Проще</span>
                   <v-icon right>mdi-arrow-down-bold</v-icon>
                 </v-btn>
@@ -91,7 +91,7 @@
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" text color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
+                <v-btn v-on="on" text color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
                   <span>Сложнее</span>
                   <v-icon right>mdi-arrow-up-bold</v-icon>
                 </v-btn>
@@ -503,7 +503,7 @@ export default {
 
       fileReader.readAsText(file);
     },
-    setDifficaulty(task, difficulty) {
+    setDifficulty(task, difficulty) {
       if (!this.isAuthorized) {
         this.$emit(
           'show:snackbar',

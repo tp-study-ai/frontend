@@ -78,6 +78,29 @@
 
       <v-col v-if="!$vuetify.breakpoint.xsOnly" cols="12" sm="6">
         <v-card class="d-flex right-card flex-column justify-space-between">
+          <v-card-actions>
+            <v-spacer />
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" text color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
+                  <span>Проще</span>
+                  <v-icon right>mdi-arrow-down-bold</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить и получить задачу попроще</span>
+            </v-tooltip>
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" text color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
+                  <span>Сложнее</span>
+                  <v-icon right>mdi-arrow-up-bold</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить и получить задачу посложнее</span>
+            </v-tooltip>
+          </v-card-actions>
+          <v-divider />
+
           <code-editor
             v-model="code"
             :languages="[['cpp', 'C++']]"
@@ -479,6 +502,23 @@ export default {
       };
 
       fileReader.readAsText(file);
+    },
+    setDifficaulty(task, difficulty) {
+      if (!this.isAuthorized) {
+        this.$emit(
+          'show:snackbar',
+          { text: 'Для совершения этого действия необходимо авторизоваться', color: 'warning' }
+        );
+        this.$emit('show:login-form');
+        return;
+      }
+
+      const params = { task_id: task.id, difficulty };
+
+      this.$http.post('/set_difficulty', params).then(() => {
+        this.$router.push('/');
+        this.$emit('show:snackbar', { text: 'Задача была оценена', color: 'success' });
+      });
     }
   }
 }

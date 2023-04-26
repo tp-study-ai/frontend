@@ -8,7 +8,7 @@
       <div v-if="$vuetify.breakpoint.xsOnly" class="d-flex justify-space-between mx-2">
         <v-tooltip top>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+            <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
               <v-icon>mdi-arrow-down-bold</v-icon>
             </v-btn>
           </template>
@@ -17,7 +17,7 @@
         <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
         <v-tooltip top>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+            <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
               <v-icon>mdi-arrow-up-bold</v-icon>
             </v-btn>
           </template>
@@ -28,7 +28,7 @@
       <div v-else class="ml-auto">
         <v-tooltip top>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" text color="secondary" @click="getTask" v-bind="attrs">
+            <v-btn v-on="on" text color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
               <span>Проще</span>
               <v-icon right>mdi-arrow-down-bold</v-icon>
             </v-btn>
@@ -38,7 +38,7 @@
         <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
         <v-tooltip top>
           <template #activator="{ on, attrs }">
-            <v-btn v-on="on" class="mr-4" text color="secondary" @click="getTask" v-bind="attrs">
+            <v-btn v-on="on" class="mr-4" text color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
               <span>Сложнее</span>
               <v-icon right>mdi-arrow-up-bold</v-icon>
             </v-btn>
@@ -180,6 +180,23 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    setDifficaulty(task, difficulty) {
+      if (!this.isAuthorized) {
+        this.$emit(
+          'show:snackbar',
+          { text: 'Для совершения этого действия необходимо авторизоваться', color: 'warning' }
+        );
+        this.$emit('show:login-form');
+        return;
+      }
+
+      const params = { task_id: task.id, difficulty };
+
+      this.$http.post('/set_difficulty', params).then(() => {
+        this.$router.push('/');
+        this.$emit('show:snackbar', { text: 'Задача была оценена', color: 'success' });
+      });
     }
   }
 }

@@ -107,7 +107,7 @@
             :copy_code="false"
             count_lines
             width="auto"
-            height="calc(100vh - 60px - 24px - 44px - 5px)"
+            height="calc(100vh - 60px - 24px - 44px - 5px - 52px - 5px)"
             border_radius="0px"
             theme="light"
           />

@@ -38,13 +38,14 @@
     <v-card>
       <v-card-title>История активности</v-card-title>
 
-      <v-card-text v-if="days.length > 0">
+      <v-card-text v-if="days.length > 0" class="d-flex flex-wrap">
         <v-tooltip v-for="(day, index) in days" :key="index" bottom>
           <template #activator="{ on, attrs }">
-            <v-btn
+            <v-card
               v-on="on"
               :color="getColor(day.count_task)"
               class="pa-0 mr-1 mb-1"
+              outlined
               max-height="26px"
               min-height="26px"
               max-width="26px"
@@ -144,7 +145,7 @@ export default {
     },
     getColor(count) {
       if (count === 0) {
-        return '#ffffff';
+        return 'normal';
       }
       if (count === 1) {
         return '#8cd98c';
@@ -158,10 +159,7 @@ export default {
       if (count === 4) {
         return '#339933';
       }
-      if (count === 5) {
-        return '#267326';
-      }
-      return '#194d19';
+      return '#267326';
     },
     getDate(dateString) {
       const milliseconds = Date.parse(dateString);

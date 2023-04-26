@@ -164,18 +164,21 @@ export default {
     getTagColor(tag) {
       const { priority } = tag;
       if (priority === 1) {
-        return 'green';
+        return '#267326';
       }
       if (priority === 2) {
-        return 'light-green';
+        return '#339933';
       }
       if (priority === 3) {
-        return 'lime';
+        return '#40bf40';
       }
       if (priority === 4) {
-        return 'yellow';
+        return '#66cc66';
       }
-      return 'amber';
+      if (priority === 5) {
+        return '#8cd98c';
+      }
+      return 'normal';
     },
     getTaskPath(task) {
       return `/task/${task.id}`;

@@ -10,13 +10,13 @@ const IGNORED_URLS = ['/get_user', '/calendar'];
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    if (!response.data.error || IGNORED_URLS.includes(response.config.url)) {
+    if (!response.data.message || IGNORED_URLS.includes(response.config.url)) {
       return response;
     }
 
     const event = new CustomEvent(
       'show:snackbar',
-      { detail: { text: response.data.error, color: 'warning' } }
+      { detail: { text: response.data.message, color: 'warning' } }
     );
     document.dispatchEvent(event);
 
@@ -24,14 +24,14 @@ axiosInstance.interceptors.response.use(
   },
   function (error) {
     let event;
-    if (error.response?.data?.error) {
+    if (error.response?.data?.message) {
       if (IGNORED_URLS.includes(error.config.url)) {
         return Promise.reject(error);
       }
 
       event = new CustomEvent(
         'show:snackbar',
-        { detail: { text: error.response.data.error, color: 'warning' } }
+        { detail: { text: error.response.data.message, color: 'warning' } }
       );
       document.dispatchEvent(event);
     } else {

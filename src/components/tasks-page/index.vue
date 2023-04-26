@@ -246,7 +246,7 @@ export default {
 <style>
 /* Используется еще на странице рекомендаций */
 .menu-card {
-  min-height: 120px;
-  max-height: 120px;
+  min-height: 100px;
+  max-height: 100px;
 }
 </style>

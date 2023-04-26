@@ -5,7 +5,7 @@
   </div>
 
   <div v-else>
-    <div class="text-h4 mb-2">Рекомендованные задачи</div>
+    <div class="text-h4 mb-2">Задачи для вас</div>
 
     <div v-if="tags.length > 0" class="mb-4">
       <div class="text-subtitle-1">Теги для прокачки</div>

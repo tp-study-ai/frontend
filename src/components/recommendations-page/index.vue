@@ -176,7 +176,7 @@ export default {
     getTagColor(tag) {
       if (tag.color) {
         return tag.color;
-      };
+      }
 
       const { priority } = tag;
       if (priority === 1) {

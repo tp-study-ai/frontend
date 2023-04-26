@@ -13,7 +13,7 @@
         <v-chip
           v-for="(tag, index) in tags"
           :key="`tag_${index}`"
-          :color="tag.color"
+          :color="getTagColor(tag)"
           class="mr-1 mb-1"
         >
           {{ tag.recommended_tag }}
@@ -152,7 +152,7 @@ export default {
     this.$http.get('/recommendations')
       .then(({ data: { rec } }) => {
         rec.forEach(({ recommended_tag, priority, problems }) => {
-          this.tags.push({ recommended_tag, priority, color: 'normal' });
+          this.tags.push({ recommended_tag, priority });
           this.tasks = this.tasks.concat(problems);
         })
       })
@@ -161,6 +161,22 @@ export default {
       });
   },
   methods: {
+    getTagColor(tag) {
+      const { priority } = tag;
+      if (priority === 1) {
+        return 'green';
+      }
+      if (priority === 2) {
+        return 'light-green';
+      }
+      if (priority === 3) {
+        return 'lime';
+      }
+      if (priority === 4) {
+        return 'yellow';
+      }
+      return 'amber';
+    },
     getTaskPath(task) {
       return `/task/${task.id}`;
     },

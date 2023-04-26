@@ -15,6 +15,7 @@
           :key="`tag_${index}`"
           :color="getTagColor(tag)"
           class="mr-1 mb-1"
+          @click="handleTag(tag)"
         >
           {{ tag.recommended_tag }}
         </v-chip>
@@ -109,27 +110,10 @@ export default {
     return {
       loading: true,
       tasks: [],
-      tags: []
+      tags: [],
+      allTasks: [],
+      choosedTags: []
     };
-  },
-  computed: {
-    topics() {
-      return [
-        'Топик 1',
-        'Топик 2',
-        'Топик 3',
-        'Топик 4',
-        'Топик 5',
-        'Топик 6',
-        'Топик 7',
-        'Топик 8',
-        'Топик 9',
-        'Топик 10'
-      ]
-    },
-    mobileTopics() {
-      return this.topics.map((topic, index) => ({ text: topic, value: index }));
-    }
   },
   watch: {
     isAuthorized(value) {
@@ -157,6 +141,7 @@ export default {
         })
 
         this.tasks = [...new Map(this.tasks.map((task) => [task['id'], task])).values()];
+        this.allTasks = this.tasks.slice();
       })
       .finally(() => {
         this.loading = false;
@@ -164,6 +149,10 @@ export default {
   },
   methods: {
     getTagColor(tag) {
+      if (tag.color) {
+        return tag.color;
+      };
+
       const { priority } = tag;
       if (priority === 1) {
         return '#267326';
@@ -181,6 +170,27 @@ export default {
         return '#8cd98c';
       }
       return 'normal';
+    },
+    handleTag(tag) {
+      if (tag.color === 'primary') {
+        this.$delete(tag, 'color');
+        const index = this.choosedTags.indexOf(tag.recommended_tag);
+        if (index !== -1) {
+          this.choosedTags.splice(index, 1);
+        }
+      } else {
+        this.$set(tag, 'color', 'primary');
+        this.choosedTags.push(tag.recommended_tag);
+      }
+
+      if (this.choosedTags.length === 0) {
+        this.tasks = this.allTasks.slice();
+        return;
+      }
+
+      this.tasks = this.allTasks.filter((task) => {
+        return task.cf_tags_RU.some((name) => this.choosedTags.includes(name));
+      });
     },
     getTaskPath(task) {
       return `/task/${task.id}`;

@@ -168,6 +168,8 @@ import VueMathjax from '@/shared/components/vue-mathjax';
 import ExamplesTab from './components/examples-tab';
 import AttemptsTab from './components/attempts-tab';
 
+const DEFAULT_CODE = '// #include <bits/stdc++.h> Won\'t compile!\r\n#include <iostream>\r\n\r\nint main() {\r\n    // Your code will be here\r\n    return 0;\r\n}\r\n';
+
 export default {
   name: 'TaskPage',
   props: {
@@ -186,7 +188,7 @@ export default {
       loading: true,
       task: {},
       limits: {},
-      code: '// #include <bits/stdc++.h> Won\'t compile!\r\n#include <iostream>\r\n\r\nint main() {\r\n    // Your code will be here\r\n    return 0;\r\n}\r\n',
+      code: DEFAULT_CODE,
       difficulty: 1,
       checkSolutionLoading: false,
       dialogShown: false,
@@ -195,6 +197,15 @@ export default {
       attempts: [],
       highlightButton: false
     };
+  },
+  watch: {
+    code(value) {
+      if (value === DEFAULT_CODE) {
+        return;
+      }
+
+      window.addEventListener('beforeunload', this.handleReload, { capture: true });
+    }
   },
   computed: {
     isTaskSolved() {
@@ -264,8 +275,6 @@ export default {
     }
   },
   created() {
-    window.addEventListener('beforeunload', this.handleReload, { capture: true });
-
     this.$http
       .get(`/get_task_by_id?id=${this.id}`)
       .then(({ data }) => {

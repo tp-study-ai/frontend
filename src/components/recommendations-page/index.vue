@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <v-row>
+    <v-row v-if="tasks.length > 0">
       <v-col v-for="task in tasks" :key="`task_${task.id}`" cols="12" sm="4">
         <v-card :id="`id_task_${task.id}`" class="d-flex flex-column" height="100%">
           <div class="d-flex">
@@ -110,6 +110,8 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <div v-else class="text-subtitle-1">Рекомендаций пока для вас нет. Заходите позже!</div>
 
     <task-form v-model="taskFormShown" :task="taskToShow" @set:defficulty="setDifficulty" />
   </div>

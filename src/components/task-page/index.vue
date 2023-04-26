@@ -264,6 +264,8 @@ export default {
     }
   },
   created() {
+    window.addEventListener('beforeunload', this.handleReload);
+
     this.$http
       .get(`/get_task_by_id?id=${this.id}`)
       .then(({ data }) => {
@@ -337,7 +339,18 @@ export default {
         this.loading = false;
       });
   },
+  beforeDestroy() {
+    window.removeEventListener('beforeunload', this.handleReload);
+  },
   methods: {
+    handleReload(e) {
+      if (!window.location.pathname.startsWith('/task/')) {
+        return;
+      }
+
+      e.preventDefault();
+      return e.returnValue = '';
+    },
     checkSolution() {
       if (!this.isAuthorized) {
         this.$emit(

@@ -290,6 +290,11 @@ export default {
         element.addEventListener('animationend', () => {
           this.tasks.splice(index, 1);
 
+          if (this.tasks.length === 0) {
+            this.$router.go();
+            return;
+          }
+
           this.$emit(
             'show:snackbar',
             { text: 'Задача была оценена. Для получения новых рекомендаций обновите страницу', color: 'success' }

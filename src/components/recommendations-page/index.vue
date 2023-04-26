@@ -23,7 +23,7 @@
 
     <v-row>
       <v-col v-for="task in tasks" :key="`task_${task.id}`" cols="12" sm="4">
-        <v-card height="100%" class="d-flex flex-column">
+        <v-card :id="`id_task_${task.id}`" class="d-flex flex-column" height="100%">
           <v-card-title>
             {{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}
           </v-card-title>
@@ -48,7 +48,7 @@
           <v-card-actions v-if="$vuetify.breakpoint.xsOnly" class="justify-space-between mx-2">
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
                   <v-icon>mdi-arrow-down-bold</v-icon>
                 </v-btn>
               </template>
@@ -57,7 +57,7 @@
             <v-btn :to="getTaskPath(task)" text color="primary">Перейти к задаче</v-btn>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
                   <v-icon>mdi-arrow-up-bold</v-icon>
                 </v-btn>
               </template>
@@ -69,7 +69,7 @@
             <v-spacer />
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, -1)" v-bind="attrs">
                   <v-icon>mdi-arrow-down</v-icon>
                 </v-btn>
               </template>
@@ -85,7 +85,7 @@
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="getTask" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficaulty(task, 1)" v-bind="attrs">
                   <v-icon>mdi-arrow-up</v-icon>
                 </v-btn>
               </template>
@@ -155,6 +155,8 @@ export default {
           this.tags.push({ recommended_tag, priority });
           this.tasks = this.tasks.concat(problems);
         })
+
+        this.tasks = [...new Map(this.tasks.map((task) => [task['id'], task])).values()];
       })
       .finally(() => {
         this.loading = false;
@@ -235,6 +237,26 @@ export default {
         return 'глобальная элита';
       }
       return '';
+    },
+    setDifficaulty(task, difficulty) {
+      const params = { task_id: task.id, difficulty };
+
+      this.$http.post('/set_difficulty', params)
+        .then(() => {
+          const index = this.tasks.findIndex((taskToFind) => taskToFind.id === task.id);
+          if (index !== -1) {
+            const animateClass = difficulty === -1 ? 'animate__bounceOutDown' : 'animate__bounceOutUp';
+
+            const element = document.getElementById(`id_task_${task.id}`);
+            element.classList.add('animate__animated', animateClass);
+            element.addEventListener('animationend', () => this.tasks.splice(index, 1));
+          }
+
+          this.$emit(
+            'show:snackbar',
+            { text: 'Задача была оценена. Для получения новых рекомендаций обновите страницу', color: 'success' }
+          );
+        });
     }
   }
 }

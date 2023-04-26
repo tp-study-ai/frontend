@@ -264,18 +264,22 @@ export default {
 
       this.$http.post('/set_difficulty', params).then(() => {
         const index = this.tasks.findIndex((taskToFind) => taskToFind.id === task.id);
-        if (index !== -1) {
-          const animateClass = difficulty === -1 ? 'animate__bounceOutDown' : 'animate__bounceOutUp';
-
-          const element = document.getElementById(`id_task_${task.id}`);
-          element.classList.add('animate__animated', animateClass);
-          element.addEventListener('animationend', () => this.tasks.splice(index, 1));
+        if (index === -1) {
+          return;
         }
 
-        this.$emit(
-          'show:snackbar',
-          { text: 'Задача была оценена. Для получения новых рекомендаций обновите страницу', color: 'success' }
-        );
+        const animateClass = difficulty === -1 ? 'animate__bounceOutDown' : 'animate__bounceOutUp';
+
+        const element = document.getElementById(`id_task_${task.id}`);
+        element.classList.add('animate__animated', animateClass);
+        element.addEventListener('animationend', () => {
+          this.tasks.splice(index, 1);
+
+          this.$emit(
+            'show:snackbar',
+            { text: 'Задача была оценена. Для получения новых рекомендаций обновите страницу', color: 'success' }
+          );
+        });
       });
     }
   }

@@ -191,10 +191,11 @@ export default {
         return;
       }
 
+      this.loading = true;
       const params = { task_id: task.id, difficulty };
 
       this.$http.post('/set_difficulty', params).then(() => {
-        this.$router.push('/');
+        this.getTask();
         this.$emit('show:snackbar', { text: 'Задача была оценена', color: 'success' });
       });
     }

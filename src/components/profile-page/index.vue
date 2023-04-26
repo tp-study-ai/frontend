@@ -38,7 +38,7 @@
     <v-card>
       <v-card-title>История активности</v-card-title>
 
-      <v-card-text v-if="days.length > 0" class="d-flex flex-wrap">
+      <v-card-text v-if="days.length > 0" class="d-flex flex-wrap pr-0">
         <v-tooltip v-for="(day, index) in days" :key="index" bottom>
           <template #activator="{ on, attrs }">
             <v-card

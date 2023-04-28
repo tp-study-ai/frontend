@@ -548,8 +548,8 @@ export default {
 
 <style>
 .task-card {
-  min-height: 100%;
-  max-height: 100%;
+  min-height: calc(100vh - 56px - 24px);
+  max-height: calc(100vh - 56px - 24px);
 }
 
 /* Используется для стилизации заголовков внутри описания задачи */

@@ -7,7 +7,7 @@
   <div v-else>
     <v-row>
       <v-col cols="12" sm="6">
-        <v-card outlined>
+        <v-card class="right-card" outlined>
           <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smAndDown" height="44px">
             <v-tab href="#task">Описание задачи</v-tab>
             <v-tab href="#examples">Примеры тестов</v-tab>
@@ -548,13 +548,13 @@ export default {
 
 <style>
 .left-card {
-  min-height: calc(100vh - 56px - 24px - 44px - 2px);
-  max-height: calc(100vh - 56px - 24px - 44px - 2px);
+  min-height: 100%;
+  max-height: 100%;
 }
 
 .right-card {
-  min-height: calc(100vh - 56px - 24px);
-  max-height: calc(100vh - 56px - 24px);
+  min-height: 100%;
+  max-height: 100%;
 }
 
 /* Используется для стилизации заголовков внутри описания задачи */

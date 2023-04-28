@@ -16,7 +16,7 @@
 
           <v-tabs-items v-model="selected" touchless>
             <v-tab-item value="task">
-              <v-card class="overflow-y-auto" flat>
+              <v-card :class="{ 'tab-card overflow-y-auto': $vuetify.breakpoint.smAndUp }" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
                 <v-card-subtitle>
                   <div class="mb-2">
@@ -54,7 +54,7 @@
             </v-tab-item>
 
             <v-tab-item value="examples">
-              <v-card class="overflow-y-auto" flat>
+              <v-card :class="{ 'tab-card overflow-y-auto': $vuetify.breakpoint.smAndUp }" flat>
                 <examples-tab
                   :examples="examples"
                   :limits="limits"
@@ -65,7 +65,7 @@
             </v-tab-item>
 
             <v-tab-item value="attempts">
-              <v-card class="overflow-y-auto" flat>
+              <v-card :class="{ 'tab-card overflow-y-auto': $vuetify.breakpoint.smAndUp }" flat>
                 <attempts-tab
                   :attempts="attempts"
                   @show:snackbar="(options) => $emit('show:snackbar', options)"
@@ -547,6 +547,11 @@ export default {
 </script>
 
 <style>
+.tab-card {
+  min-height: calc(100vh - 56px - 24px - 44px - 2px);
+  max-height: calc(100vh - 56px - 24px - 44px - 2px);
+}
+
 .task-card {
   min-height: calc(100vh - 56px - 24px);
   max-height: calc(100vh - 56px - 24px);

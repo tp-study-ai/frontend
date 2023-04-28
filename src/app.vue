@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <v-app>
-    <v-app-bar v-if="$vuetify.breakpoint.xsOnly" app height="56px">
+    <v-app-bar v-if="$vuetify.breakpoint.xsOnly" app height="56px" flat>
       <v-app-bar-nav-icon @click="showDrawer = true" />
 
       <router-link class="d-flex align-center mx-auto" to="/" tag="div" style="cursor: pointer">
@@ -10,7 +10,7 @@
       </router-link>
     </v-app-bar>
 
-    <v-app-bar v-else app height="56px">
+    <v-app-bar v-else app height="56px" flat>
       <v-container class="d-flex align-center">
         <router-link class="d-flex align-center mr-5" to="/" tag="div" style="cursor: pointer">
           <img class="mr-2" src="/logo.png" width="45" height="45" />

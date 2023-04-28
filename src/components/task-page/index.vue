@@ -77,7 +77,7 @@
       </v-col>
 
       <v-col v-if="$vuetify.breakpoint.smAndUp" cols="12" sm="6">
-        <v-card class="d-flex task-card flex-column justify-space-between" outlined>
+        <v-card class="task-card d-flex flex-column justify-space-between" outlined>
           <v-card-actions>
             <v-spacer />
             <v-tooltip top>

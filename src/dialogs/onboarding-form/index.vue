@@ -5,7 +5,7 @@
   persistent
   @input="handleInput"
 >
-  <v-card>
+  <v-card outlined>
     <v-card-title>Привет!</v-card-title>
     <v-card-text>
       <p>

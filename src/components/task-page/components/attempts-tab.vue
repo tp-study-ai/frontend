@@ -38,7 +38,7 @@
   </v-simple-table>
 
   <v-dialog v-model="dialogShown">
-    <v-card>
+    <v-card outlined>
       <div class="d-flex">
         <v-card-title>Отчет о посылке №{{ attemptReversedId }}</v-card-title>
         <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">

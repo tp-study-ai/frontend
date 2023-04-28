@@ -17,7 +17,7 @@
     loading-text="Идет загрузка задач..."
   >
     <template #item="{ item, isMobile }">
-      <v-card v-if="isMobile" class="mb-4" :to="getTaskPath(item)">
+      <v-card v-if="isMobile" class="mb-4" :to="getTaskPath(item)" outlined>
         <v-card-title>
           {{ item.name_ru === '' ? item.name.split('_')[1] : item.name_ru }}
         </v-card-title>

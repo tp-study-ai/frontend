@@ -12,7 +12,7 @@
     loading-text="Идет загрузка задач..."
   >
     <template #item="{ item, isMobile }">
-      <v-card v-if="isMobile" class="mb-4">
+      <v-card v-if="isMobile" class="mb-4" outlined>
         <v-card-title>
           {{ item.name_ru === '' ? item.name.split('_')[1] : item.name_ru }}
         </v-card-title>

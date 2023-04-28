@@ -35,7 +35,7 @@
 
     <v-row v-if="tasks.length > 0">
       <v-col v-for="task in tasks" :key="`task_${task.id}`" cols="12" sm="4">
-        <v-card :id="`id_task_${task.id}`" class="d-flex flex-column" height="100%">
+        <v-card :id="`id_task_${task.id}`" class="d-flex flex-column" height="100%" outlined>
           <div class="d-flex">
             <v-card-title>{{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}</v-card-title>
             <v-btn class="ml-auto my-auto mr-2" icon @click="() => showTaskForm(task)">

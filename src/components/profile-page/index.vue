@@ -7,7 +7,7 @@
   <div v-else>
     <div class="text-h4 mb-2">Профиль</div>
 
-    <v-card class="mb-4">
+    <v-card class="mb-4" outlined>
       <v-card-text class="pb-0">
         <v-form ref="form">
           <v-text-field
@@ -35,7 +35,7 @@
       </v-card-text>
     </v-card>
 
-    <v-card>
+    <v-card outlined>
       <v-card-title>История активности</v-card-title>
 
       <v-card-text v-if="days.length > 0" class="d-flex flex-wrap pr-0">

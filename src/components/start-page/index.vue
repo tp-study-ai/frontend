@@ -1,6 +1,6 @@
 <template>
 <v-container>
-  <v-card :loading="loading">
+  <v-card :loading="loading" outlined>
     <div :class="{ 'd-flex align-center': $vuetify.breakpoint.smAndUp }">
       <v-card-title>{{ task.title }}</v-card-title>
 

@@ -4,7 +4,7 @@
   :width="this.$vuetify.breakpoint.xsOnly ? '' : '1000'"
   @input="handleInput"
 >
-  <v-card>
+  <v-card outlined>
     <div class="d-flex">
       <v-card-title>{{ taskTitle }}</v-card-title>
       <v-btn class="ml-auto my-auto mr-2" icon @click="() => handleInput(false)">

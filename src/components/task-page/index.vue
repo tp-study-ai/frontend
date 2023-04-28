@@ -16,7 +16,7 @@
 
           <v-tabs-items v-model="selected" touchless>
             <v-tab-item value="task">
-              <v-card class="overflow-y-auto tab-card" flat>
+              <v-card class="overflow-y-auto" flat>
                 <v-card-title>{{ task.title }}</v-card-title>
                 <v-card-subtitle>
                   <div class="mb-2">
@@ -54,7 +54,7 @@
             </v-tab-item>
 
             <v-tab-item value="examples">
-              <v-card class="overflow-y-auto tab-card" flat>
+              <v-card class="overflow-y-auto" flat>
                 <examples-tab
                   :examples="examples"
                   :limits="limits"
@@ -65,7 +65,7 @@
             </v-tab-item>
 
             <v-tab-item value="attempts">
-              <v-card class="overflow-y-auto tab-card" flat>
+              <v-card class="overflow-y-auto" flat>
                 <attempts-tab
                   :attempts="attempts"
                   @show:snackbar="(options) => $emit('show:snackbar', options)"
@@ -547,11 +547,6 @@ export default {
 </script>
 
 <style>
-.tab-card {
-  min-height: 100%;
-  max-height: 100%;
-}
-
 .task-card {
   min-height: 100%;
   max-height: 100%;

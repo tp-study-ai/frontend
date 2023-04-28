@@ -1,5 +1,5 @@
 <template>
-<v-container class="pa-0">
+<v-container>
   <div v-if="loading" class="d-flex justify-center">
     <v-progress-circular indeterminate color="primary" />
   </div>

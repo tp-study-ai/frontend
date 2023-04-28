@@ -1,5 +1,5 @@
 <template>
-<v-container class="pa-0" fluid>
+<v-container fluid>
   <div v-if="loading" class="d-flex justify-center">
     <v-progress-circular indeterminate color="primary" />
   </div>

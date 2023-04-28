@@ -1,5 +1,5 @@
 <template>
-<v-container class="pa-0">
+<v-container>
   <div class="text-h4 mb-2">Все задачи</div>
 
   <div v-if="tags.length > 0">

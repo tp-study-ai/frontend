@@ -11,7 +11,7 @@
     </v-app-bar>
 
     <v-app-bar v-else app height="60px">
-      <v-container class="d-flex align-center pa-0">
+      <v-container class="d-flex align-center">
         <router-link class="d-flex align-center mr-5" to="/" tag="div" style="cursor: pointer">
           <img class="mr-2" src="/logo.png" width="50" height="50" />
           <v-toolbar-title>Study AI</v-toolbar-title>
@@ -52,7 +52,7 @@
             </v-list>
           </v-menu>
         </div>
-        <v-btn v-else class="pa-0" text @click="showLoginForm">
+        <v-btn v-else text @click="showLoginForm">
           <v-icon class="mr-1">mdi-login</v-icon>
           Войти
         </v-btn>
@@ -73,14 +73,12 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-container fluid>
-        <router-view
-          :isAuthorized="isAuthorized"
-          @show:login-form="showLoginForm"
-          @show:snackbar="showSnackbar"
-          @update:shock-mode="updateShockMode"
-        />
-      </v-container>
+      <router-view
+        :isAuthorized="isAuthorized"
+        @show:login-form="showLoginForm"
+        @show:snackbar="showSnackbar"
+        @update:shock-mode="updateShockMode"
+      />
     </v-main>
 
     <login-form

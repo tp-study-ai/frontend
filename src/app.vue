@@ -11,53 +11,52 @@
     </v-app-bar>
 
     <v-app-bar v-else app height="60px">
-      <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
-      <router-link class="d-flex align-center mr-4" to="/" tag="div" style="cursor: pointer">
-        <img class="mr-2" src="/logo.png" width="50" height="50" />
-        <v-toolbar-title>Study AI</v-toolbar-title>
-      </router-link>
+      <v-container class="d-flex align-center pa-0">
+        <router-link class="d-flex align-center mr-5" to="/" tag="div" style="cursor: pointer">
+          <img class="mr-2" src="/logo.png" width="50" height="50" />
+          <v-toolbar-title>Study AI</v-toolbar-title>
+        </router-link>
 
-      <v-btn v-if="isAuthorized" text to="/recommendations">Задачи для вас</v-btn>
-      <v-btn text to="/tasks">Все задачи</v-btn>
-      <v-spacer />
+        <v-btn v-if="isAuthorized" text to="/recommendations">Задачи для вас</v-btn>
+        <v-btn text to="/tasks">Все задачи</v-btn>
+        <v-spacer />
 
-      <div v-if="isAuthorized">
-        <v-tooltip bottom>
-          <template #activator="{ on, attrs }">
-            <v-btn v-on="on" text :color="isTaskSolvedToday ? 'error' : undefined" v-bind="attrs">
-              <v-icon class="mr-1">mdi-fire</v-icon>
-              {{ shockMode }}
-            </v-btn>
-          </template>
-          <span>{{ shockModeText }}</span>
-        </v-tooltip>
+        <div v-if="isAuthorized">
+          <v-tooltip bottom>
+            <template #activator="{ on, attrs }">
+              <v-btn v-on="on" text :color="isTaskSolvedToday ? 'error' : undefined" v-bind="attrs">
+                <v-icon class="mr-1">mdi-fire</v-icon>
+                {{ shockMode }}
+              </v-btn>
+            </template>
+            <span>{{ shockModeText }}</span>
+          </v-tooltip>
 
-        <v-menu offset-y>
-          <template #activator="{ on, attrs }">
-            <v-btn v-bind="attrs" text v-on="on">
-              <v-icon>mdi-account-circle</v-icon>
-            </v-btn>
-          </template>
+          <v-menu offset-y>
+            <template #activator="{ on, attrs }">
+              <v-btn v-bind="attrs" text v-on="on">
+                <v-icon>mdi-account-circle</v-icon>
+              </v-btn>
+            </template>
 
-          <v-list>
-            <v-list-item
-              v-for="(item, i) in menuItems"
-              :key="i"
-              :to="item.to"
-              @click="handleAction(item.action)"
-            >
-              <v-icon left>{{ item.icon }}</v-icon>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </div>
-      <v-btn v-else class="pa-0" text @click="showLoginForm">
-        <v-icon class="mr-1">mdi-login</v-icon>
-        Войти
-      </v-btn>
-
-      <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
+            <v-list>
+              <v-list-item
+                v-for="(item, i) in menuItems"
+                :key="i"
+                :to="item.to"
+                @click="handleAction(item.action)"
+              >
+                <v-icon left>{{ item.icon }}</v-icon>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+        <v-btn v-else class="pa-0" text @click="showLoginForm">
+          <v-icon class="mr-1">mdi-login</v-icon>
+          Войти
+        </v-btn>
+      </v-container>
     </v-app-bar>
 
     <v-navigation-drawer v-if="$vuetify.breakpoint.xsOnly" v-model="showDrawer" app>

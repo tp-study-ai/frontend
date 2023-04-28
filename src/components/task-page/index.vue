@@ -548,8 +548,8 @@ export default {
 
 <style>
 .left-card {
-  min-height: calc(100vh - 56px - 24px - 44px);
-  max-height: calc(100vh - 56px - 24px - 44px);
+  min-height: calc(100vh - 56px - 24px - 44px - 2px);
+  max-height: calc(100vh - 56px - 24px - 44px - 2px);
 }
 
 .right-card {

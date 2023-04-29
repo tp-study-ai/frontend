@@ -88,7 +88,7 @@ export default {
           return value && value.length >= 5 && value.length <= 31 ||
             'Логин должен быть длиной от 5 до 31 символов';
         },
-        (value) => /^([a-z0-9]{5,31})$/.test(value) || 'Используйте буквы (a-z, A-Z) и/или цифры'
+        (value) => /^([a-zA-Z0-9]{5,31})$/.test(value) || 'Используйте буквы (a-z, A-Z) и/или цифры'
       ];
     },
     passwordRules() {

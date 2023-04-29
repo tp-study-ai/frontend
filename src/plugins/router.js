@@ -34,6 +34,10 @@ const routes = [
   {
     path: '/history',
     component: components.HistoryPage
+  },
+  {
+    path: '*',
+    component: components.NotFoundPage
   }
 ];
 

@@ -149,6 +149,32 @@
           </v-card-actions>
         </v-card>
       </v-col>
+
+      <v-col v-else cols="12" sm="6">
+        <v-card outlined>
+          <v-card-actions>
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" text color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
+                  <span>Проще</span>
+                  <v-icon right>mdi-arrow-down-bold</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить и получить задачу попроще</span>
+            </v-tooltip>
+            <v-spacer />
+            <v-tooltip top>
+              <template #activator="{ on, attrs }">
+                <v-btn v-on="on" text color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
+                  <span>Сложнее</span>
+                  <v-icon right>mdi-arrow-up-bold</v-icon>
+                </v-btn>
+              </template>
+              <span>Пропустить и получить задачу посложнее</span>
+            </v-tooltip>
+          </v-card-actions>
+        </v-card>
+      </v-col>
     </v-row>
   </div>
 

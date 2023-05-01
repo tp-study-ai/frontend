@@ -41,7 +41,7 @@
             <v-icon>mdi-arrow-down-bold</v-icon>
           </v-btn>
         </template>
-        <span>Оценить задачу как простую</span>
+        <span>Оценить задачу как сложную</span>
       </v-tooltip>
       <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
       <v-tooltip top>
@@ -50,7 +50,7 @@
             <v-icon>mdi-arrow-up-bold</v-icon>
           </v-btn>
         </template>
-        <span>Оценить задачу как сложную</span>
+        <span>Оценить задачу как простую</span>
       </v-tooltip>
     </v-card-actions>
 
@@ -63,7 +63,7 @@
               <v-icon right>mdi-arrow-down-bold</v-icon>
           </v-btn>
         </template>
-        <span>Оценить задачу как простую</span>
+        <span>Оценить задачу как сложную</span>
       </v-tooltip>
       <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
       <v-tooltip top>
@@ -73,7 +73,7 @@
               <v-icon right>mdi-arrow-up-bold</v-icon>
           </v-btn>
         </template>
-        <span>Оценить задачу как сложную</span>
+        <span>Оценить задачу как простую</span>
       </v-tooltip>
     </v-card-actions>
   </v-card>

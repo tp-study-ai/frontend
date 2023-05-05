@@ -36,6 +36,10 @@ const routes = [
     component: components.HistoryPage
   },
   {
+    path: '/about',
+    component: components.AboutPage
+  },
+  {
     path: '*',
     component: components.NotFoundPage
   }

@@ -6,7 +6,7 @@ const options = {
 };
 
 const axiosInstance = axios.create(options);
-const IGNORED_URLS = ['/get_user', '/calendar'];
+const IGNORED_URLS = ['/get_user', '/calendar', '/cold_start'];
 
 axiosInstance.interceptors.response.use(
   function (response) {

@@ -209,6 +209,7 @@ export default {
           this.progress = progress;
           this.$nextTick(() => this.progressLength === 100 && this.$router.push('/recommendations'));
         })
+        .catch(() => !this.isAuthorized && this.$router.push('/about'))
         .finally(() => {
           this.loading = false;
         });

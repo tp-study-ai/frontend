@@ -469,6 +469,11 @@ export default {
         });
     },
     showRecommendationsForm() {
+      if (this.$route.query.from) {
+        this.$router.push('/')
+        return;
+      }
+
       if (this.attempts.length < 4) {
         this.difficulty = 2;
       } else if (this.attempts.length < 10) {

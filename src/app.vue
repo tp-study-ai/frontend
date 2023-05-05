@@ -221,7 +221,7 @@ export default {
     logout() {
       this.$http.get('/logout').finally(() => {
         this.authorizeUser(false);
-        this.$router.push('/');
+        this.$router.push('/about');
       });
     },
     showSnackbar(options) {

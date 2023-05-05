@@ -90,7 +90,7 @@
           <span>Для начала использования рекомендаций необходимо решить 10 задач по разным темам</span>
         </v-tooltip>
       </v-card-title>
-      <v-progress-linear :value="progressLength" height="25">
+      <v-progress-linear :value="progressLength" height="20">
         <template #default="{ value }">
           {{ value }}%
         </template>

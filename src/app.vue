@@ -17,7 +17,6 @@
           <v-toolbar-title>Study AI</v-toolbar-title>
         </router-link>
 
-        <v-btn v-if="isAuthorized" text to="/recommendations">Задачи для вас</v-btn>
         <v-btn text to="/tasks">Все задачи</v-btn>
         <v-spacer />
 
@@ -152,14 +151,9 @@ export default {
         { divider: true }
       ];
 
-      if (this.isAuthorized) {
-        items.unshift({ title: 'Задачи для вас', to: '/recommendations' });
-        items = items.concat(this.menuItems);
-      } else {
-        items = items.concat([{ title: 'Войти', icon: 'mdi-login', action: this.showLoginForm.bind(this) }]);
-      }
-
-      return items;
+      return this.isAuthorized
+        ? items.concat(this.menuItems)
+        : items.concat([{ title: 'Войти', icon: 'mdi-login', action: this.showLoginForm.bind(this) }]);
     },
     shockModeText() {
       if (this.shockMode === 0) {

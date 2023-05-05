@@ -87,7 +87,7 @@
               <v-icon>mdi-comment-question-outline</v-icon>
             </v-btn>
           </template>
-          <span>Для начала использования рекомендаций нужно решить 10 задач по разным тематикам</span>
+          <span>Для начала использования рекомендаций необходимо решить 10 задач по разным тематикам</span>
         </v-tooltip>
       </v-card-title>
       <v-progress-linear :value="progressLength" height="25">

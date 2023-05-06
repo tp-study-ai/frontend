@@ -223,7 +223,16 @@ export default {
             this.$emit('update:cold-start');
           });
         })
-        .catch(() => !this.isAuthorized && this.$router.push('/about'))
+        .catch(() => {
+          if (!this.isAuthorized) {
+            this.$router.push('/about');
+            return;
+          }
+          if (this.isColdStartPassed) {
+            this.$router.push('/recommendations');
+            return;
+          }
+        })
         .finally(() => {
           this.loading = false;
         });

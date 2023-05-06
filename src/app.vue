@@ -74,9 +74,11 @@
     <v-main>
       <router-view
         :isAuthorized="isAuthorized"
+        :isColdStartPassed="isColdStartPassed"
         @show:login-form="showLoginForm"
         @show:snackbar="showSnackbar"
         @update:shock-mode="updateShockMode"
+        @update:cold-start="updateColdStart"
       />
     </v-main>
 
@@ -133,7 +135,8 @@ export default {
       registerFormShown: false,
       isAuthorized: null,
       shockMode: 0,
-      isTaskSolvedToday: false
+      isTaskSolvedToday: false,
+      isColdStartPassed: false
     };
   },
   computed: {
@@ -187,13 +190,15 @@ export default {
 
     this.$http
       .get('/get_user')
-      .then(({ data: { id } }) => {
+      .then(({ data: { id, cold_start } }) => {
         if (!id) {
           this.isAuthorized = false;
           return;
         }
 
         this.isAuthorized = true;
+        this.isColdStartPassed = cold_start;
+
         this.updateShockMode();
       })
       .catch(() => {
@@ -241,6 +246,9 @@ export default {
         this.shockMode = chock_mode;
         this.isTaskSolvedToday = today;
       });
+    },
+    updateColdStart() {
+      this.isColdStartPassed = true;
     }
   }
 }

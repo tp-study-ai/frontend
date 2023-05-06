@@ -97,30 +97,26 @@
       </v-progress-linear>
     </v-card>
   </div>
-
-  <onboarding-form v-model="dialogShown" />
 </v-container>
 </template>
 
 <script>
-import OnboardingForm from '@/dialogs/onboarding-form';
 import VueMathjax from '@/shared/components/vue-mathjax';
 
 export default {
   name: 'ColdStartPage',
   props: {
-    isAuthorized: Boolean
+    isAuthorized: Boolean,
+    isColdStartPassed: Boolean
   },
   components: {
-    'vue-mathjax': VueMathjax,
-    OnboardingForm
+    'vue-mathjax': VueMathjax
   },
   data() {
     return {
       loading: true,
       task: {},
-      progress: [],
-      dialogShown: false
+      progress: []
     };
   },
   computed: {
@@ -185,7 +181,11 @@ export default {
     }
   },
   created() {
-    this.dialogShown = localStorage.getItem('hideStartDialog') !== 'true' && !this.isAuthorized;
+    if (this.isColdStartPassed) {
+      this.$router.push('/recommendations');
+      return;
+    }
+
     this.getTask();
   },
   methods: {
@@ -207,7 +207,14 @@ export default {
           };
 
           this.progress = progress;
-          this.$nextTick(() => this.progressLength === 100 && this.$router.push('/recommendations'));
+          this.$nextTick(() => {
+            if (this.progressLength !== 100) {
+              return;
+            }
+
+            this.$router.push('/recommendations');
+            this.$emit('update:cold-start');
+          });
         })
         .catch(() => !this.isAuthorized && this.$router.push('/about'))
         .finally(() => {

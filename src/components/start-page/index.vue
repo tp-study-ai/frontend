@@ -252,6 +252,6 @@ export default {
 
 <style scoped>
 .card {
-  max-height: 75vh;
+  max-height: 70vh;
 }
 </style>

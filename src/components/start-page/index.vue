@@ -188,11 +188,6 @@ export default {
     }
   },
   created() {
-    if (this.isColdStartPassed) {
-      this.$router.push('/recommendations');
-      return;
-    }
-
     this.getTask();
   },
   methods: {

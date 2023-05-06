@@ -13,7 +13,7 @@
         <div v-if="$vuetify.breakpoint.xsOnly" class="d-flex justify-space-between mx-2">
           <v-tooltip top>
             <template #activator="{ on, attrs }">
-              <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
+              <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
                 <v-icon>mdi-arrow-down-bold</v-icon>
               </v-btn>
             </template>
@@ -22,7 +22,7 @@
           <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
           <v-tooltip top>
             <template #activator="{ on, attrs }">
-              <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
+              <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
                 <v-icon>mdi-arrow-up-bold</v-icon>
               </v-btn>
             </template>
@@ -33,7 +33,7 @@
         <div v-else class="ml-auto">
           <v-tooltip top>
             <template #activator="{ on, attrs }">
-              <v-btn v-on="on" text color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
+              <v-btn v-on="on" text color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
                 <span>Проще</span>
                 <v-icon right>mdi-arrow-down-bold</v-icon>
               </v-btn>
@@ -43,7 +43,14 @@
           <v-btn :to="taskPath" text color="primary">Перейти к задаче</v-btn>
           <v-tooltip top>
             <template #activator="{ on, attrs }">
-              <v-btn v-on="on" class="mr-4" text color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
+              <v-btn
+                v-on="on"
+                class="mr-4"
+                text
+                color="secondary"
+                @click="setDifficulty(task, -1)"
+                v-bind="attrs"
+              >
                 <span>Сложнее</span>
                 <v-icon right>mdi-arrow-up-bold</v-icon>
               </v-btn>

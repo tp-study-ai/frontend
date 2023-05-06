@@ -63,7 +63,7 @@
           <v-card-actions v-if="$vuetify.breakpoint.xsOnly" class="justify-space-between mx-2">
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
                   <v-icon>mdi-arrow-down-bold</v-icon>
                 </v-btn>
               </template>
@@ -72,7 +72,7 @@
             <v-btn :to="getTaskPath(task)" text color="primary">Перейти к задаче</v-btn>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
                   <v-icon>mdi-arrow-up-bold</v-icon>
                 </v-btn>
               </template>
@@ -84,7 +84,7 @@
             <v-spacer />
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
                   <v-icon>mdi-arrow-down</v-icon>
                 </v-btn>
               </template>
@@ -100,7 +100,7 @@
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, 1)" v-bind="attrs">
+                <v-btn v-on="on" icon color="secondary" @click="setDifficulty(task, -1)" v-bind="attrs">
                   <v-icon>mdi-arrow-up</v-icon>
                 </v-btn>
               </template>

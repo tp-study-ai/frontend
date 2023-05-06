@@ -73,8 +73,8 @@
 
     <v-main>
       <router-view
-        :isAuthorized="isAuthorized"
-        :isColdStartPassed="isColdStartPassed"
+        :is-authorized="isAuthorized"
+        :is-cold-start-passed="isColdStartPassed"
         @show:login-form="showLoginForm"
         @show:snackbar="showSnackbar"
         @update:shock-mode="updateShockMode"

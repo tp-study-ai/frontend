@@ -2,7 +2,6 @@
 <div>
   <v-menu
     v-model="chatOpened"
-    :close-on-click="false"
     :close-on-content-click="false"
     top
     offset-y
@@ -24,7 +23,7 @@
       </div>
       <v-divider />
 
-      <div class="messages-container overflow-y-auto pa-2 pb-0">
+      <div class="messages-container overflow-y-auto pa-2 pb-0" ref="messagesContainer">
         <v-row no-gutters>
           <v-col
             v-for="(message, index) in messages"
@@ -79,20 +78,24 @@ export default {
   },
   methods: {
     sendMessage() {
-      if (this.inputMessage === '') {
+      const trimmedString = this.inputMessage.trim()
+      if (trimmedString === '') {
         return;
       }
 
       this.loading = true;
 
-      this.messages.push({ type: 'user', text: this.inputMessage });
+      this.messages.push({ type: 'user', text: trimmedString });
+      const params = { task_id: parseInt(this.taskId), message: trimmedString, code: this.code };
       this.inputMessage = '';
-
-      const params = { task_id: parseInt(this.taskId), message: this.inputMessage, code: this.code };
 
       this.$http.post('/chat_gpt', params)
         .then(({ data: { message } }) => {
           this.messages.push({ type: 'bot', text: message });
+
+          this.$nextTick(() => {
+            this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight;
+          });
         })
         .finally(() => {
           this.loading = false;

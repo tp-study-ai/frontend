@@ -34,7 +34,10 @@
           >
             <v-sheet :color="message.type === 'user' ? 'primary' : ''" outlined rounded>
               <v-card flat>
-                <v-card-text :class="{ 'ml-auto': message.type === 'user' }">{{ message.text }}</v-card-text>
+                <v-card-text
+                  :class="{ 'ml-auto': message.type === 'user' }"
+                  v-html="message.text"
+                />
               </v-card>
             </v-sheet>
           </v-col>
@@ -62,6 +65,9 @@
 </template>
 
 <script>
+import DOMPurify from 'isomorphic-dompurify';
+import { marked } from 'marked';
+
 export default {
   name: 'ChatWindow',
   props: {
@@ -87,13 +93,15 @@ export default {
 
       this.loading = true;
 
-      this.messages.push({ type: 'user', text: trimmedString });
-      const params = { task_id: parseInt(this.taskId), message: trimmedString, code: this.code };
+      const sanitizedString = DOMPurify.sanitize(marked.parse(trimmedString));
       this.inputMessage = '';
+
+      this.messages.push({ type: 'user', text: sanitizedString });
+      const params = { task_id: parseInt(this.taskId), message: sanitizedString, code: this.code };
 
       this.$http.post('/chat_gpt', params)
         .then(({ data: { message } }) => {
-          this.messages.push({ type: 'bot', text: message });
+          this.messages.push({ type: 'bot', text: DOMPurify.sanitize(marked.parse(message)) });
 
           this.$nextTick(() => {
             this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight;
@@ -107,9 +115,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .messages-container {
   min-height: calc(60vh - 54px - 40px - 18px);
   max-height: calc(60vh - 54px - 40px - 18px);
+}
+
+/* Убираем отступ для p тега, который добавляется после использования 'marked.parse' */
+.messages-container .v-sheet .v-card .v-card__text p {
+  margin-bottom: 0px;
 }
 </style>

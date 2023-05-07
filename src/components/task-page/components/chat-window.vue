@@ -32,9 +32,11 @@
             class="mb-2"
             cols="12"
           >
-            <v-card outlined>
-              <v-card-text :class="{ 'ml-auto': message.type === 'user' }">{{ message.text }}</v-card-text>
-            </v-card>
+            <v-sheet :color="message.type === 'user' ? 'primary' : ''" outlined rounded>
+              <v-card flat>
+                <v-card-text :class="{ 'ml-auto': message.type === 'user' }">{{ message.text }}</v-card-text>
+              </v-card>
+            </v-sheet>
           </v-col>
         </v-row>
       </div>

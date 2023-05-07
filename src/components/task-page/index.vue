@@ -208,7 +208,8 @@ export default {
   name: 'TaskPage',
   props: {
     id: String,
-    isAuthorized: Boolean
+    isAuthorized: Boolean,
+    isColdStartPassed: Boolean
   },
   components: {
     'vue-mathjax': VueMathjax,
@@ -478,7 +479,7 @@ export default {
         });
     },
     showRecommendationsForm() {
-      if (this.$route.query.from) {
+      if (!this.isColdStartPassed) {
         this.$router.push('/')
         return;
       }

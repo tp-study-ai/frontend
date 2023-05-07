@@ -128,7 +128,7 @@ export default {
   },
   computed: {
     taskPath() {
-      return `/task/${this.task.id}?from=start_page`;
+      return `/task/${this.task.id}`;
     },
     ratingColor() {
       const { cf_rating } = this.task;

@@ -7,11 +7,7 @@
   <div v-else>
     <v-row>
       <v-col cols="12" sm="6">
-        <v-card
-          :class="{ 'task-card': $vuetify.breakpoint.smAndUp }"
-          class="position: relative"
-          outlined
-        >
+        <v-card :class="{ 'task-card': $vuetify.breakpoint.smAndUp }" outlined>
           <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smAndDown" height="44px">
             <v-tab href="#task">Описание задачи</v-tab>
             <v-tab href="#examples">Примеры тестов</v-tab>

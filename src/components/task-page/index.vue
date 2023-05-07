@@ -7,7 +7,11 @@
   <div v-else>
     <v-row>
       <v-col cols="12" sm="6">
-        <v-card :class="{ 'task-card': $vuetify.breakpoint.smAndUp }" outlined>
+        <v-card
+          :class="{ 'task-card': $vuetify.breakpoint.smAndUp }"
+          class="position: relative"
+          outlined
+        >
           <v-tabs v-model="selected" :show-arrows="$vuetify.breakpoint.smAndDown" height="44px">
             <v-tab href="#task">Описание задачи</v-tab>
             <v-tab href="#examples">Примеры тестов</v-tab>
@@ -73,6 +77,13 @@
               </v-card>
             </v-tab-item>
           </v-tabs-items>
+
+          <chat-window
+            v-if="$vuetify.breakpoint.smAndUp && isAuthorized"
+            class="chat-window mx-auto"
+            :task-id="id"
+            :code="code"
+          />
         </v-card>
       </v-col>
 
@@ -193,6 +204,7 @@ import RecommendationsForm from '@/dialogs/recommendations-form';
 import VueMathjax from '@/shared/components/vue-mathjax';
 import ExamplesTab from './components/examples-tab';
 import AttemptsTab from './components/attempts-tab';
+import ChatWindow from './components/chat-window';
 
 const DEFAULT_CODE = '// #include <bits/stdc++.h> Won\'t compile!\r\n#include <iostream>\r\n\r\nint main() {\r\n    // Your code will be here\r\n    return 0;\r\n}\r\n';
 
@@ -207,7 +219,8 @@ export default {
     CodeEditor,
     RecommendationsForm,
     ExamplesTab,
-    AttemptsTab
+    AttemptsTab,
+    ChatWindow
   },
   data() {
     return {
@@ -604,5 +617,11 @@ export default {
 /* Используется для отображения цвета нумерации */
 .code_editor > .editor > .line-numbers > span::before {
   color: #a0a1a7;
+}
+
+.chat-window {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
 </style>

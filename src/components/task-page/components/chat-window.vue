@@ -126,8 +126,8 @@ export default {
   margin-bottom: 0px;
 }
 
-/* Переопределяем стандартные стили тега code */
-.messages-container .v-sheet .v-card .v-card__text code {
+/* Переопределяем стандартные стили тега code для красивого отображения кода */
+.messages-container .v-sheet .v-card .v-card__text pre > code {
   display: inline-flex;
   padding: 0px;
 }

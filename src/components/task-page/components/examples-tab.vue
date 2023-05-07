@@ -56,9 +56,7 @@
     </v-card>
   </div>
 
-  <div v-else class="text-h6 font-weight-bold mx-4 mt-4">
-    Примеров нет
-  </div>
+  <div v-else class="text-h6 font-weight-bold mx-4 mt-4">Примеров нет</div>
 
   <v-card flat>
     <v-card-text>

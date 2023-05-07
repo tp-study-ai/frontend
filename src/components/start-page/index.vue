@@ -210,7 +210,7 @@ export default {
 
           this.progress = progress;
           this.$nextTick(() => {
-            if (this.progressLength !== 100) {
+            if (!this.finished) {
               return;
             }
 

@@ -73,13 +73,6 @@
               </v-card>
             </v-tab-item>
           </v-tabs-items>
-
-          <chat-window
-            v-if="$vuetify.breakpoint.smAndUp && isAuthorized"
-            class="chat-window mx-auto"
-            :task-id="id"
-            :code="code"
-          />
         </v-card>
       </v-col>
 
@@ -117,6 +110,12 @@
             height="calc(100vh - 56px - 24px - 44px - 5px - 52px - 7px)"
             border_radius="0px"
             theme="light"
+          />
+          <chat-window
+            v-if="isAuthorized"
+            class="chat-window mx-auto"
+            :task-id="id"
+            :code="code"
           />
 
           <v-divider />
@@ -618,7 +617,8 @@ export default {
 
 .chat-window {
   position: absolute;
-  bottom: 10px;
+  bottom: 62px;
   right: 24px;
+  z-index: 9999;
 }
 </style>

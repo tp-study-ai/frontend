@@ -196,7 +196,7 @@ export default {
 
       this.$http
         .get('/cold_start')
-        .then(({ data: { task, progress } }) => {
+        .then(({ data: { task, progress, finished } }) => {
           const description = task.task_ru === '' ? task.description : task.task_ru;
           const title = task.name_ru === '' ? task.name.split('_')[1] : task.name_ru;
 
@@ -210,7 +210,7 @@ export default {
 
           this.progress = progress;
           this.$nextTick(() => {
-            if (!this.finished) {
+            if (!finished) {
               return;
             }
 

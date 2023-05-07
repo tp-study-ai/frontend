@@ -122,12 +122,12 @@ export default {
 }
 
 /* Убираем отступ для p тега, который добавляется после использования 'marked.parse' */
-.messages-container .v-sheet .v-card .v-card__text p {
+.messages-container .v-sheet > .v-card > .v-card__text p {
   margin-bottom: 0px;
 }
 
 /* Переопределяем стандартные стили тега code для красивого отображения кода */
-.messages-container .v-sheet .v-card .v-card__text pre > code {
+.messages-container .v-sheet > .v-card > .v-card__text pre > code {
   display: inline-flex;
   padding: 0px;
 }

@@ -49,9 +49,9 @@
         v-model="inputMessage"
         :disabled="loading"
         :loading="loading"
+        :append-icon="this.trimmedString === '' ? undefined : 'mdi-send'"
         class="pa-2"
         type="text"
-        append-icon="mdi-send"
         placeholder="Задайте любой вопрос по задаче..."
         dense
         hide-details
@@ -84,16 +84,20 @@ export default {
       inputMessage: ''
     };
   },
+  computed: {
+    trimmedString() {
+      return this.inputMessage.trim();
+    }
+  },
   methods: {
     sendMessage() {
-      const trimmedString = this.inputMessage.trim()
-      if (trimmedString === '') {
+      if (this.trimmedString === '') {
         return;
       }
 
       this.loading = true;
 
-      const sanitizedString = DOMPurify.sanitize(marked.parse(trimmedString));
+      const sanitizedString = DOMPurify.sanitize(marked.parse(this.trimmedString));
       this.inputMessage = '';
 
       this.messages.push({ type: 'user', text: sanitizedString });

@@ -6,7 +6,7 @@
     top
     offset-y
     left
-    offset-x
+    nudge-top="10"
   >
     <template #activator="{ on, attrs }">
       <v-btn v-bind="attrs" fab small color="primary" v-on="on">

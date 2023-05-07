@@ -98,18 +98,21 @@ export default {
 
       this.messages.push({ type: 'user', text: sanitizedString });
       const params = { task_id: parseInt(this.taskId), message: sanitizedString, code: this.code };
+      this.scroll();
 
       this.$http.post('/chat_gpt', params)
         .then(({ data: { message } }) => {
           this.messages.push({ type: 'bot', text: DOMPurify.sanitize(marked.parse(message)) });
-
-          this.$nextTick(() => {
-            this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight;
-          });
+          this.scroll();
         })
         .finally(() => {
           this.loading = false;
         });
+    },
+    scroll() {
+      this.$nextTick(() => {
+        this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight;
+      });
     }
   }
 }

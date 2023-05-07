@@ -622,6 +622,6 @@ export default {
 .chat-window {
   position: absolute;
   bottom: 10px;
-  right: 20px;
+  right: 24px;
 }
 </style>

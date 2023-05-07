@@ -44,6 +44,7 @@
       <v-text-field
         v-model="inputMessage"
         :disabled="loading"
+        :loading="loading"
         class="pa-2"
         type="text"
         append-icon="mdi-send"

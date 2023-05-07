@@ -97,8 +97,9 @@ export default {
       this.inputMessage = '';
 
       this.messages.push({ type: 'user', text: sanitizedString });
-      const params = { task_id: parseInt(this.taskId), message: sanitizedString, code: this.code };
       this.scroll();
+
+      const params = { task_id: parseInt(this.taskId), message: sanitizedString, code: this.code };
 
       this.$http.post('/chat_gpt', params)
         .then(({ data: { message } }) => {

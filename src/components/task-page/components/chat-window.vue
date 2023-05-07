@@ -125,4 +125,10 @@ export default {
 .messages-container .v-sheet .v-card .v-card__text p {
   margin-bottom: 0px;
 }
+
+/* Переопределяем стандартные стили тега code */
+.messages-container .v-sheet .v-card .v-card__text code {
+  display: inline-flex;
+  padding: 0px;
+}
 </style>

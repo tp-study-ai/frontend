@@ -7,24 +7,42 @@
 
   <v-btn
     :block="$vuetify.breakpoint.xsOnly"
-    class="mb-10"
     color="primary"
     @click="showRegisterForm"
   >
     Создать аккаунт
   </v-btn>
-  <v-divider />
+  <v-divider class="my-10" />
 
-  <div class="text-h4 mt-10 mb-2">Как просто это работает</div>
+  <div class="text-h4 mb-2">Как просто это работает</div>
   <div class="text-subtitle-1 mb-4">Вы быстро войдете в процесс и начнете учиться</div>
-  <img src="/steps.png" width="100%">
+  <img class="mb-10" src="/steps.png" width="100%">
 
-  <div class="text-h4 mt-10 mb-2">Наша платформа помогает обучаться</div>
+  <v-row>
+    <v-col class="text-left" cols="12" sm="6">
+      <div class="text-h4 mt-10 mb-2">Мы обладаем следующими преимуществами</div>
+      <div class="text-subtitle-1 mb-4">В отличие от конкуретов у нас есть</div>
+
+      <div v-for="(feature, index) in mainFeatures" :key="`main_feature_${index}`" class="mb-2">
+        <v-card outlined @click="showImage(feature)">
+          <v-card-title>{{ feature.title }}</v-card-title>
+          <v-card-subtitle class="text-left">{{ feature.text }}</v-card-subtitle>
+        </v-card>
+      </div>
+    </v-col>
+
+    <v-col cols="12" sm="6">
+      <img :src="imageSrc" width="60%">
+    </v-col>
+  </v-row>
+  <v-divider class="my-10" />
+
+  <div class="text-h4 mb-2">Наша платформа помогает обучаться</div>
   <div class="text-subtitle-1 mb-4">Мы проанализировали процесс обучения и сделали его более эффективным</div>
 
   <v-row>
     <v-col v-for="(feature, index) in features" :key="`feature_${index}`" cols="12" sm="4">
-      <v-card class="pa-4" outlined>
+      <v-card class="pt-4" outlined>
         <v-btn fab color="primary"><v-icon>{{ feature.icon }}</v-icon></v-btn>
         <v-card-title class="justify-center">{{ feature.title }}</v-card-title>
         <v-card-subtitle>{{ feature.text }}</v-card-subtitle>
@@ -54,12 +72,36 @@
 <script>
 export default {
   name: 'AboutPage',
+  data() {
+    return {
+      imageSrc: ''
+    };
+  },
   computed: {
     titleComponent() {
       if (this.$vuetify.breakpoint.xsOnly) {
         return 'span';
       }
       return 'div';
+    },
+    mainFeatures() {
+      return [
+        {
+          title: 'Индивидуальная образовательная траектория',
+          text: 'Нейросетевой алгоритм для анализа знаний пользователя',
+          src: '/logo.png'
+        },
+        {
+          title: 'Онлайн ИИ-помощник',
+          text: 'ChatGPT - ИИ-помощник для выхода из тупика в решении',
+          src: '/logo.png'
+        },
+        {
+          title: 'Обучение в потоке',
+          text: 'Контекстные рекомендации для непрерывного изучения определенной темы',
+          src: '/logo.png'
+        }
+      ];
     },
     features() {
       return [
@@ -72,9 +114,15 @@ export default {
       ];
     }
   },
+  created() {
+    this.showImage(this.mainFeatures[0]);
+  },
   methods: {
     showRegisterForm() {
       this.$emit('show:register-form');
+    },
+    showImage(feature) {
+      this.imageSrc = feature.src;
     }
   }
 }

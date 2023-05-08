@@ -138,9 +138,11 @@ export default {
       if (query.page !== parseInt(this.$route.query.page) || query.sort !== this.$route.query.sort ||
         query.tags !== this.$route.query.tags) {
         this.$router.push({ path: 'tasks', query });
-        return;
       }
 
+      if (this.loading) {
+        return;
+      }
       this.loading = true;
 
       const params = { page: this.page - 1, sort: this.sort };

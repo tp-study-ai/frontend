@@ -236,6 +236,7 @@ export default {
   watch: {
     code(value) {
       if (value === DEFAULT_CODE) {
+        window.removeEventListener('beforeunload', this.handleReload, { capture: true });
         return;
       }
 

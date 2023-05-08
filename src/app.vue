@@ -76,11 +76,18 @@
         :is-authorized="isAuthorized"
         :is-cold-start-passed="isColdStartPassed"
         @show:login-form="showLoginForm"
+        @show:register-form="showRegisterForm"
         @show:snackbar="showSnackbar"
         @update:shock-mode="updateShockMode"
         @update:cold-start="updateColdStart"
       />
     </v-main>
+
+    <v-footer v-if="$route.fullPath === '/about'" app>
+      <v-container class="py-0">
+        Copyright © 2023 VVT-i 4.0
+      </v-container>
+    </v-footer>
 
     <login-form
       v-model="loginFormShown"

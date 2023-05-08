@@ -113,8 +113,8 @@ export default {
       this.choosedTags = this.$route.query.tags.split(',').map((id) => parseInt(id));
     }
 
-    this.getTags();
     this.getTasks();
+    this.getTags();
   },
   methods: {
     getTags() {
@@ -138,6 +138,7 @@ export default {
       if (query.page !== parseInt(this.$route.query.page) || query.sort !== this.$route.query.sort ||
         query.tags !== this.$route.query.tags) {
         this.$router.push({ path: 'tasks', query });
+        return;
       }
 
       this.loading = true;

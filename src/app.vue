@@ -73,7 +73,7 @@
 
     <v-main>
       <router-view
-        :key="$route.fullPath"
+        :key="$route.path"
         :is-authorized="isAuthorized"
         :is-cold-start-passed="isColdStartPassed"
         @show:login-form="showLoginForm"
@@ -84,7 +84,7 @@
       />
     </v-main>
 
-    <v-footer v-if="$route.fullPath === '/about'" app>
+    <v-footer v-if="$route.path === '/about'" app>
       <v-container class="py-0">
         Copyright © 2023 VVT-i 4.0
       </v-container>
@@ -247,7 +247,7 @@ export default {
 
       if (this.isAuthorized) {
         this.updateShockMode();
-        if (this.$route.fullPath === '/about') {
+        if (this.$route.path === '/about') {
           this.$router.push('/');
         }
       }

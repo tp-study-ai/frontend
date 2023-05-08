@@ -389,7 +389,7 @@ export default {
   },
   methods: {
     handleReload(e) {
-      if (!this.$route.fullPath.startsWith('/task/')) {
+      if (!this.$route.path.startsWith('/task/')) {
         return;
       }
 

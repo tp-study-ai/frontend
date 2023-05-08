@@ -283,7 +283,7 @@ export default {
           return;
         }
 
-        const animateClass = difficulty === -1 ? 'animate__bounceOutDown' : 'animate__bounceOutUp';
+        const animateClass = difficulty === 1 ? 'animate__bounceOutDown' : 'animate__bounceOutUp';
 
         const element = document.getElementById(`id_task_${task.id}`);
         element.classList.add('animate__animated', animateClass);

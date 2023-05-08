@@ -483,6 +483,7 @@ export default {
         return;
       }
 
+      window.removeEventListener('beforeunload', this.handleReload, { capture: true });
       if (this.attempts.length < 4) {
         this.difficulty = 2;
       } else if (this.attempts.length < 10) {

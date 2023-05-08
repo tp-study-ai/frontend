@@ -17,7 +17,7 @@
 
   <div class="text-h4 mt-10 mb-2">Как просто это работает</div>
   <div class="text-subtitle-1 mb-4">Вы быстро войдете в процесс и начнете учиться</div>
-  <img src="/steps.png" width="100%">
+  <img src="/steps.png" width="100%" height="350px">
 
   <div class="text-h4 mt-10 mb-2">Наша платформа помогает обучаться</div>
   <div class="text-subtitle-1 mb-4">Мы проанализировали процесс обучения и сделали его более эффективным</div>

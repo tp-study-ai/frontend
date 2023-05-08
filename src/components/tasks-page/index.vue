@@ -140,6 +140,9 @@ export default {
         this.$router.push({ path: 'tasks', query });
       }
 
+      if (this.loading) {
+        return;
+      }
       this.loading = true;
 
       const params = { page: this.page - 1, sort: this.sort };

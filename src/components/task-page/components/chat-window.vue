@@ -17,7 +17,7 @@
     <v-card class="d-flex flex-column justify-space-between" width="350" height="60vh">
       <div class="d-flex">
         <v-card-subtitle class="font-weight-bold">Онлайн помощник</v-card-subtitle>
-        <v-btn class="ml-auto my-auto mr-2" icon small @click="chatOpened = false">
+        <v-btn class="ml-auto my-auto mr-2" icon @click="chatOpened = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </div>

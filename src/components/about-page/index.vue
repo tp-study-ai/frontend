@@ -1,5 +1,5 @@
 <template>
-<v-container class="text-center">
+<v-container class="text-center animate__animated animate__fadeIn">
   <div class="text-h3 mt-sm-10 mb-4">
     Начните учиться вместе с <component :is="titleComponent" class="primary--text">Study AI</component>
   </div>

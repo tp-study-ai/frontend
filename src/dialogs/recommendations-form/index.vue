@@ -25,7 +25,7 @@
 
     <v-row v-else class="mx-1 mb-1">
       <v-col v-for="task in tasks" :key="task.id" cols="12" sm="4">
-        <v-card :href="getTaskPath(task)" height="100%">
+        <v-card :to="getTaskPath(task)" height="100%">
           <v-card-title>
             {{ task.name_ru === '' ? task.name.split('_')[1] : task.name_ru }}
           </v-card-title>

@@ -73,6 +73,7 @@
 
     <v-main>
       <router-view
+        :key="$route.fullPath"
         :is-authorized="isAuthorized"
         :is-cold-start-passed="isColdStartPassed"
         @show:login-form="showLoginForm"

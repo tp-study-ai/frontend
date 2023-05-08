@@ -246,7 +246,7 @@ export default {
 
       if (this.isAuthorized) {
         this.updateShockMode();
-        if (window.location.pathname === '/about') {
+        if (this.$route.fullPath === '/about') {
           this.$router.push('/');
         }
       }

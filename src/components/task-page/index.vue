@@ -388,7 +388,7 @@ export default {
   },
   methods: {
     handleReload(e) {
-      if (!window.location.pathname.startsWith('/task/')) {
+      if (!this.$route.fullPath.startsWith('/task/')) {
         return;
       }
 

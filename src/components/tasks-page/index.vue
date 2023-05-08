@@ -75,7 +75,7 @@ export default {
   name: 'TasksPage',
   data() {
     return {
-      loading: true,
+      loading: false,
       page: 1,
       sort: 'rating_down',
       tasks: [],
@@ -141,7 +141,11 @@ export default {
         return;
       }
 
+      if (this.loading) {
+        return;
+      }
       this.loading = true;
+
       const params = { page: this.page - 1, sort: this.sort };
       if (choosedTagsString !== '') {
         params.tags = choosedTagsString;

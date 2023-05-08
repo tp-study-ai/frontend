@@ -621,6 +621,6 @@ export default {
   position: absolute;
   bottom: 62px;
   right: 24px;
-  z-index: 9999;
+  z-index: 10;
 }
 </style>

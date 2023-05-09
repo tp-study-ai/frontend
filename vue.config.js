@@ -21,8 +21,7 @@ module.exports = defineConfig({
           sizes: '16x16 24x24 32x32 64x64',
           type: 'image/png'
         }
-      ],
-      display: 'standalone'
+      ]
     }
   }
 });

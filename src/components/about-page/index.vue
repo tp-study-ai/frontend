@@ -15,7 +15,7 @@
   <v-divider class="my-10" />
 
   <div class="text-h4 mb-2">Подберем индивидуальный план обучения</div>
-  <div class="text-subtitle-1 mb-4">НЕЙРОСЕТЕВОЙ алгоритм для анализа ВАШИХ знаний</div>
+  <div class="text-subtitle-1">НЕЙРОСЕТЕВОЙ алгоритм для анализа ВАШИХ знаний</div>
   <img src="/pc-photo.svg" width="100%">
 
   <v-row>

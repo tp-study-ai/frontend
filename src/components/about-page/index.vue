@@ -35,12 +35,12 @@
       <img :src="imageSrc" width="60%">
     </v-col>
   </v-row>
-  <v-divider class="my-10" />
+  <!-- <v-divider class="my-10" /> -->
 
-  <div class="text-h4 mb-2">Наша платформа помогает обучаться</div>
-  <div class="text-subtitle-1 mb-4">Мы проанализировали процесс обучения и сделали его более эффективным</div>
+  <!-- <div class="text-h4 mb-2">Наша платформа помогает обучаться</div> -->
+  <!-- <div class="text-subtitle-1 mb-4">Мы проанализировали процесс обучения и сделали его более эффективным</div> -->
 
-  <v-row>
+  <!-- <v-row>
     <v-col v-for="(feature, index) in features" :key="`feature_${index}`" cols="12" sm="4">
       <v-card class="pt-4" outlined>
         <v-btn fab color="primary"><v-icon>{{ feature.icon }}</v-icon></v-btn>
@@ -48,7 +48,7 @@
         <v-card-subtitle>{{ feature.text }}</v-card-subtitle>
       </v-card>
     </v-col>
-  </v-row>
+  </v-row> -->
 
   <v-sheet
     class="mt-10 white--text py-7 px-4 text-sm-left d-sm-flex"

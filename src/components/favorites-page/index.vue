@@ -76,7 +76,9 @@
     <v-card>
       <div class="d-flex">
         <v-card-title>
-          Вы действительно хотите удалить задачу {{ taskToRemove.name }} из избранного?
+          Вы действительно хотите удалить задачу
+          {{ taskToRemove.name_ru === '' ? taskToRemove.name.split('_')[1] : taskToRemove.name_ru }}
+          из избранного?
         </v-card-title>
         <v-btn class="ml-auto my-auto mr-2" icon @click="dialogShown = false">
           <v-icon>mdi-close</v-icon>

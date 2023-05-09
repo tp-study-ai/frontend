@@ -19,17 +19,7 @@ module.exports = defineConfig({
       icons: [
         {
           src: 'img/icons/favicon.png',
-          sizes: '16x16 24x24 32x32 64x64',
-          type: 'image/png'
-        },
-        {
-          src: 'img/icons/android-chrome-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: 'img/icons/android-chrome-512x512.png',
-          sizes: '512x512',
+          sizes: '16x16 24x24 32x32 64x64 192x192 512x512',
           type: 'image/png'
         }
       ],

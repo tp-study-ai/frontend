@@ -1,8 +1,7 @@
 <template>
 <v-container class="text-center animate__animated animate__fadeIn">
   <div class="text-h3 mt-sm-10 mb-4">
-    Начните учиться ЭФФЕКТИВНО вместе с
-    <div class="primary--text">Study AI</div>
+    Начните учиться ЭФФЕКТИВНО вместе с <div class="primary--text">Study AI</div>
   </div>
   <div class="text-subtitle-1 mb-4">Твой персональный путь в изучении программирования</div>
 

@@ -1,7 +1,7 @@
 <template>
 <v-container class="text-center animate__animated animate__fadeIn">
   <div class="text-h3 mt-sm-10 mb-4">
-    Начните учиться ЭФФЕКТИВНО вместе с <div class="primary--text">Study AI</div>
+    Начните учиться эффективно вместе с <div class="primary--text">Study AI</div>
   </div>
   <div class="text-subtitle-1 mb-4">Твой персональный путь в изучении программирования</div>
 
@@ -15,13 +15,13 @@
   <v-divider class="my-10" />
 
   <div class="text-h4 mb-2">Подберем индивидуальный план обучения</div>
-  <div class="text-subtitle-1">НЕЙРОСЕТЕВОЙ алгоритм для анализа ВАШИХ знаний</div>
+  <div class="text-subtitle-1">Нейросетевой алгоритм для анализа ВАШИХ знаний</div>
   <img src="/pc-photo.svg" width="100%">
 
   <v-row>
     <v-col class="text-left" cols="12" sm="6">
       <div class="text-h4 mt-10 mb-2">Наши преимущества</div>
-      <div class="text-subtitle-1 mb-4">Уникальные функции для КОМФОРТНОГО обучения</div>
+      <div class="text-subtitle-1 mb-4">Уникальные функции для комфортного обучения</div>
 
       <div v-for="(feature, index) in mainFeatures" :key="`main_feature_${index}`" class="mb-2">
         <v-card outlined @click="showImage(feature)">
@@ -82,12 +82,12 @@ export default {
       return [
         {
           title: 'Индивидуальная образовательная траектория',
-          text: 'Нейросетевой алгоритм, анализирующий ВАШИ знания',
+          text: 'Нейросетевой алгоритм, анализирующий ваши знания',
           src: '/logo.png'
         },
         {
           title: 'Онлайн ИИ-помощник',
-          text: 'Ваш ЛИЧНЫЙ помощник на базе ChatGPT',
+          text: 'Ваш личный помощник на базе ChatGPT',
           src: '/logo.png'
         },
         {

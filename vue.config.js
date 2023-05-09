@@ -6,6 +6,7 @@ module.exports = defineConfig({
   lintOnSave: process.env.NODE_ENV !== 'production',
   pwa: {
     name: 'Study AI',
+    themeColor: '#f5f5f5',
     iconPaths: {
       favicon32: 'img/icons/favicon.png',
       favicon16: 'img/icons/favicon.png',

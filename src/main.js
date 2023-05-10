@@ -8,7 +8,6 @@ import vuetify from '@/plugins/vuetify';
 import App from '@/app';
 
 import 'animate.css';
-import 'typeface-roboto';
 import './registerServiceWorker';
 
 Vue.config.productionTip = false;

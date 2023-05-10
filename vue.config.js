@@ -14,7 +14,6 @@ module.exports = defineConfig({
       maskIcon: null,
       msTileImage: null
     },
-    assetsVersion: '1',
 
     manifestOptions: {
       icons: [

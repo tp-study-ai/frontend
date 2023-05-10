@@ -8,9 +8,9 @@ module.exports = defineConfig({
     name: 'Study AI',
     themeColor: '#f5f5f5',
     iconPaths: {
-      favicon32: 'favicon.png',
-      favicon16: 'favicon.png',
-      appleTouchIcon: 'favicon.png',
+      favicon32: 'img/icons/favicon.png',
+      favicon16: 'img/icons/favicon.png',
+      appleTouchIcon: 'img/icons/favicon.png',
       maskIcon: null,
       msTileImage: null
     },
@@ -18,8 +18,18 @@ module.exports = defineConfig({
     manifestOptions: {
       icons: [
         {
-          src: 'favicon.png',
-          sizes: '16x16 24x24 32x32 64x64 192x192 512x512',
+          src: 'img/icons/favicon.png',
+          sizes: '16x16 24x24 32x32 64x64',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/android-chrome-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: 'img/icons/android-chrome-512x512.png',
+          sizes: '512x512',
           type: 'image/png'
         }
       ],

@@ -9,7 +9,7 @@
 
     <div v-if="tags.length > 0" class="mb-4">
       <div class="text-subtitle-1">
-        Теги для прокачки
+        Рекомендуемые темы к изучению
         <v-tooltip right>
           <template #activator="{ on, attrs }">
             <v-btn v-bind="attrs" class="ml-1" icon small v-on="on">
